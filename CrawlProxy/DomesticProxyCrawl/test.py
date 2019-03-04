@@ -45,6 +45,7 @@ class crawl_fn:
                 async with session.get(url="https://google.com", proxy=proxy, headers=self.headers_normal,
                                        timeout=4) as res:
                     if res.status == 200:
+                        print('可用的'+str(self.number)+'proxy'+str(proxy))
                         self.number += 1
                         return proxy
                     else:
@@ -153,7 +154,6 @@ class CrawlApkName:
         }
 
     def get_apknames_tasks(self):
-        print('get_apknames_tasks')
         tasks = []
         for url in self.urls.values():
             post_data_first = {
@@ -178,7 +178,6 @@ class CrawlApkName:
 
 
     def build_async_tasks(self,urls):
-        print('build_async_tasks')
         tasks = []
         for url in urls:
             task = asyncio.ensure_future(self.get_web_data(url))
@@ -186,7 +185,6 @@ class CrawlApkName:
         return tasks
 
     async def fetch_post_apkname(self,url,data):
-        print('fetch_post_apkname')
         proxy = await self.get_proxy()
         try:
             async with self.session.post(url=url, data=data, headers=self.headers, proxy=proxy) as ct:
@@ -222,7 +220,6 @@ class CrawlApkName:
             except:
                 pass
     async def get_category_url(self, data):
-        print('get_category_url')
         analysis_data = etree.HTML(data)
         urls = analysis_data.xpath("//div[@class='dropdown-submenu']//a/@href")
         urls = [self.host + url for url in urls]
@@ -234,7 +231,6 @@ class CrawlApkName:
         return feasible_url
 
     async def get_proxy(self):
-        print('get_proxy')
         if len(self.proxies) < 3:
             self.proxies = await self.crawl_proxy.run(self.session)
         try:
@@ -258,7 +254,6 @@ class CrawlApkName:
                 pass
 
     async def get_main_url(self):
-        print('get_main_url')
         proxy = await self.get_proxy()
         url = "https://play.google.com/store/apps"
         try:
