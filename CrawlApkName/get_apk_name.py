@@ -5,7 +5,7 @@ from random import choice
 from CrawlProxy.ForeignProxyCrawl.crawl_foreigh_auto import crawl_fn
 
 
-class CrawlApkNmae:
+class CrawlApkName:
     def __init__(self):
         self.apk_names = set()
         self.son_category_url = set()
@@ -183,23 +183,6 @@ class CrawlApkNmae:
 
         self.loop.run_until_complete(asyncio.gather(*get_apkname_tasks))
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 if __name__ == '__main__':
-    pass
+    t = CrawlApkName()
+    t.run()
