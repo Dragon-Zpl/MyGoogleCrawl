@@ -4,6 +4,10 @@
     <list default="true" id="6d700b11-5e9c-45a8-bbfc-f91dbeefd186" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/AllSetting/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/AllSetting/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CrawlProxy/DomesticProxyCrawl/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/CrawlProxy/DomesticProxyCrawl/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CrawlProxy/DomesticProxyCrawl/crawl_auto.py" beforeDir="false" afterPath="$PROJECT_DIR$/CrawlProxy/DomesticProxyCrawl/crawl_auto.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CrawlProxy/DomesticProxyCrawl/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/CrawlProxy/DomesticProxyCrawl/test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CrawlProxy/ForeignProxyCrawl/crawl_foreigh_auto.py" beforeDir="false" afterPath="$PROJECT_DIR$/CrawlProxy/ForeignProxyCrawl/crawl_foreigh_auto.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -15,16 +19,16 @@
   <component name="CoverageDataManager">
     <SUITE FILE_PATH="coverage/MyGoogleCrawl$testIP.coverage" NAME="testIP Coverage Results" MODIFIED="1551424514547" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/CrawlProxy/DomesticProxyCrawl" />
     <SUITE FILE_PATH="coverage/MyGoogleCrawl$__init__.coverage" NAME="__init__ Coverage Results" MODIFIED="1551421910901" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/AllSetting" />
-    <SUITE FILE_PATH="coverage/MyGoogleCrawl$test.coverage" NAME="test Coverage Results" MODIFIED="1551424655350" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/CrawlProxy/DomesticProxyCrawl" />
-    <SUITE FILE_PATH="coverage/MyGoogleCrawl$crawl_auto.coverage" NAME="crawl_auto Coverage Results" MODIFIED="1551424501477" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/CrawlProxy/DomesticProxyCrawl" />
+    <SUITE FILE_PATH="coverage/MyGoogleCrawl$test.coverage" NAME="test Coverage Results" MODIFIED="1551683666329" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/CrawlProxy/DomesticProxyCrawl" />
+    <SUITE FILE_PATH="coverage/MyGoogleCrawl$crawl_auto.coverage" NAME="crawl_auto Coverage Results" MODIFIED="1551664177459" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/CrawlProxy/DomesticProxyCrawl" />
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file leaf-file-name="__init__.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/AllSetting/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="325">
-              <caret line="13" selection-start-line="13" selection-end-line="17" selection-end-column="55" />
+            <state relative-caret-position="50">
+              <caret line="2" column="14" lean-forward="true" selection-start-line="2" selection-start-column="14" selection-end-line="2" selection-end-column="14" />
               <folding>
                 <element signature="e#0#14#0" expanded="true" />
               </folding>
@@ -32,11 +36,28 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="crawl_auto.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/CrawlProxy/DomesticProxyCrawl/crawl_auto.py">
+      <file leaf-file-name="__init__.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/CrawlApkName/__init__.py">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file leaf-file-name="test.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/CrawlProxy/DomesticProxyCrawl/test.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="125">
-              <caret line="5" lean-forward="true" selection-start-line="5" selection-end-line="5" />
+            <state relative-caret-position="100">
+              <caret line="4" column="16" lean-forward="true" selection-start-line="4" selection-start-column="16" selection-end-line="4" selection-end-column="16" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="get_apk_name.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/CrawlApkName/get_apk_name.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="275">
+              <caret line="77" column="54" selection-start-line="77" selection-start-column="54" selection-end-line="77" selection-end-column="54" />
+              <folding>
+                <element signature="e#0#33#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -44,8 +65,8 @@
       <file leaf-file-name="crawl_foreigh_auto.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/CrawlProxy/ForeignProxyCrawl/crawl_foreigh_auto.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="294">
-              <caret line="85" column="52" lean-forward="true" selection-start-line="85" selection-start-column="52" selection-end-line="85" selection-end-column="52" />
+            <state relative-caret-position="199">
+              <caret line="89" column="29" selection-start-line="89" selection-start-column="29" selection-end-line="89" selection-end-column="29" />
               <folding>
                 <element signature="e#0#14#0" expanded="true" />
               </folding>
@@ -53,20 +74,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="test.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/CrawlProxy/DomesticProxyCrawl/test.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret column="14" selection-start-column="14" selection-end-column="14" />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="testIP.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/CrawlProxy/DomesticProxyCrawl/testIP.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="250">
-              <caret line="66" column="18" lean-forward="true" selection-start-line="66" selection-start-column="18" selection-end-line="66" selection-end-column="18" />
+            <state relative-caret-position="1575">
+              <caret line="66" column="18" selection-start-line="66" selection-start-column="18" selection-end-line="66" selection-end-column="18" />
               <folding>
                 <element signature="e#0#15#0" expanded="true" />
               </folding>
@@ -81,7 +93,11 @@
       </file>
       <file leaf-file-name="__init__.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/CrawlProxy/DomesticProxyCrawl/__init__.py">
-          <provider selected="true" editor-type-id="text-editor" />
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="75">
+              <caret line="3" selection-start-line="3" selection-end-line="3" />
+            </state>
+          </provider>
         </entry>
       </file>
     </leaf>
@@ -101,9 +117,11 @@
       <list>
         <option value="$PROJECT_DIR$/CrawlProxy/DomesticProxyCrawl/testIP.py" />
         <option value="$PROJECT_DIR$/AllSetting/__init__.py" />
+        <option value="$PROJECT_DIR$/CrawlProxy/DomesticProxyCrawl/__init__.py" />
+        <option value="$PROJECT_DIR$/CrawlProxy/DomesticProxyCrawl/crawl_auto.py" />
         <option value="$PROJECT_DIR$/CrawlProxy/ForeignProxyCrawl/crawl_foreigh_auto.py" />
         <option value="$PROJECT_DIR$/CrawlProxy/DomesticProxyCrawl/test.py" />
-        <option value="$PROJECT_DIR$/CrawlProxy/DomesticProxyCrawl/crawl_auto.py" />
+        <option value="$PROJECT_DIR$/CrawlApkName/get_apk_name.py" />
       </list>
     </option>
   </component>
@@ -129,7 +147,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -142,14 +159,38 @@
               <item name="MyGoogleCrawl" type="462c0819:PsiDirectoryNode" />
               <item name="AllSetting" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="MyGoogleCrawl" type="b2602c69:ProjectViewProjectNode" />
+              <item name="MyGoogleCrawl" type="462c0819:PsiDirectoryNode" />
+              <item name="CrawlApkName" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="MyGoogleCrawl" type="b2602c69:ProjectViewProjectNode" />
+              <item name="MyGoogleCrawl" type="462c0819:PsiDirectoryNode" />
+              <item name="CrawlProxy" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="MyGoogleCrawl" type="b2602c69:ProjectViewProjectNode" />
+              <item name="MyGoogleCrawl" type="462c0819:PsiDirectoryNode" />
+              <item name="CrawlProxy" type="462c0819:PsiDirectoryNode" />
+              <item name="DomesticProxyCrawl" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="MyGoogleCrawl" type="b2602c69:ProjectViewProjectNode" />
+              <item name="MyGoogleCrawl" type="462c0819:PsiDirectoryNode" />
+              <item name="CrawlProxy" type="462c0819:PsiDirectoryNode" />
+              <item name="ForeignProxyCrawl" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../CrawlGoogleWithGplayCli1111" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
@@ -257,8 +298,8 @@
     <recent_temporary>
       <list>
         <item itemvalue="Python.test" />
-        <item itemvalue="Python.testIP" />
         <item itemvalue="Python.crawl_auto" />
+        <item itemvalue="Python.testIP" />
         <item itemvalue="Python.__init__" />
       </list>
     </recent_temporary>
@@ -284,12 +325,11 @@
       <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info anchor="bottom" id="Python Console" order="7" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.32997763" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.32997763" />
       <window_info anchor="bottom" id="Terminal" order="7" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18123667" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18283582" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="3" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.32997763" />
       <window_info anchor="right" id="SciView" order="3" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
@@ -300,6 +340,7 @@
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32997763" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -311,43 +352,17 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/AllSetting/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="50">
-          <caret line="2" selection-start-line="2" selection-end-line="2" />
+        <state relative-caret-position="275">
+          <caret line="13" selection-start-line="13" selection-end-line="17" selection-end-column="55" />
           <folding>
             <element signature="e#0#14#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/CrawlProxy/DomesticProxyCrawl/__init__.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CrawlProxy/__init__.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CrawlProxy/DomesticProxyCrawl/testIP.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="250">
-          <caret line="66" column="18" lean-forward="true" selection-start-line="66" selection-start-column="18" selection-end-line="66" selection-end-column="18" />
-          <folding>
-            <element signature="e#0#15#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CrawlProxy/DomesticProxyCrawl/allip.txt">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://D:/python/Lib/asyncio/tasks.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="175">
-          <caret line="633" column="4" selection-start-line="633" selection-start-column="4" selection-end-line="633" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/CrawlProxy/ForeignProxyCrawl/crawl_foreigh_auto.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="294">
+        <state relative-caret-position="2125">
           <caret line="85" column="52" lean-forward="true" selection-start-line="85" selection-start-column="52" selection-end-line="85" selection-end-column="52" />
           <folding>
             <element signature="e#0#14#0" expanded="true" />
@@ -362,20 +377,117 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/AllSetting/__init__.py">
+    <entry file="file://$PROJECT_DIR$/CrawlProxy/DomesticProxyCrawl/testIP.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="325">
-          <caret line="13" selection-start-line="13" selection-end-line="17" selection-end-column="55" />
+        <state relative-caret-position="1650">
+          <caret line="66" column="18" lean-forward="true" selection-start-line="66" selection-start-column="18" selection-end-line="66" selection-end-column="18" />
+          <folding>
+            <element signature="e#0#15#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CrawlProxy/__init__.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CrawlProxy/DomesticProxyCrawl/__init__.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CrawlProxy/DomesticProxyCrawl/crawl_auto.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="125">
+          <caret line="5" lean-forward="true" selection-start-line="5" selection-end-line="5" />
           <folding>
             <element signature="e#0#14#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/AllSetting/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="50">
+          <caret line="2" selection-start-line="2" selection-end-line="2" />
+          <folding>
+            <element signature="e#0#14#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CrawlProxy/__init__.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CrawlProxy/DomesticProxyCrawl/testIP.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1575">
+          <caret line="66" column="18" selection-start-line="66" selection-start-column="18" selection-end-line="66" selection-end-column="18" />
+          <folding>
+            <element signature="e#0#15#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CrawlProxy/DomesticProxyCrawl/allip.txt" />
+    <entry file="file://D:/python/Lib/asyncio/tasks.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="175">
+          <caret line="572" column="4" selection-start-line="572" selection-start-column="4" selection-end-line="572" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CrawlProxy/DomesticProxyCrawl/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="3" selection-start-line="3" selection-end-line="3" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/CrawlProxy/DomesticProxyCrawl/crawl_auto.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="125">
-          <caret line="5" lean-forward="true" selection-start-line="5" selection-end-line="5" />
+        <state relative-caret-position="25">
+          <caret line="78" column="40" lean-forward="true" selection-start-line="78" selection-start-column="40" selection-end-line="78" selection-end-column="40" />
+          <folding>
+            <element signature="e#0#14#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CrawlProxy/ForeignProxyCrawl/crawl_foreigh_auto.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="199">
+          <caret line="89" column="29" selection-start-line="89" selection-start-column="29" selection-end-line="89" selection-end-column="29" />
+          <folding>
+            <element signature="e#0#14#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AllSetting/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="50">
+          <caret line="2" column="14" lean-forward="true" selection-start-line="2" selection-start-column="14" selection-end-line="2" selection-end-column="14" />
+          <folding>
+            <element signature="e#0#14#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CrawlApkName/__init__.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CrawlProxy/DomesticProxyCrawl/test.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="100">
+          <caret line="4" column="16" lean-forward="true" selection-start-line="4" selection-start-column="16" selection-end-line="4" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CrawlApkName/get_apk_name.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="275">
+          <caret line="77" column="54" selection-start-line="77" selection-start-column="54" selection-end-line="77" selection-end-column="54" />
+          <folding>
+            <element signature="e#0#33#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

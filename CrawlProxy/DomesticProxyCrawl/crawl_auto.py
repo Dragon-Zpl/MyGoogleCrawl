@@ -6,13 +6,16 @@ import aiohttp
 
 from lxml import etree
 
+from AllSetting import GetSetting
+
+
 class CrawlProxy:
     def __init__(self):
         self.headers = {
             'User-Agent':  'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36',
         }
 
-    def build_async_tasks(self,session):
+    def build_async_tasks(self, session):
         print('创建任务队列')
         tasks = []
         for page in range(0,1):
@@ -29,7 +32,6 @@ class CrawlProxy:
         try:
             print('进入爬取解析')
             async with session.get(url=url, headers=self.headers) as ct:
-                print(ct.status)
                 text = await ct.text()
                 content = etree.HTML(text)
                 ip_list = content.xpath("//table[@id='ip_list']//tr[@class='odd']")
@@ -55,7 +57,8 @@ class CrawlProxy:
         try:
             async with session.get(url='https://play.google.com/store', headers=self.headers, proxy=proxy, timeout=10) as ct:
                 if ct.status in [200,201]:
-                    return ipdic
+                    print(ct.status)
+                    return proxy
         except Exception as e:
             pass
 
@@ -64,30 +67,29 @@ class CrawlProxy:
         print(ipdic)
 
     def run(self):
-        conn = aiohttp.TCPConnector(family=socket.AF_INET,
-                                    verify_ssl=False,
-                                    # use_dns_cache=True
-                                    )
-        session = aiohttp.ClientSession(connector=conn)
-        tasks = self.build_async_tasks(session)
-        # print(tasks)
-        loop = asyncio.get_event_loop()
-        loop.run_until_complete(asyncio.wait(tasks))
+        proxies = []
+        setting = GetSetting()
+        session = setting.get_session()
+        loop = setting.get_loop()
+        tasks = await self.build_async_tasks(session)
         check_tasks = []
-        for proxies in tasks:
-            for ipdic in proxies.result():
+        for proxy in tasks:
+            for ipdic in proxy.result():
                 task = asyncio.ensure_future(self.check_proxy(ipdic,session))
                 check_tasks.append(task)
         loop.run_until_complete(asyncio.wait(check_tasks))
         if check_tasks:
             mysql_tasks = []
-            for ipdic in check_tasks:
-                if ipdic:
-                    task = asyncio.ensure_future(self.save_mysql(ipdic.result()))
+            for proxy in check_tasks:
+                if proxy.result():
+                    task = asyncio.ensure_future(self.save_mysql(proxy.result()))
                     mysql_tasks.append(task)
+                    proxies.append(proxy.result())
             loop.run_until_complete(asyncio.wait(mysql_tasks))
+        return proxies
 
 
-t = CrawlProxy()
 
-t.run()
+if __name__ == '__main__':
+    t = CrawlProxy()
+    t.run()

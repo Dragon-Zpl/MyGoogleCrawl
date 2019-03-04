@@ -1,7 +1,5 @@
 import asyncio
-from lxml import etree
 import re
-from AllSetting import GetSetting
 
 
 class crawl_fn:
@@ -87,10 +85,8 @@ class crawl_fn:
             ip_dic["uptimeld"] = json_list['PROXY_UPTIMELD']
             proxies.append(ip_dic)
 
-    async def run(self):
+    async def run(self,session):
         proxies = []
-        setting = GetSetting()
-        session = setting.get_session()
         results = await self.get_useful_proxy(session)
 
         for result in results:
