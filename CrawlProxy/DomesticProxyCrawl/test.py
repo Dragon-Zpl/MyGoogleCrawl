@@ -134,6 +134,7 @@ class CrawlApkName:
         self.session = GetSetting().get_session()
         self.crawl_proxy = crawl_fn()
         self.loop = GetSetting().get_loop()
+        self.lock = asyncio.Lock()
         self.headers = {
             "user-agent": "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.96 Safari/537.36",
         }
@@ -234,14 +235,15 @@ class CrawlApkName:
         return feasible_url
 
     async def get_proxy(self):
-        if len(self.proxies) < 3:
-            self.proxies = await self.crawl_proxy.run(self.session)
-        try:
-            proxy = choice(self.proxies)
-            print('输出可以用的proxy'+str(proxy))
-            return proxy
-        except:
-            await self.get_proxy()
+        async with self.lock:
+            if len(self.proxies) < 3:
+                self.proxies = await self.crawl_proxy.run(self.session)
+            try:
+                proxy = choice(self.proxies)
+                print('输出可以用的proxy' + str(proxy))
+                return proxy
+            except:
+                await self.get_proxy()
 
     async def get_web_data(self, url):
         print('get_web_data')
@@ -257,6 +259,7 @@ class CrawlApkName:
                 pass
 
     async def get_main_url(self):
+        print('get_main_url')
         proxy = await self.get_proxy()
         url = "https://play.google.com/store/apps"
         try:
