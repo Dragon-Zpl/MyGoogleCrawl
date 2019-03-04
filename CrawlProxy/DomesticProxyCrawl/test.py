@@ -237,8 +237,8 @@ class CrawlApkName:
         print('get_proxy')
         if len(self.proxies) < 3:
             self.proxies = await self.crawl_proxy.run(self.session)
-        proxy = choice(self.proxies)
         try:
+            proxy = choice(self.proxies)
             print('输出可以用的proxy'+str(proxy))
             return proxy
         except:
@@ -286,20 +286,18 @@ class CrawlApkName:
         tasks = self.build_async_tasks(urls)
 
         results = self.loop.run_until_complete(asyncio.gather(*tasks))
-
-        get_data_tasks = []
-
+        print("result:"+str(results))
         # 获取里层的分类的url
-        for result in results:
-            task = asyncio.ensure_future(self.get_category_url(result))
-            get_data_tasks.append(task)
 
-        allurls = self.loop.run_until_complete(asyncio.gather(*get_data_tasks))
+        task = asyncio.ensure_future(self.get_category_url(results[0]))
 
 
-        for urls in allurls:
-            for url in urls:
-                self.son_category_url.add(url)
+        allurls = self.loop.run_until_complete(task)
+
+
+        for url in allurls:
+            print('子url'+str(url))
+            self.son_category_url.add(url)
 
         get_apkname_tasks = []
         for url in self.son_category_url:
