@@ -38,7 +38,7 @@ class crawl_fn:
         self.number = 0
 
     async def check_proxy(self,session,proxy_info):
-        if self.number <= 10:
+        if self.number <= 20:
             proxy = 'http://' + str(proxy_info["ip"]) + ':' + str(proxy_info["port"])
 
             try:
@@ -237,7 +237,12 @@ class CrawlApkName:
         print('get_proxy')
         if len(self.proxies) < 3:
             self.proxies = await self.crawl_proxy.run(self.session)
-        return choice(self.proxies)
+        proxy = choice(self.proxies)
+        try:
+            print('输出可以用的proxy'+str(proxy))
+            return proxy
+        except:
+            self.get_proxy()
 
     async def get_web_data(self, url):
         print('get_web_data')
