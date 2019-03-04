@@ -242,7 +242,7 @@ class CrawlApkName:
             print('输出可以用的proxy'+str(proxy))
             return proxy
         except:
-            self.get_proxy()
+            await self.get_proxy()
 
     async def get_web_data(self, url):
         print('get_web_data')
