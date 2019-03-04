@@ -35,19 +35,22 @@ class crawl_fn:
             'User_Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.162 Safari/537.36',
         }
 
-    async def check_proxy(self,session,proxy_info):
-        proxy = 'http://' + str(proxy_info["ip"]) + ':' + str(proxy_info["port"])
+        self.number = 0
 
-        try:
-            async with session.get(url="https://google.com", proxy=proxy, headers=self.headers_normal,
-                                   timeout=10) as res:
-                if res.status == 200:
-                    print(proxy)
-                    return proxy
-                else:
-                    return None
-        except Exception as e:
-            return None
+    async def check_proxy(self,session,proxy_info):
+        if self.number <= 10:
+            proxy = 'http://' + str(proxy_info["ip"]) + ':' + str(proxy_info["port"])
+
+            try:
+                async with session.get(url="https://google.com", proxy=proxy, headers=self.headers_normal,
+                                       timeout=4) as res:
+                    if res.status == 200:
+                        self.number += 1
+                        return proxy
+                    else:
+                        return None
+            except Exception as e:
+                return None
 
     async def get_useful_proxy(self, session):
         proxies = []
@@ -71,7 +74,7 @@ class crawl_fn:
             self.analysis_code(code, proxies)
 
     async def get_request(self, url, session, headers):
-         async with session.get(url=url, headers=headers) as ct:
+         async with session.get(url=url, headers=headers, timeout=4) as ct:
              if ct.status == 200:
                  code = await ct.text()
                  return code
@@ -90,7 +93,6 @@ class crawl_fn:
             ip_dic["last_update"] = json_list['PROXY_LAST_UPDATE']
             ip_dic["time"] = json_list['PROXY_TIME']
             ip_dic["uptimeld"] = json_list['PROXY_UPTIMELD']
-            print(ip_dic)
             proxies.append(ip_dic)
 
     async def run(self,session):
