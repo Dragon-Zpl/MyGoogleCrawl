@@ -288,7 +288,6 @@ class CrawlApkName:
         tasks = self.build_async_tasks(urls)
 
         results = self.loop.run_until_complete(asyncio.gather(*tasks))
-        print("result:"+str(results))
         # 获取里层的分类的url
 
         task = asyncio.ensure_future(self.get_category_url(results[0]))
@@ -302,6 +301,7 @@ class CrawlApkName:
             self.son_category_url.add(url)
 
         get_apkname_tasks = []
+        print('进入最后一层')
         for url in self.son_category_url:
             task = asyncio.ensure_future(self.fetch_get_apkname(url))
             get_apkname_tasks.append(task)
