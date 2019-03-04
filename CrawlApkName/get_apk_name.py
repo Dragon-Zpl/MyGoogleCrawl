@@ -35,7 +35,6 @@ class CrawlApkName:
         }
 
     def get_apknames_tasks(self):
-        print('get_apknames_tasks')
         tasks = []
         for url in self.urls.values():
             post_data_first = {
@@ -60,7 +59,6 @@ class CrawlApkName:
 
 
     def build_async_tasks(self,urls):
-        print('build_async_tasks')
         tasks = []
         for url in urls:
             task = asyncio.ensure_future(self.get_web_data(url))
@@ -68,14 +66,13 @@ class CrawlApkName:
         return tasks
 
     async def fetch_post_apkname(self,url,data):
-        print('fetch_post_apkname')
         proxy = await self.get_proxy()
         try:
             async with self.session.post(url=url, data=data, headers=self.headers, proxy=proxy) as ct:
                 data = await ct.text()
                 analysis_data = etree.HTML(data)
                 apknames = analysis_data.xpath(
-                    "#//div[@class='card no-rationale square-cover apps small']//span[@class='preview-overlay-container']/@data-docid")
+                    "//div[@class='card no-rationale square-cover apps small']//span[@class='preview-overlay-container']/@data-docid")
                 for apkname in apknames:
                     print(apkname)
                     self.apk_names.add(apkname)
@@ -86,14 +83,13 @@ class CrawlApkName:
                 pass
 
     async def fetch_get_apkname(self,url):
-        print('fetch_get_apkname')
         proxy = await self.get_proxy()
         try:
             async with self.session.get(url=url, headers=self.headers, proxy=proxy) as ct:
                 data = await ct.text()
                 analysis_data = etree.HTML(data)
                 apknames = analysis_data.xpath(
-                    "#//div[@class='card no-rationale square-cover apps small']//span[@class='preview-overlay-container']/@data-docid")
+                    "//div[@class='card no-rationale square-cover apps small']//span[@class='preview-overlay-container']/@data-docid")
                 for apkname in apknames:
                     print(apkname)
                     self.apk_names.add(apkname)
@@ -103,7 +99,6 @@ class CrawlApkName:
             except:
                 pass
     async def get_category_url(self, data):
-        print('get_category_url')
         analysis_data = etree.HTML(data)
         urls = analysis_data.xpath("//div[@class='dropdown-submenu']//a/@href")
         urls = [self.host + url for url in urls]
@@ -114,13 +109,16 @@ class CrawlApkName:
         return feasible_url
 
     async def get_proxy(self):
-        print('get_proxy')
         if len(self.proxies) < 3:
             self.proxies = await self.crawl_proxy.run(self.session)
-        return choice(self.proxies)
+        try:
+            proxy = choice(self.proxies)
+            print('输出可以用的proxy'+str(proxy))
+            return proxy
+        except:
+            await self.get_proxy()
 
     async def get_web_data(self, url):
-        print('get_web_data')
         proxy = await self.get_proxy()
         try:
             async with self.session.get(url=url, headers=self.headers, proxy=proxy, timeout=10) as ct:
@@ -133,7 +131,6 @@ class CrawlApkName:
                 pass
 
     async def get_main_url(self):
-        print('get_main_url')
         proxy = await self.get_proxy()
         url = "https://play.google.com/store/apps"
         try:
@@ -162,19 +159,17 @@ class CrawlApkName:
 
         results = self.loop.run_until_complete(asyncio.gather(*tasks))
 
-        get_data_tasks = []
 
         # 获取里层的分类的url
-        for result in results:
-            task = asyncio.ensure_future(self.get_category_url(result))
-            get_data_tasks.append(task)
 
-        allurls = self.loop.run_until_complete(asyncio.gather(*get_data_tasks))
+        task = asyncio.ensure_future(self.get_category_url(results[0]))
 
 
-        for urls in allurls:
-            for url in urls:
-                self.son_category_url.add(url)
+        allurls = self.loop.run_until_complete(task)
+
+
+        for url in allurls:
+            self.son_category_url.add(url)
 
         get_apkname_tasks = []
         for url in self.son_category_url:

@@ -64,10 +64,13 @@ class crawl_fn:
             self.analysis_code(code, proxies)
 
     async def get_request(self, url, session, headers):
-         async with session.get(url=url, headers=headers) as ct:
-             if ct.status == 200:
-                 code = await ct.text()
-                 return code
+        try:
+            async with session.get(url=url, headers=headers) as ct:
+                if ct.status == 200:
+                    code = await ct.text()
+                    return code
+        except:
+            pass
 
     def analysis_code(self,code,proxies):
         re_str = '(?<=insertPrx\().*\}'

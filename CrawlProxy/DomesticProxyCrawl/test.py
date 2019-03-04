@@ -190,15 +190,12 @@ class CrawlApkName:
     async def fetch_post_apkname(self,url,data):
         proxy = await self.get_proxy()
         try:
-            async with self.session.post(url=url, data=data, headers=self.headers, proxy=proxy) as ct:
-                print(ct.status)
+            async with self.session.post(url=url, data=data, headers=self.headers, proxy=proxy, timeout=10) as ct:
                 data = await ct.text()
                 analysis_data = etree.HTML(data)
                 apknames = analysis_data.xpath(
                     "//div[@class='card no-rationale square-cover apps small']//span[@class='preview-overlay-container']/@data-docid")
-                print(apknames)
                 for apkname in apknames:
-                    print('apkname'+apkname)
                     self.apk_names.add(apkname)
         except Exception as e:
             try:
@@ -212,7 +209,7 @@ class CrawlApkName:
         print('fetch_get_apkname')
         proxy = await self.get_proxy()
         try:
-            async with self.session.get(url=url, headers=self.headers, proxy=proxy) as ct:
+            async with self.session.get(url=url, headers=self.headers, proxy=proxy, timeout=10) as ct:
                 data = await ct.text()
                 analysis_data = etree.HTML(data)
                 apknames = analysis_data.xpath(
@@ -231,7 +228,7 @@ class CrawlApkName:
         urls = [self.host + url for url in urls]
         feasible_url = set()
         for url in urls:
-            print(url)
+            print('category:'+str(url))
             if "GAME" in url or "SOCIAL" in url or "SPORTS" in url or "SHOPPING" in url or "HEALTH_AND_FITNESS" in url or "COMICS" in url:
                 feasible_url.add(url)
         return feasible_url
@@ -250,7 +247,7 @@ class CrawlApkName:
         print('get_web_data')
         proxy = await self.get_proxy()
         try:
-            async with self.session.get(url=url, headers=self.headers, proxy=proxy, timeout=10) as ct:
+            async with self.session.get(url=url, headers=self.headers, proxy=proxy, timeout=5) as ct:
                 data = await ct.text()
                 return data
         except:
@@ -263,7 +260,7 @@ class CrawlApkName:
         proxy = await self.get_proxy()
         url = "https://play.google.com/store/apps"
         try:
-            async with self.session.get(url=url, headers=self.headers, proxy=proxy) as tc:
+            async with self.session.get(url=url, headers=self.headers, proxy=proxy, timeout=5) as tc:
                 data = await tc.text()
                 analysis_data = etree.HTML(data)
                 urls = analysis_data.xpath("//div[@class='g4kCYe']/a/@href")
@@ -282,6 +279,7 @@ class CrawlApkName:
         self.loop.run_until_complete(asyncio.wait(tasks))
 
         # 获取最外层类别的url，共八种
+        print('进入外层')
         urls = self.loop.run_until_complete(self.get_main_url())
 
         tasks = self.build_async_tasks(urls)
@@ -295,7 +293,7 @@ class CrawlApkName:
 
         allurls = self.loop.run_until_complete(task)
 
-
+        print('进入子层')
         for url in allurls:
             print('子url'+str(url))
             self.son_category_url.add(url)
