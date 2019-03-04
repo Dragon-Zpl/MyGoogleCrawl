@@ -75,10 +75,13 @@ class crawl_fn:
             self.analysis_code(code, proxies)
 
     async def get_request(self, url, session, headers):
-         async with session.get(url=url, headers=headers, timeout=4) as ct:
-             if ct.status == 200:
-                 code = await ct.text()
-                 return code
+         try:
+             async with session.get(url=url, headers=headers, timeout=4) as ct:
+                 if ct.status == 200:
+                     code = await ct.text()
+                     return code
+         except Exception as e:
+             print(e)
 
     def analysis_code(self,code,proxies):
         re_str = '(?<=insertPrx\().*\}'
@@ -192,7 +195,8 @@ class CrawlApkName:
                 data = await ct.text()
                 analysis_data = etree.HTML(data)
                 apknames = analysis_data.xpath(
-                    "#//div[@class='card no-rationale square-cover apps small']//span[@class='preview-overlay-container']/@data-docid")
+                    "//div[@class='card no-rationale square-cover apps small']//span[@class='preview-overlay-container']/@data-docid")
+                print(apknames)
                 for apkname in apknames:
                     print('apkname'+apkname)
                     self.apk_names.add(apkname)
@@ -212,7 +216,7 @@ class CrawlApkName:
                 data = await ct.text()
                 analysis_data = etree.HTML(data)
                 apknames = analysis_data.xpath(
-                    "#//div[@class='card no-rationale square-cover apps small']//span[@class='preview-overlay-container']/@data-docid")
+                    "//div[@class='card no-rationale square-cover apps small']//span[@class='preview-overlay-container']/@data-docid")
                 for apkname in apknames:
                     print(apkname)
                     self.apk_names.add(apkname)
