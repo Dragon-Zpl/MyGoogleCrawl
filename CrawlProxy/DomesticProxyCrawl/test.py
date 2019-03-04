@@ -42,6 +42,7 @@ class crawl_fn:
             async with session.get(url="https://google.com", proxy=proxy, headers=self.headers_normal,
                                    timeout=10) as res:
                 if res.status == 200:
+                    print(proxy)
                     return proxy
                 else:
                     return None
@@ -89,6 +90,7 @@ class crawl_fn:
             ip_dic["last_update"] = json_list['PROXY_LAST_UPDATE']
             ip_dic["time"] = json_list['PROXY_TIME']
             ip_dic["uptimeld"] = json_list['PROXY_UPTIMELD']
+            print(ip_dic)
             proxies.append(ip_dic)
 
     async def run(self,session):
@@ -186,12 +188,13 @@ class CrawlApkName:
         proxy = await self.get_proxy()
         try:
             async with self.session.post(url=url, data=data, headers=self.headers, proxy=proxy) as ct:
+                print(ct.status)
                 data = await ct.text()
                 analysis_data = etree.HTML(data)
                 apknames = analysis_data.xpath(
                     "#//div[@class='card no-rationale square-cover apps small']//span[@class='preview-overlay-container']/@data-docid")
                 for apkname in apknames:
-                    print(apkname)
+                    print('apkname'+apkname)
                     self.apk_names.add(apkname)
         except Exception as e:
             try:
@@ -223,6 +226,7 @@ class CrawlApkName:
         urls = [self.host + url for url in urls]
         feasible_url = set()
         for url in urls:
+            print(url)
             if "GAME" in url or "SOCIAL" in url or "SPORTS" in url or "SHOPPING" in url or "HEALTH_AND_FITNESS" in url or "COMICS" in url:
                 feasible_url.add(url)
         return feasible_url
