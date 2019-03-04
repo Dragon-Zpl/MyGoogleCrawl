@@ -65,7 +65,7 @@ class crawl_fn:
 
     async def get_request(self, url, session, headers):
         try:
-            async with session.get(url=url, headers=headers) as ct:
+            async with session.get(url=url, headers=headers, timeout=10) as ct:
                 if ct.status == 200:
                     code = await ct.text()
                     return code
