@@ -198,7 +198,7 @@ class CheckUpdateApkname:
         data["pkgname"] = updatedata["pkgname"]
         data["app_version"] = updatedata["app_version"]
         data["host"] = "host"
-        self.rcon.rpush("download:queen", str(data).encode('utf-8'))
+        self.rcon.lpush("download:queen", str(data).encode('utf-8'))
 
     def run(self):
         tasks = []
@@ -219,9 +219,10 @@ class CheckUpdateApkname:
                 redis_tasks = []
 
                 for check_result in check_results:
-                    print(check_result)
-                    task = asyncio.ensure_future(self.save_redis(check_result))
-                    redis_tasks.append(task)
+                    print('结果:'+str(check_result))
+                    if check_result != None:
+                        task = asyncio.ensure_future(self.save_redis(check_result))
+                        redis_tasks.append(task)
 
                 self.loop.run_until_complete(asyncio.wait(redis_tasks))
 
