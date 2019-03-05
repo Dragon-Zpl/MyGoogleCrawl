@@ -19,7 +19,7 @@ class CheckUpdateApkname:
             "user-agent": "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.96 Safari/537.36",
         }
         self.country_dict = {
-            'us': '&hl=en&gl=us',
+            # 'us': '&hl=en&gl=us',
             'kr': '&hl=ko&gl=us',
             'sa': '&hl=ar&gl=us',
             'jp': '&hl=ja&gl=us',
@@ -103,7 +103,7 @@ class CheckUpdateApkname:
             analysis_dic["is_busy"] = 0
         else:
             analysis_dic["is_busy"] = 1
-        analysis_dic["name"] = analysis_data.xpath("//h1[@class='AHFaub']/span/text()")
+        analysis_dic["name"] = analysis_data.xpath("//h1[@class='AHFaub']/span/text()")[0]
         print(analysis_dic)
         return analysis_dic
 
