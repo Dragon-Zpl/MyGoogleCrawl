@@ -90,8 +90,8 @@ class CheckUpdateApkname:
         analysis_data = etree.HTML(data)
         xpath_list = analysis_data.xpath("//div[@class='hAyfc']")
         for xpath_one in xpath_list:
-            print(needxpath.xpath("./text()")[0])
             needxpath = xpath_one.xpath("./div")
+            print(needxpath.xpath("./text()")[0])
             if needxpath.xpath("./text()")[0] == ["更新日期", "업데이트 날짜", "تم التحديث", "更新日", "Updated"]:
                 analysis_data["update_time"] = needxpath.xpath(".//span[@class='htlgb']/text()")[0]
             elif needxpath.xpath("./text()")[0] == ["大小", "크기", "الحجم", "サイズ", "Size"]:
