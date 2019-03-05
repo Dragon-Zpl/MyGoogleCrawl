@@ -99,7 +99,7 @@ class CheckUpdateApkname:
                 analysis_dic["app_version"] = xpath_one.xpath(".//span[@class='htlgb']/text()")[0]
             elif needxpath.xpath("./text()")[0] in ["开发者", "제공", "تقديم", "提供元", "Offered By"]:
                 analysis_dic["provider"] = xpath_one.xpath(".//span[@class='htlgb']/text()")[0]
-        if analysis_data.xpath("//span[@class='oocvOe']/button/@aria-label")[0] in ["安装", "설치", "تثبيت", "インストール"]:
+        if analysis_data.xpath("//span[@class='oocvOe']/button/@aria-label")[0] in ["安装", "설치", "تثبيت", "インストール","Install"]:
             analysis_dic["is_busy"] = 0
         else:
             analysis_dic["is_busy"] = 1
