@@ -228,7 +228,8 @@ class CheckUpdateApkname:
                         task = asyncio.ensure_future(self.save_redis(check_result))
                         redis_tasks.append(task)
 
-                self.loop.run_until_complete(asyncio.wait(redis_tasks))
+                if len(redis_tasks) >= 1:
+                    self.loop.run_until_complete(asyncio.wait(redis_tasks))
 
 
 if __name__ == '__main__':
