@@ -16,7 +16,6 @@ class CheckUpdateApkname:
         self.crawl_proxy = crawl_fn()
         self.apknames = set()
         self.proxies = []
-        self.apk_list = []
         self.headers = {
             "user-agent": "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.96 Safari/537.36",
         }
@@ -37,7 +36,6 @@ class CheckUpdateApkname:
                 await self.get_proxy()
 
     async def check_app_version(self, data, time=3, proxy=None):
-        print("app检查")
         now_pkgname = data["pkgname"]
         now_app_version = data["app_version"]
         apk_url = "https://play.google.com/store/apps/details?id=" + now_pkgname
@@ -61,21 +59,26 @@ class CheckUpdateApkname:
                         proxy = await self.get_proxy()
                         return await self.check_app_version(data, proxy=proxy, time=time - 1)
                     else:
-                        return None
+                        data_return = {}
+                        data_return["app_version"] = now_app_version
+                        data_return["pkgname"] = now_pkgname
+                        return data_return
         except:
             if time > 0:
                 proxy = await self.get_proxy()
                 return await self.check_app_version(data, proxy=proxy, time=time - 1)
             else:
-                return None
+                data_return = {}
+                data_return["app_version"] = now_app_version
+                data_return["pkgname"] = now_pkgname
+                return data_return
 
     async def save_redis(self, updatedata):
-        print("存入数据库"+updatedata["pkgname"])
         data = {}
         data["pkgname"] = updatedata["pkgname"]
         data["app_version"] = updatedata["app_version"]
         data["host"] = "host"
-        self.rcon.rpush("download:queen", str(data).encode('utf-8'))
+        self.rcon.lpush("download:queen", str(data).encode('utf-8'))
 
     def run(self):
         tasks = []
@@ -96,7 +99,13 @@ class CheckUpdateApkname:
                 redis_tasks = []
 
                 for check_result in check_results:
-                    task = asyncio.ensure_future(self.save_redis(check_result))
-                    redis_tasks.append(task)
+                    if check_result != None:
+                        task = asyncio.ensure_future(self.save_redis(check_result))
+                        redis_tasks.append(task)
 
                 self.loop.run_until_complete(redis_tasks)
+
+
+if __name__ == '__main__':
+    t = CheckUpdateApkname()
+    t.run()

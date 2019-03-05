@@ -138,7 +138,6 @@ class CheckUpdateApkname:
         self.lock = asyncio.Lock()
         self.crawl_proxy = crawl_fn()
         self.apknames = set()
-        self.apk_list = []
         self.proxies = []
         self.headers = {
             "user-agent": "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.96 Safari/537.36",
@@ -180,17 +179,22 @@ class CheckUpdateApkname:
                         return data_return
                 elif ct.status in [403, 400, 500, 502, 503, 429]:
                     if time > 0:
-                        print('失败')
                         proxy = await self.get_proxy()
                         return await self.check_app_version(data, proxy=proxy, time=time - 1)
                     else:
-                        return None
+                        data_return = {}
+                        data_return["app_version"] = now_app_version
+                        data_return["pkgname"] = now_pkgname
+                        return data_return
         except:
             if time > 0:
                 proxy = await self.get_proxy()
                 return await self.check_app_version(data, proxy=proxy, time=time - 1)
             else:
-                return None
+                data_return = {}
+                data_return["app_version"] = now_app_version
+                data_return["pkgname"] = now_pkgname
+                return data_return
 
     async def save_redis(self, updatedata):
         print('存入数据库'+updatedata["pkgname"])
@@ -206,7 +210,7 @@ class CheckUpdateApkname:
             task = asyncio.ensure_future(self.get_redis_apk())
             tasks.append(task)
 
-            if len(tasks) > 20:
+            if len(tasks) > 100:
                 results = self.loop.run_until_complete(asyncio.gather(*tasks))
                 tasks = []
                 check_tasks = []
