@@ -82,7 +82,7 @@ class CheckUpdateApkname:
                 data_return["is_update"] = 0
                 return data_return
 
-    def analysis_web_data(self,data):
+    def analysis_web_data(self, data):
         analysis_dic = {}
         analysis_data = etree.HTML(data)
         xpath_list = analysis_data.xpath("//div[@class='hAyfc']")
@@ -92,7 +92,7 @@ class CheckUpdateApkname:
                 analysis_data["update_time"] = needxpath.xpath(".//span[@class='htlgb']/text()")[0]
             elif needxpath.xpath("./text()")[0] == ["大小", "크기", "الحجم", "サイズ", "Size"]:
                 analysis_data["size"] = needxpath.xpath(".//span[@class='htlgb']/text()")[0]
-            elif needxpath.xpath("./text()")[0] == ["当前版本", "현재 버전","الإصدار الحالي", "現在のバージョン", "Current Version"]:
+            elif needxpath.xpath("./text()")[0] == ["当前版本", "현재 버전", "الإصدار الحالي", "現在のバージョン", "Current Version"]:
                 analysis_data["app_version"] = needxpath.xpath(".//span[@class='htlgb']/text()")[0]
             elif needxpath.xpath("./text()")[0] == ["开发者", "제공", "تقديم", "提供元", "Offered By"]:
                 analysis_data["provider"] = needxpath.xpath(".//span[@class='htlgb']/text()")[0]
@@ -123,7 +123,9 @@ class CheckUpdateApkname:
                             proxy = await self.get_proxy()
                             return await self.check_other_coutry(data, proxy=proxy, time=time - 1)
                         else:
-                            fail_dict = {"pkgname": data["pkgname"] , "update_time": "", "size": "", "app_version": data["app_version"], "is_busy": "", "country": country, "provider": "", "name": ""}
+                            fail_dict = {"pkgname": data["pkgname"], "update_time": "", "size": "",
+                                         "app_version": data["app_version"], "is_busy": "", "country": country,
+                                         "provider": "", "name": ""}
                             return fail_dict
             except:
                 if time > 0:
@@ -131,9 +133,9 @@ class CheckUpdateApkname:
                     return await self.check_other_coutry(data, proxy=proxy, time=time - 1)
                 else:
                     fail_dict = {"pkgname": data["pkgname"], "update_time": "", "size": "",
-                                 "app_version": data["app_version"], "is_busy": "", "country": country, "provider": "", "name": ""}
+                                 "app_version": data["app_version"], "is_busy": "", "country": country, "provider": "",
+                                 "name": ""}
                     return fail_dict
-
 
     async def save_redis(self, updatedata):
         data = {}
@@ -176,8 +178,8 @@ class CheckUpdateApkname:
                         task = asyncio.ensure_future(self.check_other_coutry(check_result))
                         check_other_tasks.append(task)
 
-                if len(check_other_tasks) >=1:
+                if len(check_other_tasks) >= 1:
                     check_other_results = self.loop.run_until_complete(asyncio.gather(*check_other_tasks))
 
                 for result in check_other_results:
-                    print('其他国家结果'+str(result))
+                    print('其他国家结果' + str(result))
