@@ -89,6 +89,9 @@ class CheckUpdateApkname:
         analysis_dic = {}
         analysis_data = etree.HTML(data)
         xpath_list = analysis_data.xpath("//div[@class='hAyfc']")
+        print(xpath_list)
+        print('******')
+        print(xpath_list.xpath('.//text()'))
         for xpath_one in xpath_list:
             needxpath = xpath_one.xpath("./div")
             print('解析到的：'+str(needxpath.xpath("./text()")[0]))
