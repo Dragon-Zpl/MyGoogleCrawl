@@ -15,6 +15,7 @@ class CheckUpdateApkname:
         self.lock = asyncio.Lock()
         self.crawl_proxy = crawl_fn()
         self.apknames = set()
+        self.proxies = []
         self.apk_list = []
         self.headers = {
             "user-agent": "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.96 Safari/537.36",
