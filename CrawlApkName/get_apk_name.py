@@ -13,6 +13,7 @@ class CrawlApkName:
         self.crawl_proxy = crawl_fn()
         self.loop = GetSetting().get_loop()
         self.lock = asyncio.Lock()
+        self.rcon = GetSetting().get_redis()
         self.headers = {
             "user-agent": "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.96 Safari/537.36",
         }
@@ -146,6 +147,13 @@ class CrawlApkName:
             except:
                 pass
 
+    async def save_redis(self,apkname):
+        data = {}
+        data["pkgname"] = apkname
+        data["app_version"] = "none"
+        data["host"] = "host"
+        self.rcon.rpush("download:queen",str(data).encode('utf-8'))
+
     def run(self):
         self.apk_names.clear()
         # 获取最外层的apkname
@@ -179,6 +187,13 @@ class CrawlApkName:
 
         self.loop.run_until_complete(asyncio.gather(*get_apkname_tasks))
 
+        save_redis_tasks = []
+
+        for apkname in self.apk_names:
+            task = asyncio.ensure_future(self.save_redis(apkname))
+            save_redis_tasks.append(task)
+
+        self.loop.run_until_complete(asyncio.wait(save_redis_tasks))
 if __name__ == '__main__':
     t = CrawlApkName()
     t.run()

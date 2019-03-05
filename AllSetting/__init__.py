@@ -1,6 +1,8 @@
 import asyncio
 import socket
 import aiohttp
+import redis
+
 
 class GetSetting:
     def __init__(self):
@@ -16,3 +18,8 @@ class GetSetting:
                                     )
         session = aiohttp.ClientSession(connector=conn)
         return session
+
+    def get_redis(self):
+        pool = redis.ConnectionPool(host="127.0.0.1", password="a123456", port=6379, db=1)
+        rcon = redis.Redis(connection_pool=pool)
+        return rcon
