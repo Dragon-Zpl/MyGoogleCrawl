@@ -91,14 +91,14 @@ class CheckUpdateApkname:
         xpath_list = analysis_data.xpath("//div[@class='hAyfc']")
         for xpath_one in xpath_list:
             needxpath = xpath_one.xpath("./div")
-            print(needxpath.xpath("./text()")[0])
-            if needxpath.xpath("./text()")[0] == ["更新日期", "업데이트 날짜", "تم التحديث", "更新日", "Updated"]:
+            print('解析到的：'+str(needxpath.xpath("./text()")[0]))
+            if needxpath.xpath("./text()")[0] in ["更新日期", "업데이트 날짜", "تم التحديث", "更新日", "Updated"]:
                 analysis_data["update_time"] = needxpath.xpath(".//span[@class='htlgb']/text()")[0]
-            elif needxpath.xpath("./text()")[0] == ["大小", "크기", "الحجم", "サイズ", "Size"]:
+            elif needxpath.xpath("./text()")[0] in ["大小", "크기", "الحجم", "サイズ", "Size"]:
                 analysis_data["size"] = needxpath.xpath(".//span[@class='htlgb']/text()")[0]
-            elif needxpath.xpath("./text()")[0] == ["当前版本", "현재 버전", "الإصدار الحالي", "現在のバージョン", "Current Version"]:
+            elif needxpath.xpath("./text()")[0] in ["当前版本", "현재 버전", "الإصدار الحالي", "現在のバージョン", "Current Version"]:
                 analysis_data["app_version"] = needxpath.xpath(".//span[@class='htlgb']/text()")[0]
-            elif needxpath.xpath("./text()")[0] == ["开发者", "제공", "تقديم", "提供元", "Offered By"]:
+            elif needxpath.xpath("./text()")[0] in ["开发者", "제공", "تقديم", "提供元", "Offered By"]:
                 analysis_data["provider"] = needxpath.xpath(".//span[@class='htlgb']/text()")[0]
         if analysis_data.xpath("//span[@class='oocvOe']/button/@aria-label")[0] in ["安装", "설치", "تثبيت", "インストール"]:
             analysis_dic["is_busy"] = 0
