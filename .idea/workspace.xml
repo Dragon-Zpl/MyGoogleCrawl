@@ -15,6 +15,7 @@
     <SUITE FILE_PATH="coverage/MyGoogleCrawl$testall.coverage" NAME="testall Coverage Results" MODIFIED="1551754505016" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/MyGoogleCrawl$testIP.coverage" NAME="testIP Coverage Results" MODIFIED="1551773963790" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/CrawlProxy/DomesticProxyCrawl" />
     <SUITE FILE_PATH="coverage/MyGoogleCrawl$__init__.coverage" NAME="__init__ Coverage Results" MODIFIED="1551421910901" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/AllSetting" />
+    <SUITE FILE_PATH="coverage/MyGoogleCrawl$check_update_apkname.coverage" NAME="check_update_apkname Coverage Results" MODIFIED="1551777185961" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/CheckOut_ApkName" />
     <SUITE FILE_PATH="coverage/MyGoogleCrawl$test.coverage" NAME="test Coverage Results" MODIFIED="1551683666329" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/CrawlProxy/DomesticProxyCrawl" />
     <SUITE FILE_PATH="coverage/MyGoogleCrawl$crawl_auto.coverage" NAME="crawl_auto Coverage Results" MODIFIED="1551664177459" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/CrawlProxy/DomesticProxyCrawl" />
   </component>
@@ -135,7 +136,7 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>with self.session</find>
+      <find />
       <find>loop</find>
       <find>print</find>
       <find>(.+):(.+)</find>
@@ -257,8 +258,8 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.testIP">
-    <configuration name="__init__" type="PythonConfigurationType" factoryName="Python" temporary="true">
+  <component name="RunManager" selected="Python.check_update_apkname">
+    <configuration name="check_update_apkname" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="MyGoogleCrawl" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -266,12 +267,12 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/AllSetting" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/CheckOut_ApkName" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/AllSetting/__init__.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/CheckOut_ApkName/check_update_apkname.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -356,17 +357,17 @@
     <list>
       <item itemvalue="Python.crawl_auto" />
       <item itemvalue="Python.test" />
-      <item itemvalue="Python.__init__" />
       <item itemvalue="Python.testIP" />
       <item itemvalue="Python.testall" />
+      <item itemvalue="Python.check_update_apkname" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.check_update_apkname" />
         <item itemvalue="Python.testIP" />
         <item itemvalue="Python.testall" />
         <item itemvalue="Python.test" />
         <item itemvalue="Python.crawl_auto" />
-        <item itemvalue="Python.__init__" />
       </list>
     </recent_temporary>
   </component>

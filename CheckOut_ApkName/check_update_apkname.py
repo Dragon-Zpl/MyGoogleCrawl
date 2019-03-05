@@ -183,3 +183,8 @@ class CheckUpdateApkname:
 
                 for result in check_other_results:
                     print('其他国家结果' + str(result))
+
+
+if __name__ == '__main__':
+    t = CheckUpdateApkname()
+    t.run()
