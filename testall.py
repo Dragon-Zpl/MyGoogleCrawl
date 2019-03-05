@@ -180,6 +180,7 @@ class CheckUpdateApkname:
                         return data_return
                 elif ct.status in [403, 400, 500, 502, 503, 429]:
                     if time > 0:
+                        print('失败')
                         proxy = await self.get_proxy()
                         return await self.check_app_version(data, proxy=proxy, time=time - 1)
                     else:
@@ -218,6 +219,7 @@ class CheckUpdateApkname:
                 redis_tasks = []
 
                 for check_result in check_results:
+                    print(check_result)
                     task = asyncio.ensure_future(self.save_redis(check_result))
                     redis_tasks.append(task)
 
