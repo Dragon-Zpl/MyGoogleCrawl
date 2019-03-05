@@ -22,7 +22,7 @@ class CheckUpdateApkname:
 
     async def get_redis_apk(self):
         async with self.lock:
-            apk_detail = await eval(self.rcon.brpop("download:queen", timeout=4)[1].decode('utf-8'))
+            apk_detail = eval(self.rcon.brpop("download:queen", timeout=4)[1].decode('utf-8'))
             return apk_detail
 
     async def get_proxy(self):
@@ -36,6 +36,7 @@ class CheckUpdateApkname:
                 await self.get_proxy()
 
     async def check_app_version(self, data, time=3, proxy=None):
+        print("app检查")
         now_pkgname = data["pkgname"]
         now_app_version = data["app_version"]
         apk_url = "https://play.google.com/store/apps/details?id=" + now_pkgname
@@ -57,17 +58,18 @@ class CheckUpdateApkname:
                 elif ct.status in [403, 400, 500, 502, 503, 429]:
                     if time > 0:
                         proxy = await self.get_proxy()
-                        return await self.check_app_version(data, proxy=proxy, times=time - 1)
+                        return await self.check_app_version(data, proxy=proxy, time=time - 1)
                     else:
                         return None
         except:
             if time > 0:
                 proxy = await self.get_proxy()
-                return await self.check_app_version(data, proxy=proxy, times=time - 1)
+                return await self.check_app_version(data, proxy=proxy, time=time - 1)
             else:
                 return None
 
     async def save_redis(self, updatedata):
+        print("存入数据库"+updatedata["pkgname"])
         data = {}
         data["pkgname"] = updatedata["pkgname"]
         data["app_version"] = updatedata["app_version"]

@@ -145,7 +145,7 @@ class CheckUpdateApkname:
 
     async def get_redis_apk(self):
         async with self.lock:
-            apk_detail = await eval(self.rcon.brpop("download:queen", timeout=4)[1].decode('utf-8'))
+            apk_detail = eval(self.rcon.brpop("download:queen", timeout=4)[1].decode('utf-8'))
             return apk_detail
 
     async def get_proxy(self):
@@ -220,3 +220,8 @@ class CheckUpdateApkname:
                     redis_tasks.append(task)
 
                 self.loop.run_until_complete(redis_tasks)
+
+
+if __name__ == '__main__':
+    t = CheckUpdateApkname()
+    t.run()
