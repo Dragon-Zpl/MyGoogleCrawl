@@ -50,9 +50,11 @@ class CheckUpdateApkname:
             proxy = self.get_proxy()
         try:
             async with self.session.get(url=apk_url, headers=self.headers, proxy=proxy, timeout=10) as ct:
+                print(ct.status)
                 if ct.status in [200, 201]:
                     datas = await ct.text()
                     check_app_version = self.analysis_web_data(datas)["app_version"]
+                    print('当前版本'+str(check_app_version))
                     if check_app_version == now_app_version:
                         pass
                     else:
@@ -83,6 +85,7 @@ class CheckUpdateApkname:
                 return data_return
 
     def analysis_web_data(self, data):
+        print('进入解析')
         analysis_dic = {}
         analysis_data = etree.HTML(data)
         xpath_list = analysis_data.xpath("//div[@class='hAyfc']")
