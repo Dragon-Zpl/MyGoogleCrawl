@@ -54,7 +54,7 @@ class CheckUpdateApkname:
                 if ct.status in [200, 201]:
                     datas = await ct.text()
                     check_app_version = self.analysis_web_data(datas)["app_version"]
-                    print('当前版本'+str(check_app_version))
+                    print('当前版本' + str(check_app_version))
                     if check_app_version == now_app_version:
                         pass
                     else:
@@ -91,10 +91,10 @@ class CheckUpdateApkname:
         xpath_list = analysis_data.xpath("//div[@class='hAyfc']")
         print(xpath_list)
         print('******')
-        print(xpath_list.xpath('.//text()'))
         for xpath_one in xpath_list:
+            print('进入循环')
             needxpath = xpath_one.xpath("./div")
-            print('解析到的：'+str(needxpath.xpath("./text()")[0]))
+            print('解析到的：' + str(needxpath.xpath("./text()")[0]))
             if needxpath.xpath("./text()")[0] in ["更新日期", "업데이트 날짜", "تم التحديث", "更新日", "Updated"]:
                 analysis_data["update_time"] = needxpath.xpath(".//span[@class='htlgb']/text()")[0]
             elif needxpath.xpath("./text()")[0] in ["大小", "크기", "الحجم", "サイズ", "Size"]:
