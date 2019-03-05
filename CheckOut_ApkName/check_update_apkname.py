@@ -91,9 +91,10 @@ class CheckUpdateApkname:
         xpath_list = analysis_data.xpath("//div[@class='hAyfc']")
         print(xpath_list)
         print('******')
+        print('test'+str(xpath_list[0].xpath("./div/text()")))
         for xpath_one in xpath_list:
-            print('进入循环')
-            needxpath = xpath_one.xpath("./div")
+            print('进入循环'+str(xpath_one))
+            needxpath = xpath_one.xpath("./div")[0]
             print('解析到的：' + str(needxpath.xpath("./text()")[0]))
             if needxpath.xpath("./text()")[0] in ["更新日期", "업데이트 날짜", "تم التحديث", "更新日", "Updated"]:
                 analysis_data["update_time"] = needxpath.xpath(".//span[@class='htlgb']/text()")[0]
