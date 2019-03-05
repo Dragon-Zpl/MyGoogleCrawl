@@ -20,6 +20,6 @@ class GetSetting:
         return session
 
     def get_redis(self):
-        pool = redis.ConnectionPool(host="127.0.0.1", password="a123456", port=6379, db=1)
+        pool = redis.ConnectionPool(host="192.168.9.227", password="a123456", port=6379, db=1)
         rcon = redis.Redis(connection_pool=pool)
         return rcon
