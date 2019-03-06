@@ -56,9 +56,9 @@ class CheckUpdateApkname:
                     analysis_data["country"] = "us"
                     analysis_data["pkgname"] = now_pkgname
                     check_app_version = analysis_data["app_version"]
-                    if check_app_version == now_app_version:
+                    if check_app_version == now_app_version or check_app_version == None:
                         data_return = {}
-                        data_return["app_version"] = check_app_version
+                        data_return["app_version"] = now_app_version
                         data_return["pkgname"] = now_pkgname
                         data_return["is_update"] = 0
                     else:
@@ -66,7 +66,6 @@ class CheckUpdateApkname:
                         data_return["app_version"] = check_app_version
                         data_return["pkgname"] = now_pkgname
                         data_return["is_update"] = 1
-                    print('获取数据中的返回data_return：'+str(data_return) + '返回analysis_data:' + str(analysis_data))
                     return data_return,analysis_data
                 elif ct.status in [403, 400, 500, 502, 503, 429]:
                     if time > 0:
@@ -77,7 +76,6 @@ class CheckUpdateApkname:
                         data_return["app_version"] = now_app_version
                         data_return["pkgname"] = now_pkgname
                         data_return["is_update"] = 0
-                        print('获取数据中的返回失败data_return：' + str(data_return))
                         return data_return, None
         except:
             if time > 0:
@@ -88,7 +86,6 @@ class CheckUpdateApkname:
                 data_return["app_version"] = now_app_version
                 data_return["pkgname"] = now_pkgname
                 data_return["is_update"] = 0
-                print('获取数据中的返回失败data_return：' + str(data_return) + '返回analysis_data:')
                 return data_return, None
 
     def analysis_web_data(self, data):
@@ -179,16 +176,20 @@ class CheckUpdateApkname:
                 check_other_tasks = []
                 for check_result in check_results:
                     print('check_result'+str(check_result))
-                    data_return, analysis_data = check_result
-                    if data_return != None :
-                        task = asyncio.ensure_future(self.save_redis(data_return))
-                        redis_tasks.append(task)
-                    if analysis_data != None:
-                        task = asyncio.ensure_future(self.save_mysql(analysis_data))
-                        save_mysql_tasks.append(task)
-                    if data_return != None and data_return["is_update"] == 1:
-                        task = asyncio.ensure_future(self.check_other_coutry(data_return))
-                        check_other_tasks.append(task)
+                    try:
+                        data_return, analysis_data = check_result
+                        if data_return != None:
+                            task = asyncio.ensure_future(self.save_redis(data_return))
+                            redis_tasks.append(task)
+                        if analysis_data != None:
+                            task = asyncio.ensure_future(self.save_mysql(analysis_data))
+                            save_mysql_tasks.append(task)
+                        if data_return != None and data_return["is_update"] == 1:
+                            task = asyncio.ensure_future(self.check_other_coutry(data_return))
+                            check_other_tasks.append(task)
+                    except Exception as e:
+                        print('错误信息：'+ str(e))
+                        print(check_results)
                 if len(redis_tasks) >= 1:
                     self.loop.run_until_complete(asyncio.wait(redis_tasks))
 
