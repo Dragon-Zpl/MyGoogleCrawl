@@ -94,6 +94,7 @@ class CheckUpdateApkname:
         xpath_list = analysis_data.xpath("//div[@class='hAyfc']")
         for xpath_one in xpath_list:
             needxpath = xpath_one.xpath(".//div[contains(@class,'BgcNfc')]")[0]
+            print('解析得到：'+ str(needxpath.xpath("./text()")[0]))
             if needxpath.xpath("./text()")[0] in ["更新日期", "업데이트 날짜", "تم التحديث", "更新日", "Updated"]:
                 analysis_dic["update_time"] = xpath_one.xpath(".//span[@class='htlgb']/text()")[0]
             elif needxpath.xpath("./text()")[0] in ["大小", "크기", "الحجم", "サイズ", "Size"]:
@@ -122,7 +123,7 @@ class CheckUpdateApkname:
         analysis_dic["cover_image_url"] = analysis_data.xpath("//div[@class='dQrBL']/img/@src")[0]
         analysis_dic["description"] = analysis_data.xpath("//meta[@name='description']/@content")[0]
         analysis_dic["what_news"] = ','.join(analysis_data.xpath("//div[@class='DWPxHb']/content/text()"))
-
+        print('解析获得字典：'+str(analysis_dic))
         return analysis_dic
 
     async def check_other_coutry(self, data, time=3, proxy=None):
@@ -190,7 +191,6 @@ class CheckUpdateApkname:
                 save_mysql_tasks = []
                 check_other_tasks = []
                 for check_result in check_results:
-                    print('check_result'+str(check_result))
                     try:
                         data_return, analysis_data = check_result
                         if data_return != None:
