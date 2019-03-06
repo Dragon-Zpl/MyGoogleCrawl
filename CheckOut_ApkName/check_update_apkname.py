@@ -50,19 +50,23 @@ class CheckUpdateApkname:
             proxy = self.get_proxy()
         try:
             async with self.session.get(url=apk_url, headers=self.headers, proxy=proxy, timeout=10) as ct:
-                print(ct.status)
                 if ct.status in [200, 201]:
                     datas = await ct.text()
-                    check_app_version = self.analysis_web_data(datas)["app_version"]
-                    print('当前版本' + str(check_app_version))
+                    analysis_data = self.analysis_web_data(datas)
+                    analysis_data["country"] = "us"
+                    analysis_data["pkgname"] = now_pkgname
+                    check_app_version = analysis_data["app_version"]
                     if check_app_version == now_app_version:
-                        pass
+                        data_return = {}
+                        data_return["app_version"] = check_app_version
+                        data_return["pkgname"] = now_pkgname
+                        data_return["is_update"] = 0
                     else:
                         data_return = {}
                         data_return["app_version"] = check_app_version
                         data_return["pkgname"] = now_pkgname
                         data_return["is_update"] = 1
-                        return data_return
+                    return data_return,analysis_data
                 elif ct.status in [403, 400, 500, 502, 503, 429]:
                     if time > 0:
                         proxy = await self.get_proxy()
@@ -72,7 +76,7 @@ class CheckUpdateApkname:
                         data_return["app_version"] = now_app_version
                         data_return["pkgname"] = now_pkgname
                         data_return["is_update"] = 0
-                        return data_return
+                        return data_return, None
         except:
             if time > 0:
                 proxy = await self.get_proxy()
@@ -82,7 +86,7 @@ class CheckUpdateApkname:
                 data_return["app_version"] = now_app_version
                 data_return["pkgname"] = now_pkgname
                 data_return["is_update"] = 0
-                return data_return
+                return data_return, None
 
     def analysis_web_data(self, data):
         print('进入解析')
@@ -127,19 +131,19 @@ class CheckUpdateApkname:
                             proxy = await self.get_proxy()
                             return await self.check_other_coutry(data, proxy=proxy, time=time - 1)
                         else:
-                            fail_dict = {"pkgname": data["pkgname"], "update_time": "", "size": "",
-                                         "app_version": data["app_version"], "is_busy": "", "country": country,
-                                         "provider": "", "name": ""}
-                            return fail_dict
+                            # fail_dict = {"pkgname": data["pkgname"], "update_time": "", "size": "",
+                            #              "app_version": data["app_version"], "is_busy": "", "country": country,
+                            #              "provider": "", "name": ""}
+                            return None
             except:
                 if time > 0:
                     proxy = await self.get_proxy()
                     return await self.check_other_coutry(data, proxy=proxy, time=time - 1)
                 else:
-                    fail_dict = {"pkgname": data["pkgname"], "update_time": "", "size": "",
-                                 "app_version": data["app_version"], "is_busy": "", "country": country, "provider": "",
-                                 "name": ""}
-                    return fail_dict
+                    # fail_dict = {"pkgname": data["pkgname"], "update_time": "", "size": "",
+                    #              "app_version": data["app_version"], "is_busy": "", "country": country, "provider": "",
+                    #              "name": ""}
+                    return None
 
     async def save_redis(self, updatedata):
         data = {}
@@ -147,6 +151,9 @@ class CheckUpdateApkname:
         data["app_version"] = updatedata["app_version"]
         data["host"] = "host"
         self.rcon.lpush("download:queen", str(data).encode('utf-8'))
+
+    async def save_mysql(self, data):
+        print("save_mysql:"+str(data))
 
     def run(self):
         tasks = []
@@ -166,27 +173,31 @@ class CheckUpdateApkname:
 
                 redis_tasks = []
                 print('存入数据库')
+                save_mysql_tasks = []
+                check_other_tasks = []
                 for check_result in check_results:
-                    print(check_result)
-                    if check_result != None:
-                        task = asyncio.ensure_future(self.save_redis(check_result))
+                    data_return, analysis_data = check_result
+                    if data_return != None and data_return["is_update"] == 1:
+                        task = asyncio.ensure_future(self.save_redis(data_return))
                         redis_tasks.append(task)
-
+                        check_other_task = asyncio.ensure_future(self.check_other_coutry(check_result))
+                        check_other_tasks.append(check_other_task)
+                    if analysis_data != None:
+                        task = asyncio.ensure_future(self.save_mysql(analysis_data))
+                        save_mysql_tasks.append(task)
                 if len(redis_tasks) >= 1:
                     self.loop.run_until_complete(asyncio.wait(redis_tasks))
-
-                check_other_tasks = []
-                print('查询其他国家')
-                for check_result in check_results:
-                    if check_result["is_update"] == 1:
-                        task = asyncio.ensure_future(self.check_other_coutry(check_result))
-                        check_other_tasks.append(task)
 
                 if len(check_other_tasks) >= 1:
                     check_other_results = self.loop.run_until_complete(asyncio.gather(*check_other_tasks))
 
                 for result in check_other_results:
-                    print('其他国家结果' + str(result))
+                    print("存入数据库结果"+str(result))
+                    if result != None:
+                        task = asyncio.ensure_future(self.save_mysql(result))
+                        save_mysql_tasks.append(task)
+
+                self.loop.run_until_complete(asyncio.wait(save_mysql_tasks))
 
 
 if __name__ == '__main__':
