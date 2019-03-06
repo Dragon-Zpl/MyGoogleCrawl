@@ -181,7 +181,7 @@ class CheckUpdateApkname:
             task = asyncio.ensure_future(self.get_redis_apk())
             tasks.append(task)
 
-            if len(tasks) > 10:
+            if len(tasks) > 100:
                 results = self.loop.run_until_complete(asyncio.gather(*tasks))
                 tasks = []
                 check_tasks = []
