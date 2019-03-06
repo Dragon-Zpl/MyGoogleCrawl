@@ -89,7 +89,6 @@ class CheckUpdateApkname:
                 return data_return, None
 
     def analysis_web_data(self, data):
-        print('进入解析')
         analysis_dic = {}
         analysis_data = etree.HTML(data)
         xpath_list = analysis_data.xpath("//div[@class='hAyfc']")
@@ -103,13 +102,12 @@ class CheckUpdateApkname:
                 analysis_dic["app_version"] = xpath_one.xpath(".//span[@class='htlgb']/text()")[0]
             elif needxpath.xpath("./text()")[0] in ["开发者", "제공", "تقديم", "提供元", "Offered By"]:
                 analysis_dic["provider"] = xpath_one.xpath(".//span[@class='htlgb']/text()")[0]
-        print('是否购买：'+str(analysis_data.xpath("//span[@class='oocvOe']/button/@aria-label")[0]))
+        # print('是否购买：'+str(analysis_data.xpath("//span[@class='oocvOe']/button/@aria-label")[0]))
         if analysis_data.xpath("//span[@class='oocvOe']/button/@aria-label")[0] in ["安装", "설치", "تثبيت", "インストール","Install"]:
             analysis_dic["is_busy"] = 0
         else:
             analysis_dic["is_busy"] = 1
         analysis_dic["name"] = analysis_data.xpath("//h1[@class='AHFaub']/span/text()")[0]
-        print(analysis_dic)
         return analysis_dic
 
     async def check_other_coutry(self, data, time=3, proxy=None):
@@ -153,7 +151,7 @@ class CheckUpdateApkname:
         self.rcon.lpush("download:queen", str(data).encode('utf-8'))
 
     async def save_mysql(self, data):
-        print("save_mysql:"+str(data))
+        pass
 
     def run(self):
         tasks = []
@@ -169,7 +167,8 @@ class CheckUpdateApkname:
                     task = asyncio.ensure_future(self.check_app_version(result))
                     check_tasks.append(task)
 
-                check_results = self.loop.run_until_complete(asyncio.gather(*check_tasks))
+                if len(check_tasks) >= 1:
+                    check_results = self.loop.run_until_complete(asyncio.gather(*check_tasks))
 
                 redis_tasks = []
                 print('存入数据库')
@@ -198,7 +197,8 @@ class CheckUpdateApkname:
                         task = asyncio.ensure_future(self.save_mysql(result))
                         save_mysql_tasks.append(task)
 
-                self.loop.run_until_complete(asyncio.wait(save_mysql_tasks))
+                if len(save_mysql_tasks) >= 1:
+                    self.loop.run_until_complete(asyncio.wait(save_mysql_tasks))
 
 
 if __name__ == '__main__':
