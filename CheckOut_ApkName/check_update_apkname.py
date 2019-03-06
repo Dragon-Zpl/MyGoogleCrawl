@@ -112,6 +112,7 @@ class CheckUpdateApkname:
             elif needxpath.xpath("./text()")[0] in ["필요한 Android 버전", "يتطلب Android", "Android 要件", "Requires Android", "Android 系统版本要求", "Android 最低版本需求"]:
                 analysis_dic["min_os_version"] = xpath_one.xpath(".//a[@class='hrTbp KyaTEc']/text()")[0]
                 # print('是否购买：'+str(analysis_data.xpath("//span[@class='oocvOe']/button/@aria-label")[0]))
+        print('循环结束')
         if analysis_data.xpath("//span[@class='oocvOe']/button/@aria-label")[0] in ["安装", "설치", "تثبيت", "インストール","Install"]:
             analysis_dic["is_busy"] = 0
         else:
@@ -196,7 +197,7 @@ class CheckUpdateApkname:
                 save_mysql_tasks = []
                 check_other_tasks = []
                 for check_result in check_results:
-                    print('check_result:'+check_result)
+                    print('check_result:'+str(check_result))
                     try:
                         data_return, analysis_data = check_result
                         if data_return != None:
