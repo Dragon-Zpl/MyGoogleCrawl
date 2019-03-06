@@ -117,10 +117,15 @@ class CheckUpdateApkname:
         else:
             analysis_dic["is_busy"] = 1
         analysis_dic["name"] = analysis_data.xpath("//h1[@class='AHFaub']/span/text()")[0]
+        print('analysis_dic["name"]'+analysis_dic["name"])
         analysis_dic["developer_url"] = analysis_data.xpath("//a[@class='hrTbp R8zArc']/@href")[0]
+        print('analysis_dic["developer_url"]'+analysis_dic["developer_url"])
         analysis_dic["category"] = analysis_data.xpath("//a[@itemprop='genre']/text()")[0]
+        print('analysis_dic["category"]'+analysis_dic["category"])
         analysis_dic["app_current_num"] = analysis_data.xpath("//span[@class='AYi5wd TBRnV']/span/text()")[0]
+        print('analysis_dic["app_current_num"]'+analysis_dic["app_current_num"])
         analysis_dic["cover_image_url"] = analysis_data.xpath("//div[@class='dQrBL']/img/@src")[0]
+        print('analysis_dic["cover_image_url"]'+analysis_dic["cover_image_url"])
         analysis_dic["description"] = analysis_data.xpath("//meta[@name='description']/@content")[0]
         analysis_dic["what_news"] = ','.join(analysis_data.xpath("//div[@class='DWPxHb']/content/text()"))
         print('解析获得字典：'+str(analysis_dic))
@@ -175,7 +180,7 @@ class CheckUpdateApkname:
             task = asyncio.ensure_future(self.get_redis_apk())
             tasks.append(task)
 
-            if len(tasks) > 100:
+            if len(tasks) > 10:
                 results = self.loop.run_until_complete(asyncio.gather(*tasks))
                 tasks = []
                 check_tasks = []
