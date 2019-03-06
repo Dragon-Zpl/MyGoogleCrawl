@@ -36,8 +36,8 @@
       <file leaf-file-name="check_update_apkname.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/CheckOut_ApkName/check_update_apkname.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="624">
-              <caret line="67" column="52" selection-start-line="67" selection-start-column="52" selection-end-line="67" selection-end-column="52" />
+            <state relative-caret-position="425">
+              <caret line="110" column="154" selection-start-line="110" selection-start-column="154" selection-end-line="110" selection-end-column="154" />
               <folding>
                 <element signature="e#0#14#0" expanded="true" />
               </folding>
@@ -49,7 +49,7 @@
         <entry file="file://$PROJECT_DIR$/AllSetting/mysql_setting.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="50">
-              <caret line="2" column="12" selection-start-line="2" selection-start-column="12" selection-end-line="2" selection-end-column="12" />
+              <caret line="2" column="12" selection-start-line="2" selection-start-column="8" selection-end-line="2" selection-end-column="12" />
             </state>
           </provider>
         </entry>
@@ -175,7 +175,7 @@
   <component name="NodePackageJsonFileManager">
     <packageJsonPaths />
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="721" />
     <option name="y" value="94" />
     <option name="width" value="1400" />
@@ -399,9 +399,9 @@
       <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info anchor="bottom" id="Python Console" order="7" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32997763" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.32997763" />
       <window_info anchor="bottom" id="Terminal" order="7" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.18496802" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18496802" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="3" />
       <window_info anchor="right" id="SciView" order="3" />
@@ -740,13 +740,6 @@
     <entry file="file://$PROJECT_DIR$/CheckOut_ApkName/__init__.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/AllSetting/mysql_setting.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="50">
-          <caret line="2" column="12" selection-start-line="2" selection-start-column="12" selection-end-line="2" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/CrawlProxy/DomesticProxyCrawl/testIP.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="150">
@@ -754,10 +747,17 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/AllSetting/mysql_setting.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="50">
+          <caret line="2" column="12" selection-start-line="2" selection-start-column="8" selection-end-line="2" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/CheckOut_ApkName/check_update_apkname.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="624">
-          <caret line="67" column="52" selection-start-line="67" selection-start-column="52" selection-end-line="67" selection-end-column="52" />
+        <state relative-caret-position="425">
+          <caret line="110" column="154" selection-start-line="110" selection-start-column="154" selection-end-line="110" selection-end-column="154" />
           <folding>
             <element signature="e#0#14#0" expanded="true" />
           </folding>

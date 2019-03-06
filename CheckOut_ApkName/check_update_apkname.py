@@ -102,12 +102,27 @@ class CheckUpdateApkname:
                 analysis_dic["app_version"] = xpath_one.xpath(".//span[@class='htlgb']/text()")[0]
             elif needxpath.xpath("./text()")[0] in ["开发者", "제공", "تقديم", "提供元", "Offered By"]:
                 analysis_dic["provider"] = xpath_one.xpath(".//span[@class='htlgb']/text()")[0]
-        # print('是否购买：'+str(analysis_data.xpath("//span[@class='oocvOe']/button/@aria-label")[0]))
+            elif needxpath.xpath("./text()")[0] in ["콘텐츠 등급", "تقييم المحتوى", "コンテンツのレーティング", "Content Rating", "內容分級", "内容分级"]:
+                analysis_dic["content_rating"] = xpath_one.xpath(".//span[@class='htlgb']/text()")[0]
+            elif needxpath.xpath("./text()")[0] in ["개발자", "مطوّر البرامج", "開発元", "Developer", "開發人員", "开发者"]:
+                analysis_dic["developer_email"] = xpath_one.xpath(".//a[@class='hrTbp KyaTEc']/text()")[0]
+            elif needxpath.xpath("./text()")[0] in ["설치 수", "عمليات التثبيت", "インストール", "Installs", "安裝次數", "安装次数"]:
+                analysis_dic["installs"] = xpath_one.xpath(".//a[@class='hrTbp KyaTEc']/text()")[0]
+            elif needxpath.xpath("./text()")[0] in ["필요한 Android 버전", "يتطلب Android", "Android 要件", "Requires Android", "Android 系统版本要求", "Android 最低版本需求"]:
+                analysis_dic["min_os_version"] = xpath_one.xpath(".//a[@class='hrTbp KyaTEc']/text()")[0]
+                # print('是否购买：'+str(analysis_data.xpath("//span[@class='oocvOe']/button/@aria-label")[0]))
         if analysis_data.xpath("//span[@class='oocvOe']/button/@aria-label")[0] in ["安装", "설치", "تثبيت", "インストール","Install"]:
             analysis_dic["is_busy"] = 0
         else:
             analysis_dic["is_busy"] = 1
         analysis_dic["name"] = analysis_data.xpath("//h1[@class='AHFaub']/span/text()")[0]
+        analysis_dic["developer_url"] = analysis_data.xpath("//a[@class='hrTbp R8zArc']/@href")[0]
+        analysis_dic["category"] = analysis_data.xpath("//a[@itemprop='genre']/text()")[0]
+        analysis_dic["app_current_num"] = analysis_data.xpath("//span[@class='AYi5wd TBRnV']/span/text()")[0]
+        analysis_dic["cover_image_url"] = analysis_data.xpath("//div[@class='dQrBL']/img/@src")[0]
+        analysis_dic["description"] = analysis_data.xpath("//meta[@name='description']/@content")[0]
+        analysis_dic["what_news"] = ','.join(analysis_data.xpath("//div[@class='DWPxHb']/content/text()"))
+
         return analysis_dic
 
     async def check_other_coutry(self, data, time=3, proxy=None):
