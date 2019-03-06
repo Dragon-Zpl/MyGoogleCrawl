@@ -3,7 +3,7 @@ import asyncio
 
 async def test(number):
 
-    a = {"dada":number}
+    a = None
     b = None
 
     return a,b

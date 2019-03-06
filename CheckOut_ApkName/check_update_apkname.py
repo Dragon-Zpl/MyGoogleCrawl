@@ -66,6 +66,7 @@ class CheckUpdateApkname:
                         data_return["app_version"] = check_app_version
                         data_return["pkgname"] = now_pkgname
                         data_return["is_update"] = 1
+                    print('获取数据中的返回data_return：'+str(data_return) + '返回analysis_data:' + str(analysis_data))
                     return data_return,analysis_data
                 elif ct.status in [403, 400, 500, 502, 503, 429]:
                     if time > 0:
@@ -76,6 +77,7 @@ class CheckUpdateApkname:
                         data_return["app_version"] = now_app_version
                         data_return["pkgname"] = now_pkgname
                         data_return["is_update"] = 0
+                        print('获取数据中的返回失败data_return：' + str(data_return))
                         return data_return, None
         except:
             if time > 0:
@@ -86,6 +88,7 @@ class CheckUpdateApkname:
                 data_return["app_version"] = now_app_version
                 data_return["pkgname"] = now_pkgname
                 data_return["is_update"] = 0
+                print('获取数据中的返回失败data_return：' + str(data_return) + '返回analysis_data:')
                 return data_return, None
 
     def analysis_web_data(self, data):
@@ -184,7 +187,6 @@ class CheckUpdateApkname:
                         task = asyncio.ensure_future(self.save_mysql(analysis_data))
                         save_mysql_tasks.append(task)
                     if data_return != None and data_return["is_update"] == 1:
-                        print('创建查询其他国家队列')
                         task = asyncio.ensure_future(self.check_other_coutry(data_return))
                         check_other_tasks.append(task)
                 if len(redis_tasks) >= 1:
@@ -193,14 +195,13 @@ class CheckUpdateApkname:
                 if len(check_other_tasks) >= 1:
                     check_other_results = self.loop.run_until_complete(asyncio.gather(*check_other_tasks))
 
-                for result in check_other_results:
-                    print("存入数据库结果"+str(result))
-                    if result != None:
-                        task = asyncio.ensure_future(self.save_mysql(result))
-                        save_mysql_tasks.append(task)
-
-                if len(save_mysql_tasks) >= 1:
-                    self.loop.run_until_complete(asyncio.wait(save_mysql_tasks))
+                # for result in check_other_results:
+                #     if result != None:
+                #         task = asyncio.ensure_future(self.save_mysql(result))
+                #         save_mysql_tasks.append(task)
+                #
+                # if len(save_mysql_tasks) >= 1:
+                #     self.loop.run_until_complete(asyncio.wait(save_mysql_tasks))
 
 
 if __name__ == '__main__':
