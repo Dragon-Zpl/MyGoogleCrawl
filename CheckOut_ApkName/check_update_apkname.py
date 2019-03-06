@@ -176,6 +176,7 @@ class CheckUpdateApkname:
                 save_mysql_tasks = []
                 check_other_tasks = []
                 for check_result in check_results:
+                    print('check_result'+str(check_result))
                     data_return, analysis_data = check_result
                     if data_return != None and data_return["is_update"] == 1:
                         task = asyncio.ensure_future(self.save_redis(data_return))

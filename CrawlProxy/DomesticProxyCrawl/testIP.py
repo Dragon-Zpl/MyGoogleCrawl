@@ -4,7 +4,7 @@ import asyncio
 async def test(number):
 
     a = {"dada":number}
-    b = {"daaa":number+1}
+    b = None
 
     return a,b
 
