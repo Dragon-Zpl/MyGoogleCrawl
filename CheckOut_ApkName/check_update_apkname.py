@@ -177,14 +177,16 @@ class CheckUpdateApkname:
                 for check_result in check_results:
                     print('check_result'+str(check_result))
                     data_return, analysis_data = check_result
-                    if data_return != None and data_return["is_update"] == 1:
+                    if data_return != None :
                         task = asyncio.ensure_future(self.save_redis(data_return))
                         redis_tasks.append(task)
-                        check_other_task = asyncio.ensure_future(self.check_other_coutry(check_result))
-                        check_other_tasks.append(check_other_task)
                     if analysis_data != None:
                         task = asyncio.ensure_future(self.save_mysql(analysis_data))
                         save_mysql_tasks.append(task)
+                    if data_return != None and data_return["is_update"] == 1:
+                        print('创建查询其他国家队列')
+                        task = asyncio.ensure_future(self.check_other_coutry(data_return))
+                        check_other_tasks.append(task)
                 if len(redis_tasks) >= 1:
                     self.loop.run_until_complete(asyncio.wait(redis_tasks))
 
