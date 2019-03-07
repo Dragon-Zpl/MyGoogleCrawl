@@ -6,10 +6,12 @@ import redis
 
 class GetSetting:
     def __init__(self):
-        pass
+        self.loop = asyncio.get_event_loop()
 
     def get_loop(self):
-        loop = asyncio.get_event_loop()
+        loop = asyncio.get_running_loop()
+        if loop is None:
+            loop = asyncio.get_event_loop()
         return loop
 
     def get_session(self):
