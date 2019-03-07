@@ -1,7 +1,10 @@
 import asyncio
+import re
+from datetime import datetime
 from random import choice
 from lxml import etree
 from AllSetting import GetSetting
+from AllSetting.mysql_setting import GetMysqlSetting
 from CrawlProxy.ForeignProxyCrawl.crawl_foreigh_auto import crawl_fn
 
 
@@ -15,16 +18,17 @@ class CheckUpdateApkname:
         self.crawl_proxy = crawl_fn()
         self.apknames = set()
         self.proxies = []
+        self.send_mysql = GetMysqlSetting()
         self.headers = {
             "user-agent": "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.96 Safari/537.36",
         }
         self.country_dict = {
             # 'us': '&hl=en&gl=us',
-            'kr': '&hl=ko&gl=us',
-            'sa': '&hl=ar&gl=us',
+            'ko': '&hl=ko&gl=us',
+            'ar': '&hl=ar&gl=us',
             'jp': '&hl=ja&gl=us',
             'zh': '&hl=zh&gl=us',
-            'zh_tw': '&hl=zh_TW&gl=us',
+            'zhtw': '&hl=zh_TW&gl=us',
         }
 
     async def get_redis_apk(self):
@@ -42,6 +46,27 @@ class CheckUpdateApkname:
             except:
                 await self.get_proxy()
 
+    def change_time(self,lang,LastUpdateDate):
+        if LastUpdateDate:
+            if lang == 'us':
+                try:
+                    LastUpdateDate = datetime.strptime(LastUpdateDate, '%B %d, %Y')
+                except:
+                    LastUpdateDate = re.findall('([0-9/])', LastUpdateDate)
+                    LastUpdateDate = ''.join(LastUpdateDate)
+                    LastUpdateDate = datetime.strptime(LastUpdateDate, '%m/%d/%Y')
+            elif lang == 'ko':
+                LastUpdateDate = datetime.strptime(LastUpdateDate, '%Y년 %m월 %d일')
+            elif lang == 'ar':
+                # arabic date need to be process specially
+                LastUpdateDate = "2019-01-01 00:00:00"
+            else:
+                try:
+                    LastUpdateDate = datetime.strptime(LastUpdateDate, '%Y年%m月%d日')
+                except:
+                    LastUpdateDate = "2019-01-01 00:00:00"
+            return LastUpdateDate
+
     async def check_app_version(self, data, time=3, proxy=None):
         now_pkgname = data["pkgname"]
         now_app_version = data["app_version"]
@@ -55,6 +80,7 @@ class CheckUpdateApkname:
                     analysis_data = self.analysis_web_data(datas)
                     analysis_data["country"] = "us"
                     analysis_data["pkgname"] = now_pkgname
+                    analysis_data["url"] = apk_url
                     check_app_version = analysis_data["app_version"]
                     if check_app_version == now_app_version or check_app_version == None:
                         data_return = {}
@@ -129,7 +155,6 @@ class CheckUpdateApkname:
         # print('analysis_dic["cover_image_url"]'+analysis_dic["cover_image_url"])
         analysis_dic["description"] = analysis_data.xpath("//meta[@name='description']/@content")[0]
         analysis_dic["what_news"] = ','.join(analysis_data.xpath("//div[@class='DWPxHb']/content/text()"))
-        print('解析获得字典：'+str(analysis_dic))
         return analysis_dic
 
     async def check_other_coutry(self, data, time=3, proxy=None):
@@ -145,6 +170,11 @@ class CheckUpdateApkname:
                         check_app_data = self.analysis_web_data(datas)
                         check_app_data["pkgname"] = pkgname
                         check_app_data["country"] = country
+                        check_app_data["url"] = apk_url
+                        change_time = self.change_time(country,check_app_data["update_time"])
+                        if change_time !=None:
+                            check_app_data["update_time"] = change_time
+
                         return check_app_data
                     elif ct.status in [403, 400, 500, 502, 503, 429]:
                         if time > 0:
@@ -172,8 +202,6 @@ class CheckUpdateApkname:
         data["host"] = "host"
         self.rcon.lpush("download:queen", str(data).encode('utf-8'))
 
-    async def save_mysql(self, data):
-        pass
 
     def run(self):
         tasks = []
@@ -218,13 +246,15 @@ class CheckUpdateApkname:
                 if len(check_other_tasks) >= 1:
                     check_other_results = self.loop.run_until_complete(asyncio.gather(*check_other_tasks))
 
-                # for result in check_other_results:
-                #     if result != None:
-                #         task = asyncio.ensure_future(self.save_mysql(result))
-                #         save_mysql_tasks.append(task)
-                #
-                # if len(save_mysql_tasks) >= 1:
-                #     self.loop.run_until_complete(asyncio.wait(save_mysql_tasks))
+                for result in check_other_results:
+                    print("国家:"+result["country"])
+                    print("结果:"+result)
+                    if result != None:
+                        task = self.send_mysql.run(self.loop,result)
+                        save_mysql_tasks.append(task)
+
+                if len(save_mysql_tasks) >= 1:
+                    self.loop.run_until_complete(asyncio.wait(save_mysql_tasks))
 
 
 if __name__ == '__main__':
