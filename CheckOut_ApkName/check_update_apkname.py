@@ -227,14 +227,13 @@ class CheckUpdateApkname:
                 save_mysql_tasks = []
                 check_other_tasks = []
                 for check_result in check_results:
-                    print('check_result:' + str(check_result))
                     try:
                         data_return, analysis_data = check_result
                         if data_return != None:
                             task = asyncio.ensure_future(self.save_redis(data_return))
                             redis_tasks.append(task)
                         if analysis_data != None:
-                            task = asyncio.ensure_future(self.save_mysql(analysis_data))
+                            task = asyncio.ensure_future(self.send_mysql.run(self.loop,analysis_data))
                             save_mysql_tasks.append(task)
                         if data_return != None and data_return["is_update"] == 1:
                             task = asyncio.ensure_future(self.check_other_coutry(data_return))
@@ -247,13 +246,13 @@ class CheckUpdateApkname:
 
                 if len(check_other_tasks) >= 1:
                     check_other_results = self.loop.run_until_complete(asyncio.gather(*check_other_tasks))
+                    for result in check_other_results:
+                        print("国家:" + result["country"])
+                        print("结果:" + result)
+                        if result != None:
+                            task = self.send_mysql.run(self.loop, result)
+                            save_mysql_tasks.append(task)
 
-                for result in check_other_results:
-                    print("国家:" + result["country"])
-                    print("结果:" + result)
-                    if result != None:
-                        task = self.send_mysql.run(self.loop, result)
-                        save_mysql_tasks.append(task)
 
                 if len(save_mysql_tasks) >= 1:
                     self.loop.run_until_complete(asyncio.wait(save_mysql_tasks))
