@@ -190,6 +190,7 @@ class CheckUpdateApkname:
                         change_time = self.change_time(country, check_app_data["update_time"])
                         if change_time != None:
                             check_app_data["update_time"] = change_time
+                        print('执行到最后一步')
                         self.all_data_list.append(check_app_data)
                     elif ct.status in [403, 400, 500, 502, 503, 429]:
                         if time > 0:
