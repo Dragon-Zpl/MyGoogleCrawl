@@ -46,7 +46,7 @@ class CheckUpdateApkname:
             except:
                 await self.get_proxy()
 
-    def change_time(self,lang,LastUpdateDate):
+    def change_time(self, lang, LastUpdateDate):
         if LastUpdateDate:
             if lang == 'us':
                 try:
@@ -92,7 +92,7 @@ class CheckUpdateApkname:
                         data_return["app_version"] = check_app_version
                         data_return["pkgname"] = now_pkgname
                         data_return["is_update"] = 1
-                    return data_return,analysis_data
+                    return data_return, analysis_data
                 elif ct.status in [403, 400, 500, 502, 503, 429]:
                     if time > 0:
                         proxy = await self.get_proxy()
@@ -129,17 +129,20 @@ class CheckUpdateApkname:
                 analysis_dic["app_version"] = xpath_one.xpath(".//span[@class='htlgb']/text()")[0]
             elif needxpath.xpath("./text()")[0] in ["开发者", "제공", "تقديم", "提供元", "Offered By"]:
                 analysis_dic["provider"] = xpath_one.xpath(".//span[@class='htlgb']/text()")[0]
-            elif needxpath.xpath("./text()")[0] in ["콘텐츠 등급", "تقييم المحتوى", "コンテンツのレーティング", "Content Rating", "內容分級", "内容分级"]:
+            elif needxpath.xpath("./text()")[0] in ["콘텐츠 등급", "تقييم المحتوى", "コンテンツのレーティング", "Content Rating", "內容分級",
+                                                    "内容分级"]:
                 analysis_dic["content_rating"] = xpath_one.xpath(".//span[@class='htlgb']/div/text()")[0]
             elif needxpath.xpath("./text()")[0] in ["개발자", "مطوّر البرامج", "開発元", "Developer", "開發人員", "开发者"]:
                 analysis_dic["developer_email"] = xpath_one.xpath(".//a[@class='hrTbp KyaTEc']/text()")[0]
             elif needxpath.xpath("./text()")[0] in ["설치 수", "عمليات التثبيت", "インストール", "Installs", "安裝次數", "安装次数"]:
                 analysis_dic["installs"] = xpath_one.xpath(".//span[@class='htlgb']/text()")[0]
-            elif needxpath.xpath("./text()")[0] in ["필요한 Android 버전", "يتطلب Android", "Android 要件", "Requires Android", "Android 系统版本要求", "Android 最低版本需求"]:
+            elif needxpath.xpath("./text()")[0] in ["필요한 Android 버전", "يتطلب Android", "Android 要件", "Requires Android",
+                                                    "Android 系统版本要求", "Android 最低版本需求"]:
                 analysis_dic["min_os_version"] = xpath_one.xpath(".//span[@class='htlgb']/text()")[0]
                 # print('是否购买：'+str(analysis_data.xpath("//span[@class='oocvOe']/button/@aria-label")[0]))
         # print('循环结束')
-        if analysis_data.xpath("//span[@class='oocvOe']/button/@aria-label")[0] in ["安装", "설치", "تثبيت", "インストール","Install"]:
+        if analysis_data.xpath("//span[@class='oocvOe']/button/@aria-label")[0] in ["安装", "설치", "تثبيت", "インストール",
+                                                                                    "Install"]:
             analysis_dic["is_busy"] = 0
         else:
             analysis_dic["is_busy"] = 1
@@ -171,8 +174,8 @@ class CheckUpdateApkname:
                         check_app_data["pkgname"] = pkgname
                         check_app_data["country"] = country
                         check_app_data["url"] = apk_url
-                        change_time = self.change_time(country,check_app_data["update_time"])
-                        if change_time !=None:
+                        change_time = self.change_time(country, check_app_data["update_time"])
+                        if change_time != None:
                             check_app_data["update_time"] = change_time
 
                         return check_app_data
@@ -202,7 +205,6 @@ class CheckUpdateApkname:
         data["host"] = "host"
         self.rcon.lpush("download:queen", str(data).encode('utf-8'))
 
-
     def run(self):
         tasks = []
         while True:
@@ -225,7 +227,7 @@ class CheckUpdateApkname:
                 save_mysql_tasks = []
                 check_other_tasks = []
                 for check_result in check_results:
-                    print('check_result:'+str(check_result))
+                    print('check_result:' + str(check_result))
                     try:
                         data_return, analysis_data = check_result
                         if data_return != None:
@@ -238,7 +240,7 @@ class CheckUpdateApkname:
                             task = asyncio.ensure_future(self.check_other_coutry(data_return))
                             check_other_tasks.append(task)
                     except Exception as e:
-                        print('错误信息：'+ str(e))
+                        print('错误信息：' + str(e))
                         print(check_results)
                 if len(redis_tasks) >= 1:
                     self.loop.run_until_complete(asyncio.wait(redis_tasks))
@@ -247,10 +249,10 @@ class CheckUpdateApkname:
                     check_other_results = self.loop.run_until_complete(asyncio.gather(*check_other_tasks))
 
                 for result in check_other_results:
-                    print("国家:"+result["country"])
-                    print("结果:"+result)
+                    print("国家:" + result["country"])
+                    print("结果:" + result)
                     if result != None:
-                        task = self.send_mysql.run(self.loop,result)
+                        task = self.send_mysql.run(self.loop, result)
                         save_mysql_tasks.append(task)
 
                 if len(save_mysql_tasks) >= 1:
