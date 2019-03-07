@@ -212,6 +212,7 @@ class CheckUpdateApkname:
         self.rcon.lpush("download:queen", str(data).encode('utf-8'))
 
     async def get_mysql_db(self,loop=None):
+        print('获取数据库')
         pool = await aiomysql.create_pool(host='192.168.9.227', port=3306, user='root', password='123456',
                                           db='google_play', charset='utf8', autocommit=True,loop=loop)
         return pool
@@ -268,18 +269,19 @@ class CheckUpdateApkname:
             if len(tasks) > 20:
                 get_db = self.loop.run_until_complete(self.get_mysql_db())
                 results = self.loop.run_until_complete(asyncio.gather(*tasks))
+                print('redis拿完数据')
                 tasks = []
                 check_tasks = []
                 for result in results:
                     task = asyncio.ensure_future(self.check_app_version(result))
                     check_tasks.append(task)
-
+                print('检查完毕')
                 if len(check_tasks) >= 1:
                     check_results = self.loop.run_until_complete(asyncio.gather(*check_tasks))
                     redis_tasks = []
                     save_mysql_tasks = []
                     check_other_tasks = []
-                    print('检查更新')
+                    print('检查其他国家更新')
                     for check_result in check_results:
                         try:
                             data_return, analysis_data = check_result
