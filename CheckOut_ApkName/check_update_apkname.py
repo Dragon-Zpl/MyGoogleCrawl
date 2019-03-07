@@ -180,7 +180,6 @@ class CheckUpdateApkname:
                 print("当前在爬取的国家是：" + str(country))
             try:
                 async with self.session.get(url=apk_url, headers=self.headers, proxy=proxy, timeout=10) as ct:
-                    print('状态:' + str(ct.status) + str(country))
                     if ct.status in [200, 201]:
                         datas = await ct.text()
                         check_app_data = self.analysis_web_data(datas)
@@ -260,7 +259,7 @@ class CheckUpdateApkname:
         while True:
             task = asyncio.ensure_future(self.get_redis_apk())
             tasks.append(task)
-            if len(tasks) > 5:
+            if len(tasks) > 2:
                 print('添加任务完毕')
                 get_db = self.loop.run_until_complete(self.get_mysql_db())
                 results = self.loop.run_until_complete(asyncio.gather(*tasks))
@@ -298,7 +297,6 @@ class CheckUpdateApkname:
 
                     if len(check_other_tasks) >= 1:
                         self.loop.run_until_complete(asyncio.wait(check_other_tasks))
-                        print('self.all_data_list' + str(self.all_data_list))
                         for result_list in self.all_data_list:
                             if result_list != None:
                                 # print('时间：' + str(result["update_time"]) + '国家：' + result["country"])
