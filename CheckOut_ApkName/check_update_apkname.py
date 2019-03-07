@@ -248,7 +248,7 @@ class CheckUpdateApkname:
                     check_other_results = self.loop.run_until_complete(asyncio.gather(*check_other_tasks))
                     for result in check_other_results:
                         print("国家:" + result["country"])
-                        print("结果:" + result)
+                        print("结果:" + str(result))
                         if result != None:
                             task = self.send_mysql.run(self.loop, result)
                             save_mysql_tasks.append(task)

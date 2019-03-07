@@ -22,6 +22,7 @@ class GetMysqlSetting:
                 try:
                     await cur.execute(sql)
                 except Exception as e:
+                    print("数据库语句:"+sql)
                     print('数据库错误信息：' + str(e))
 
 
