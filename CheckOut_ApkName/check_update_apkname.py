@@ -299,11 +299,12 @@ class CheckUpdateApkname:
                     if len(check_other_tasks) >= 1:
                         check_other_results = self.loop.run_until_complete(asyncio.gather(*check_other_tasks))
                         for result_list in check_other_results:
-                            for result in result_list:
-                                if result != None:
-                                    print('时间：' + str(result["update_time"]) + '国家：' + result["country"])
-                                    task = self.insert_mysql(result, get_db)
-                                    save_mysql_tasks.append(task)
+                            if result_list != None:
+                                for result in result_list:
+                                    if result != None:
+                                        print('时间：' + str(result["update_time"]) + '国家：' + result["country"])
+                                        task = self.insert_mysql(result, get_db)
+                                        save_mysql_tasks.append(task)
 
                     if len(save_mysql_tasks) >= 1:
                         self.loop.run_until_complete(asyncio.wait(save_mysql_tasks))
