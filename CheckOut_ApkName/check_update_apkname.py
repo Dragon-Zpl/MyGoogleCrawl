@@ -169,7 +169,6 @@ class CheckUpdateApkname:
         analysis_dic["what_news"] = ','.join(analysis_data.xpath("//div[@class='DWPxHb']/content/text()"))
         analysis_dic["what_news"] = self.remove_emoji(analysis_dic["what_news"])
         analysis_dic["what_news"] = self.filter_emoji(analysis_dic["what_news"])
-        print('analysis_dic' + str(analysis_dic))
         return analysis_dic
 
     async def check_other_coutry(self, data, time=3, proxy=None):
@@ -191,6 +190,7 @@ class CheckUpdateApkname:
                         change_time = self.change_time(country, check_app_data["update_time"])
                         if change_time != None:
                             check_app_data["update_time"] = change_time
+                        print('check_app_data'+str(check_app_data))
                         self.all_data_list.append(check_app_data)
                     elif ct.status in [403, 400, 500, 502, 503, 429]:
                         if time > 0:
@@ -302,12 +302,13 @@ class CheckUpdateApkname:
                     print('爬取其他国家信息')
 
                     if len(check_other_tasks) >= 1:
-                        self.loop.run_until_complete(asyncio.gather(*check_other_tasks))
+                        self.loop.run_until_complete(asyncio.wait(check_other_tasks))
+                        print(self.all_data_list)
                         for result_list in self.all_data_list:
                             if result_list != None:
                                 for result in result_list:
                                     if result != None:
-                                        print('时间：' + str(result["update_time"]) + '国家：' + result["country"])
+                                        # print('时间：' + str(result["update_time"]) + '国家：' + result["country"])
                                         task = self.insert_mysql(result, get_db)
                                         save_mysql_tasks.append(task)
 
