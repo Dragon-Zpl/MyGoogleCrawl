@@ -207,10 +207,12 @@ class CheckUpdateApkname:
         self.rcon.lpush("download:queen", str(data).encode('utf-8'))
 
     async def insert_mysql(self,loop, data):
+        print('进入到insert_mysql')
         pool = await aiomysql.create_pool(host='192.168.9.227', port=3306, user='root', password='123456',
                                          db='google_play', charset='utf8', autocommit=True, loop=loop)
         async with pool.get() as conn:
             async with conn.cursor() as cur:
+                print('开始存数据')
                 if data["country"] == "us":
                     to_mysql = "crawl_google_play_app_info"
                 else:
