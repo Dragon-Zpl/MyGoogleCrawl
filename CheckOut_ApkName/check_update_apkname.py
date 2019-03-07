@@ -6,7 +6,6 @@ from random import choice
 import aiomysql
 from lxml import etree
 from AllSetting import GetSetting
-from AllSetting.mysql_setting import GetMysqlSetting
 from CrawlProxy.ForeignProxyCrawl.crawl_foreigh_auto import crawl_fn
 
 
@@ -31,6 +30,13 @@ class CheckUpdateApkname:
             'zh': '&hl=zh&gl=us',
             'zhtw': '&hl=zh_TW&gl=us',
         }
+        self.emoji_pattern = re.compile(
+        u"(\ud83d[\ude00-\ude4f])|"  # emoticons
+        u"(\ud83c[\udf00-\uffff])|"  # symbols & pictographs (1 of 2)
+        u"(\ud83d[\u0000-\uddff])|"  # symbols & pictographs (2 of 2)
+        u"(\ud83d[\ude80-\udeff])|"  # transport & map symbols
+        u"(\ud83c[\udde0-\uddff])"  # flags (iOS)
+        "+", flags=re.UNICODE)
 
     async def get_redis_apk(self):
         async with self.lock:
@@ -124,7 +130,6 @@ class CheckUpdateApkname:
         xpath_list = analysis_data.xpath("//div[@class='hAyfc']")
         for xpath_one in xpath_list:
             needxpath = xpath_one.xpath(".//div[contains(@class,'BgcNfc')]")[0]
-            # print('解析得到：'+ str(needxpath.xpath("./text()")[0]))
             if needxpath.xpath("./text()")[0] in ["更新日期", "업데이트 날짜", "تم التحديث", "更新日", "Updated"]:
                 analysis_dic["update_time"] = xpath_one.xpath(".//span[@class='htlgb']/text()")[0]
             elif needxpath.xpath("./text()")[0] in ["大小", "크기", "الحجم", "サイズ", "Size"]:
@@ -133,6 +138,8 @@ class CheckUpdateApkname:
                 analysis_dic["app_version"] = xpath_one.xpath(".//span[@class='htlgb']/text()")[0]
             elif needxpath.xpath("./text()")[0] in ["开发者", "제공", "تقديم", "提供元", "Offered By"]:
                 analysis_dic["provider"] = xpath_one.xpath(".//span[@class='htlgb']/text()")[0]
+                analysis_dic["provider"] = self.remove_emoji(analysis_dic["provider"])
+                analysis_dic["provider"] = self.filter_emoji(analysis_dic["provider"])
             elif needxpath.xpath("./text()")[0] in ["콘텐츠 등급", "تقييم المحتوى", "コンテンツのレーティング", "Content Rating", "內容分級",
                                                     "内容分级"]:
                 analysis_dic["content_rating"] = xpath_one.xpath(".//span[@class='htlgb']/div/text()")[0]
@@ -143,25 +150,24 @@ class CheckUpdateApkname:
             elif needxpath.xpath("./text()")[0] in ["필요한 Android 버전", "يتطلب Android", "Android 要件", "Requires Android",
                                                     "Android 系统版本要求", "Android 最低版本需求"]:
                 analysis_dic["min_os_version"] = xpath_one.xpath(".//span[@class='htlgb']/text()")[0]
-                # print('是否购买：'+str(analysis_data.xpath("//span[@class='oocvOe']/button/@aria-label")[0]))
-        # print('循环结束')
         if analysis_data.xpath("//span[@class='oocvOe']/button/@aria-label")[0] in ["安装", "설치", "تثبيت", "インストール",
                                                                                     "Install"]:
             analysis_dic["is_busy"] = 0
         else:
             analysis_dic["is_busy"] = 1
         analysis_dic["name"] = analysis_data.xpath("//h1[@class='AHFaub']/span/text()")[0]
-        # print('analysis_dic["name"]'+analysis_dic["name"])
+        analysis_dic["name"] = self.remove_emoji(analysis_dic["name"])
+        analysis_dic["name"] = self.filter_emoji(analysis_dic["name"])
         analysis_dic["developer_url"] = analysis_data.xpath("//a[@class='hrTbp R8zArc']/@href")[0]
-        # print('analysis_dic["developer_url"]'+analysis_dic["developer_url"])
         analysis_dic["category"] = analysis_data.xpath("//a[@itemprop='genre']/text()")[0]
-        # print('analysis_dic["category"]'+analysis_dic["category"])
         analysis_dic["app_current_num"] = analysis_data.xpath("//span[@class='AYi5wd TBRnV']/span/text()")[0]
-        # print('analysis_dic["app_current_num"]'+analysis_dic["app_current_num"])
         analysis_dic["cover_image_url"] = analysis_data.xpath("//div[@class='dQrBL']/img/@src")[0]
-        # print('analysis_dic["cover_image_url"]'+analysis_dic["cover_image_url"])
         analysis_dic["description"] = analysis_data.xpath("//meta[@name='description']/@content")[0]
+        analysis_dic["description"] = self.remove_emoji(analysis_dic["description"])
+        analysis_dic["description"] = self.filter_emoji(analysis_dic["description"])
         analysis_dic["what_news"] = ','.join(analysis_data.xpath("//div[@class='DWPxHb']/content/text()"))
+        analysis_dic["what_news"] = self.remove_emoji(analysis_dic["what_news"])
+        analysis_dic["what_news"] = self.filter_emoji(analysis_dic["what_news"])
         return analysis_dic
 
     async def check_other_coutry(self, data, time=3, proxy=None):
@@ -188,18 +194,12 @@ class CheckUpdateApkname:
                             proxy = await self.get_proxy()
                             return await self.check_other_coutry(data, proxy=proxy, time=time - 1)
                         else:
-                            # fail_dict = {"pkgname": data["pkgname"], "update_time": "", "size": "",
-                            #              "app_version": data["app_version"], "is_busy": "", "country": country,
-                            #              "provider": "", "name": ""}
                             return None
             except:
                 if time > 0:
                     proxy = await self.get_proxy()
                     return await self.check_other_coutry(data, proxy=proxy, time=time - 1)
                 else:
-                    # fail_dict = {"pkgname": data["pkgname"], "update_time": "", "size": "",
-                    #              "app_version": data["app_version"], "is_busy": "", "country": country, "provider": "",
-                    #              "name": ""}
                     return None
 
     async def save_redis(self, updatedata):
@@ -231,11 +231,31 @@ class CheckUpdateApkname:
                     data["name"], data["pkgname"], data["url"])
                 try:
                     await cur.execute(sql)
-                    print('存入成功')
                 except Exception as e:
                     print("数据库语句:" + sql)
                     print('数据库错误信息：' + str(e))
 
+    emoji_pattern = re.compile(
+        u"(\ud83d[\ude00-\ude4f])|"  # emoticons
+        u"(\ud83c[\udf00-\uffff])|"  # symbols & pictographs (1 of 2)
+        u"(\ud83d[\u0000-\uddff])|"  # symbols & pictographs (2 of 2)
+        u"(\ud83d[\ude80-\udeff])|"  # transport & map symbols
+        u"(\ud83c[\udde0-\uddff])"  # flags (iOS)
+        "+", flags=re.UNICODE)
+
+    def remove_emoji(self, text):
+        return self.emoji_pattern.sub(r'', text)
+
+    # 双重过滤
+    def filter_emoji(self, text):
+        '''''
+        过滤表情
+        '''
+        try:
+            co = re.compile(u'[\U00010000-\U0010ffff]')
+        except re.error:
+            co = re.compile(u'[\uD800-\uDBFF][\uDC00-\uDFFF]')
+        return co.sub(r'', text)
 
     def run(self):
         tasks = []
@@ -243,7 +263,7 @@ class CheckUpdateApkname:
             task = asyncio.ensure_future(self.get_redis_apk())
             tasks.append(task)
 
-            if len(tasks) > 20:
+            if len(tasks) > 100:
                 get_db = self.loop.run_until_complete(self.get_mysql_db())
                 results = self.loop.run_until_complete(asyncio.gather(*tasks))
                 tasks = []
@@ -255,7 +275,6 @@ class CheckUpdateApkname:
                 if len(check_tasks) >= 1:
                     check_results = self.loop.run_until_complete(asyncio.gather(*check_tasks))
                     redis_tasks = []
-                    print('存入数据库')
                     save_mysql_tasks = []
                     check_other_tasks = []
                     for check_result in check_results:
@@ -265,7 +284,6 @@ class CheckUpdateApkname:
                                 task = asyncio.ensure_future(self.save_redis(data_return))
                                 redis_tasks.append(task)
                             if analysis_data != None:
-                                print('美国时间：'+str(analysis_data["update_time"]))
                                 task = asyncio.ensure_future(self.insert_mysql(analysis_data,get_db))
                                 save_mysql_tasks.append(task)
                             if data_return != None and data_return["is_update"] == 1:
@@ -281,14 +299,12 @@ class CheckUpdateApkname:
                         check_other_results = self.loop.run_until_complete(asyncio.gather(*check_other_tasks))
                         for result in check_other_results:
                             if result != None:
-                                print(str(result["country"])+"时间:" + str(result["update_time"]))
+                                print('时间：'+str(result["update_time"]) + '国家：'+ result["country"])
                                 task = self.insert_mysql(result,get_db)
                                 save_mysql_tasks.append(task)
 
                     if len(save_mysql_tasks) >= 1:
-                        print('执行存入数据库')
                         self.loop.run_until_complete(asyncio.wait(save_mysql_tasks))
-                print('执行完一次循环')
 
 if __name__ == '__main__':
     t = CheckUpdateApkname()

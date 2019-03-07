@@ -1,13 +1,22 @@
-import asyncio
+import re
 
-import aiomysql
+emoji_pattern = re.compile(
+    u"(\ud83d[\ude00-\ude4f])|"  # emoticons
+    u"(\ud83c[\udf00-\uffff])|"  # symbols & pictographs (1 of 2)
+    u"(\ud83d[\u0000-\uddff])|"  # symbols & pictographs (2 of 2)
+    u"(\ud83d[\ude80-\udeff])|"  # transport & map symbols
+    u"(\ud83c[\udde0-\uddff])"  # flags (iOS)
+    "+", flags=re.UNICODE)
 
-data = {'pkgname':'test','url':'test','country': 'us', 'update_time': '2019-02-28 00:00:00', 'size': '36M', 'installs': '1,000,000+', 'app_version': '36.7.6', 'min_os_version': '4.0 and up', 'content_rating': 'Everyone', 'provider': 'Dialekts', 'developer_email': 'dialekts.game@gmail.com', 'is_busy': 0, 'name': 'Shoot Dinosaur Eggs', 'developer_url': 'https://play.google.com/store/apps/developer?id=Dialekts', 'category': 'Casual', 'app_current_num': '4,478', 'cover_image_url': 'https://lh3.googleusercontent.com/OHew4iL5WhbpvZ-oAvr8-wPQ-_N77SvaAOfCzkGeUruYPuDx1gTScEmrXy1nlcwvGEk=s180-rw', 'description': 'Configure the combination and shoot down the balls of the same color. The game has many different levels, with each new level to knock the egg becomes more difficult.', 'what_news': '✔ Added adaptive icon.,✔ We have improved performance.,✔ Fixed bugs.,Thanks for playing. Be sure to rate us after each update.'}
 
-
-async def insert_mysql(data):
-    pool = await aiomysql.create_pool(host='192.168.9.227', port=3306, user='root', password='123456', db='google_play',
-                                      charset='utf8', autocommit=True)
-    return pool
-loop = asyncio.get_event_loop()
-loop.run_until_complete(insert_mysql(data))
+def remove_emoji(text):
+    return emoji_pattern.sub(r'', text)
+def filter_emoji(text):
+    '''''
+    过滤表情
+    '''
+    try:
+        co = re.compile(u'[\U00010000-\U0010ffff]')
+    except re.error:
+        co = re.compile(u'[\uD800-\uDBFF][\uDC00-\uDFFF]')
+    return co.sub(r'', text)
