@@ -83,6 +83,9 @@ class CheckUpdateApkname:
                     analysis_data["pkgname"] = now_pkgname
                     analysis_data["url"] = apk_url
                     check_app_version = analysis_data["app_version"]
+                    change_time = self.change_time('us', analysis_data["update_time"])
+                    if change_time != None:
+                        analysis_data["update_time"] = change_time
                     if check_app_version == now_app_version or check_app_version == None:
                         data_return = {}
                         data_return["app_version"] = now_app_version
@@ -262,7 +265,7 @@ class CheckUpdateApkname:
                                 task = asyncio.ensure_future(self.save_redis(data_return))
                                 redis_tasks.append(task)
                             if analysis_data != None:
-                                print('添加数据库任务')
+                                print('美国时间：'+str(analysis_data["update_time"]))
                                 task = asyncio.ensure_future(self.insert_mysql(analysis_data,get_db))
                                 save_mysql_tasks.append(task)
                             if data_return != None and data_return["is_update"] == 1:
@@ -277,9 +280,8 @@ class CheckUpdateApkname:
                     if len(check_other_tasks) >= 1:
                         check_other_results = self.loop.run_until_complete(asyncio.gather(*check_other_tasks))
                         for result in check_other_results:
-                            print("结果:" + str(result))
                             if result != None:
-                                print("国家:" + result["country"])
+                                print(str(result["country"])+"时间:" + str(result["update_time"]))
                                 task = self.insert_mysql(result,get_db)
                                 save_mysql_tasks.append(task)
 
