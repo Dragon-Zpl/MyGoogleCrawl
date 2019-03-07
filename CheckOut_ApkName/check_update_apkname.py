@@ -221,7 +221,7 @@ class CheckUpdateApkname:
     async def insert_mysql(self, data, pool):
         async with pool.acquire() as conn:
             async with conn.cursor() as cur:
-                print(data)
+                print('data'+str(data))
                 if data["country"] == "us":
                     to_mysql = "crawl_google_play_app_info"
                 else:
