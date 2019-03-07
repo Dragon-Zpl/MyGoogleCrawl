@@ -214,10 +214,8 @@ class CheckUpdateApkname:
                                           db='google_play', charset='utf8', autocommit=True,loop=loop)
         return pool
     async def insert_mysql(self,data,pool):
-        print('进入到insert_mysql')
         async with pool.acquire() as conn:
             async with conn.cursor() as cur:
-                print('开始存数据')
                 if data["country"] == "us":
                     to_mysql = "crawl_google_play_app_info"
                 else:
@@ -232,6 +230,7 @@ class CheckUpdateApkname:
                           data["name"], data["pkgname"], data["url"])
                 try:
                     result = await cur.execute(sql_google,params)
+                    print('当前插入的国家:' + str(data["country"]))
                 except Exception as e:
                     print("数据库语句:" + sql_google)
                     print('数据库错误信息：' + str(e))
@@ -292,7 +291,6 @@ class CheckUpdateApkname:
                                 check_other_tasks.append(task)
                         except Exception as e:
                             print('错误信息：' + str(e))
-                            print(check_results)
                     if len(redis_tasks) >= 1:
                         self.loop.run_until_complete(asyncio.wait(redis_tasks))
 
