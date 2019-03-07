@@ -190,7 +190,7 @@ class CheckUpdateApkname:
                         change_time = self.change_time(country, check_app_data["update_time"])
                         if change_time != None:
                             check_app_data["update_time"] = change_time
-                        print('执行到最后一步')
+                        print('执行到最后一步'+check_app_data["country"])
                         self.all_data_list.append(check_app_data)
                     elif ct.status in [403, 400, 500, 502, 503, 429]:
                         if time > 0:
@@ -301,11 +301,9 @@ class CheckUpdateApkname:
                         print('self.all_data_list' + str(self.all_data_list))
                         for result_list in self.all_data_list:
                             if result_list != None:
-                                for result in result_list:
-                                    if result != None:
-                                        # print('时间：' + str(result["update_time"]) + '国家：' + result["country"])
-                                        task = self.insert_mysql(result, get_db)
-                                        save_mysql_tasks.append(task)
+                                # print('时间：' + str(result["update_time"]) + '国家：' + result["country"])
+                                task = self.insert_mysql(result_list, get_db)
+                                save_mysql_tasks.append(task)
 
                     if len(save_mysql_tasks) >= 1:
                         self.loop.run_until_complete(asyncio.wait(save_mysql_tasks))
