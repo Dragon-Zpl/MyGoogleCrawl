@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="6d700b11-5e9c-45a8-bbfc-f91dbeefd186" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/CheckOut_ApkName/check_update_apkname.py" beforeDir="false" afterPath="$PROJECT_DIR$/CheckOut_ApkName/check_update_apkname.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CrawlProxy/DomesticProxyCrawl/testIP.py" beforeDir="false" afterPath="$PROJECT_DIR$/CrawlProxy/DomesticProxyCrawl/testIP.py" afterDir="false" />
-    </list>
+    <list default="true" id="6d700b11-5e9c-45a8-bbfc-f91dbeefd186" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -38,8 +35,8 @@
       <file leaf-file-name="check_update_apkname.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/CheckOut_ApkName/check_update_apkname.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="79">
-              <caret line="253" column="23" lean-forward="true" selection-start-line="253" selection-start-column="23" selection-end-line="253" selection-end-column="23" />
+            <state relative-caret-position="325">
+              <caret line="241" column="47" lean-forward="true" selection-start-line="241" selection-start-column="47" selection-end-line="241" selection-end-column="47" />
               <folding>
                 <element signature="e#0#14#0" expanded="true" />
               </folding>
@@ -50,8 +47,8 @@
       <file leaf-file-name="mysql_setting.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/AllSetting/mysql_setting.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="400">
-              <caret line="16" column="31" lean-forward="true" selection-start-line="16" selection-start-column="31" selection-end-line="16" selection-end-column="31" />
+            <state relative-caret-position="4">
+              <caret line="20" column="86" lean-forward="true" selection-start-line="20" selection-start-column="86" selection-end-line="20" selection-end-column="86" />
               <folding>
                 <element signature="e#0#15#0" expanded="true" />
               </folding>
@@ -162,9 +159,9 @@
         <option value="$PROJECT_DIR$/testall.py" />
         <option value="$PROJECT_DIR$/CrawlProxy/DomesticProxyCrawl/test.py" />
         <option value="$PROJECT_DIR$/CrawlApkName/get_apk_name.py" />
-        <option value="$PROJECT_DIR$/AllSetting/mysql_setting.py" />
         <option value="$PROJECT_DIR$/CrawlProxy/DomesticProxyCrawl/testIP.py" />
         <option value="$PROJECT_DIR$/CheckOut_ApkName/check_update_apkname.py" />
+        <option value="$PROJECT_DIR$/AllSetting/mysql_setting.py" />
       </list>
     </option>
   </component>
@@ -844,8 +841,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/AllSetting/mysql_setting.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="400">
-          <caret line="16" column="31" lean-forward="true" selection-start-line="16" selection-start-column="31" selection-end-line="16" selection-end-column="31" />
+        <state relative-caret-position="4">
+          <caret line="20" column="86" lean-forward="true" selection-start-line="20" selection-start-column="86" selection-end-line="20" selection-end-column="86" />
           <folding>
             <element signature="e#0#15#0" expanded="true" />
           </folding>
@@ -854,8 +851,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/CheckOut_ApkName/check_update_apkname.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="79">
-          <caret line="253" column="23" lean-forward="true" selection-start-line="253" selection-start-column="23" selection-end-line="253" selection-end-column="23" />
+        <state relative-caret-position="325">
+          <caret line="241" column="47" lean-forward="true" selection-start-line="241" selection-start-column="47" selection-end-line="241" selection-end-column="47" />
           <folding>
             <element signature="e#0#14#0" expanded="true" />
           </folding>
