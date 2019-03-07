@@ -303,7 +303,7 @@ class CheckUpdateApkname:
 
                     if len(check_other_tasks) >= 1:
                         self.loop.run_until_complete(asyncio.wait(check_other_tasks))
-                        print(self.all_data_list)
+                        print('self.all_data_list'+str(self.all_data_list))
                         for result_list in self.all_data_list:
                             if result_list != None:
                                 for result in result_list:
