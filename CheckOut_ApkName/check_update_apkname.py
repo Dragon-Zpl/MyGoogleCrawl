@@ -233,7 +233,7 @@ class CheckUpdateApkname:
                 try:
                     result = await cur.execute(sql_google,params)
                 except Exception as e:
-                    print("数据库语句:" + sql)
+                    print("数据库语句:" + sql_google)
                     print('数据库错误信息：' + str(e))
 
     emoji_pattern = re.compile(
