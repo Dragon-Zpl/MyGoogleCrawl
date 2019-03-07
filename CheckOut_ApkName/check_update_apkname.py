@@ -19,6 +19,7 @@ class CheckUpdateApkname:
         self.crawl_proxy = crawl_fn()
         self.apknames = set()
         self.proxies = []
+        self.all_data_list = []
         self.headers = {
             "user-agent": "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.96 Safari/537.36",
         }
@@ -172,7 +173,6 @@ class CheckUpdateApkname:
         return analysis_dic
 
     async def check_other_coutry(self, data, time=3, proxy=None):
-        all_data_list = []
         for country in self.country_dict:
             pkgname = data["pkgname"]
             apk_url = "https://play.google.com/store/apps/details?id=" + pkgname + self.country_dict[country]
@@ -191,9 +191,7 @@ class CheckUpdateApkname:
                         change_time = self.change_time(country, check_app_data["update_time"])
                         if change_time != None:
                             check_app_data["update_time"] = change_time
-                        print('check_app_data'+str(check_app_data))
-                        all_data_list.append(check_app_data)
-                        print('all_data_list'+str(all_data_list))
+                        self.all_data_list.append(check_app_data)
                     elif ct.status in [403, 400, 500, 502, 503, 429]:
                         if time > 0:
                             proxy = await self.get_proxy()
@@ -206,7 +204,6 @@ class CheckUpdateApkname:
                     return await self.check_other_coutry(data, proxy=proxy, time=time - 1)
                 else:
                     return None
-        return all_data_list
     async def save_redis(self, updatedata):
         data = {}
         data["pkgname"] = updatedata["pkgname"]
@@ -305,9 +302,8 @@ class CheckUpdateApkname:
                     print('爬取其他国家信息')
 
                     if len(check_other_tasks) >= 1:
-                        check_other_results = self.loop.run_until_complete(asyncio.gather(*check_other_tasks))
-                        print('check_other_results:'+ str(check_other_results))
-                        for result_list in check_other_results:
+                        self.loop.run_until_complete(asyncio.gather(*check_other_tasks))
+                        for result_list in self.all_data_list:
                             if result_list != None:
                                 for result in result_list:
                                     if result != None:
