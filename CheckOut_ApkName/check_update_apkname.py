@@ -222,7 +222,7 @@ class CheckUpdateApkname:
                     to_mysql = "crawl_google_play_app_info"
                 else:
                     to_mysql = "crawl_google_play_app_info_" + data["country"]
-                sql = 'insert into ' + to_mysql + '(id,language,appsize,category,contentrating,current_version,description,developer,whatsnew,developer_url,instalations,isbusy,last_updatedate,minimum_os_version,name,pkgname,url) VALUES(default,"{}","{}","{}","{}","{}","{}","{}","{}","{}","{}","{}","{}","{}","{}","{}","{}")'.format(
+                sql = 'insert into ' + to_mysql + "(id,language,appsize,category,contentrating,current_version,description,developer,whatsnew,developer_url,instalations,isbusy,last_updatedate,minimum_os_version,name,pkgname,url) VALUES(default,'{}','{}','{}','{}','{}','{}','{}','{}','{}','{}','{}','{}','{}','{}','{}','{}')".format(
                     data["country"], data["size"], data["category"], data["content_rating"],
                     data["app_version"],
                     data["description"], data["provider"], data["what_news"],

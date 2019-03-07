@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="6d700b11-5e9c-45a8-bbfc-f91dbeefd186" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/CheckOut_ApkName/check_update_apkname.py" beforeDir="false" afterPath="$PROJECT_DIR$/CheckOut_ApkName/check_update_apkname.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CrawlProxy/DomesticProxyCrawl/testIP.py" beforeDir="false" afterPath="$PROJECT_DIR$/CrawlProxy/DomesticProxyCrawl/testIP.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -26,8 +25,8 @@
       <file leaf-file-name="check_update_apkname.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/CheckOut_ApkName/check_update_apkname.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-2421">
-              <caret line="87" column="66" lean-forward="true" selection-start-line="87" selection-start-column="66" selection-end-line="87" selection-end-column="66" />
+            <state relative-caret-position="443">
+              <caret line="224" column="249" selection-start-line="224" selection-start-column="249" selection-end-line="224" selection-end-column="249" />
               <folding>
                 <element signature="e#0#14#0" expanded="true" />
               </folding>
@@ -858,8 +857,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/CheckOut_ApkName/check_update_apkname.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2421">
-          <caret line="87" column="66" lean-forward="true" selection-start-line="87" selection-start-column="66" selection-end-line="87" selection-end-column="66" />
+        <state relative-caret-position="443">
+          <caret line="224" column="249" selection-start-line="224" selection-start-column="249" selection-end-line="224" selection-end-column="249" />
           <folding>
             <element signature="e#0#14#0" expanded="true" />
           </folding>
