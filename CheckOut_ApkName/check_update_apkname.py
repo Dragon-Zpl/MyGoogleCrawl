@@ -206,10 +206,12 @@ class CheckUpdateApkname:
         data["host"] = "host"
         self.rcon.lpush("download:queen", str(data).encode('utf-8'))
 
-    async def insert_mysql(self,loop, data):
-        print('进入到insert_mysql')
+    async def get_mysql_db(self,loop=None):
         pool = await aiomysql.create_pool(host='192.168.9.227', port=3306, user='root', password='123456',
-                                         db='google_play', charset='utf8', autocommit=True, loop=loop)
+                                          db='google_play', charset='utf8', autocommit=True,loop=loop)
+        return pool
+    async def insert_mysql(self,data,pool):
+        print('进入到insert_mysql')
         async with pool.get() as conn:
             async with conn.cursor() as cur:
                 print('开始存数据')
@@ -239,6 +241,7 @@ class CheckUpdateApkname:
             tasks.append(task)
 
             if len(tasks) > 20:
+                get_db = self.loop.run_until_complete(self.get_mysql_db())
                 results = self.loop.run_until_complete(asyncio.gather(*tasks))
                 tasks = []
                 check_tasks = []
@@ -260,7 +263,7 @@ class CheckUpdateApkname:
                                 redis_tasks.append(task)
                             if analysis_data != None:
                                 print('添加数据库任务')
-                                task = asyncio.ensure_future(self.insert_mysql(self.loop,analysis_data))
+                                task = asyncio.ensure_future(self.insert_mysql(analysis_data,get_db))
                                 save_mysql_tasks.append(task)
                             if data_return != None and data_return["is_update"] == 1:
                                 task = asyncio.ensure_future(self.check_other_coutry(data_return))
@@ -277,13 +280,13 @@ class CheckUpdateApkname:
                             print("结果:" + str(result))
                             if result != None:
                                 print("国家:" + result["country"])
-                                task = self.insert_mysql(self.loop,result)
+                                task = self.insert_mysql(result,get_db)
                                 save_mysql_tasks.append(task)
 
                     if len(save_mysql_tasks) >= 1:
                         print('执行存入数据库')
                         self.loop.run_until_complete(asyncio.wait(save_mysql_tasks))
-
+                print('执行完一次循环')
 
 if __name__ == '__main__':
     t = CheckUpdateApkname()
