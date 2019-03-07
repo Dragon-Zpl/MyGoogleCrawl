@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="6d700b11-5e9c-45a8-bbfc-f91dbeefd186" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/CheckOut_ApkName/check_update_apkname.py" beforeDir="false" afterPath="$PROJECT_DIR$/CheckOut_ApkName/check_update_apkname.py" afterDir="false" />
-    </list>
+    <list default="true" id="6d700b11-5e9c-45a8-bbfc-f91dbeefd186" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -25,8 +23,8 @@
       <file leaf-file-name="check_update_apkname.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/CheckOut_ApkName/check_update_apkname.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="381">
-              <caret line="202" column="32" selection-start-line="202" selection-start-column="27" selection-end-line="202" selection-end-column="32" />
+            <state relative-caret-position="56">
+              <caret line="279" column="43" lean-forward="true" selection-start-line="279" selection-start-column="43" selection-end-line="279" selection-end-column="43" />
               <folding>
                 <element signature="e#0#14#0" expanded="true" />
               </folding>
@@ -836,8 +834,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/CheckOut_ApkName/check_update_apkname.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="381">
-          <caret line="202" column="32" selection-start-line="202" selection-start-column="27" selection-end-line="202" selection-end-column="32" />
+        <state relative-caret-position="56">
+          <caret line="279" column="43" lean-forward="true" selection-start-line="279" selection-start-column="43" selection-end-line="279" selection-end-column="43" />
           <folding>
             <element signature="e#0#14#0" expanded="true" />
           </folding>

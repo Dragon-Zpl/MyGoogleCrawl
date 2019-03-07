@@ -168,6 +168,7 @@ class CheckUpdateApkname:
         analysis_dic["what_news"] = ','.join(analysis_data.xpath("//div[@class='DWPxHb']/content/text()"))
         analysis_dic["what_news"] = self.remove_emoji(analysis_dic["what_news"])
         analysis_dic["what_news"] = self.filter_emoji(analysis_dic["what_news"])
+        print('analysis_dic' + str(analysis_dic))
         return analysis_dic
 
     async def check_other_coutry(self, data, time=3, proxy=None):
@@ -190,7 +191,9 @@ class CheckUpdateApkname:
                         change_time = self.change_time(country, check_app_data["update_time"])
                         if change_time != None:
                             check_app_data["update_time"] = change_time
+                        print('check_app_data'+str(check_app_data))
                         all_data_list.append(check_app_data)
+                        print('all_data_list'+str(all_data_list))
                     elif ct.status in [403, 400, 500, 502, 503, 429]:
                         if time > 0:
                             proxy = await self.get_proxy()
