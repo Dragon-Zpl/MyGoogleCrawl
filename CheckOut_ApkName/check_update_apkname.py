@@ -177,15 +177,16 @@ class CheckUpdateApkname:
             apk_url = "https://play.google.com/store/apps/details?id=" + pkgname + self.country_dict[country]
             if proxy == None:
                 proxy = self.get_proxy()
+                print("当前在爬取的国家是：" + str(country))
             try:
                 async with self.session.get(url=apk_url, headers=self.headers, proxy=proxy, timeout=10) as ct:
+                    print('状态:'+str(ct.status)+str(country))
                     if ct.status in [200, 201]:
                         datas = await ct.text()
                         check_app_data = self.analysis_web_data(datas)
                         check_app_data["pkgname"] = pkgname
                         check_app_data["country"] = country
                         check_app_data["url"] = apk_url
-                        print("当前在爬取的国家是："+str(country))
                         change_time = self.change_time(country, check_app_data["update_time"])
                         if change_time != None:
                             check_app_data["update_time"] = change_time
@@ -217,13 +218,12 @@ class CheckUpdateApkname:
     async def insert_mysql(self,data,pool):
         async with pool.acquire() as conn:
             async with conn.cursor() as cur:
-                print('开始存如数据')
+                print(data["country"])
                 if data["country"] == "us":
                     to_mysql = "crawl_google_play_app_info"
                 else:
                     to_mysql = "crawl_google_play_app_info_" + data["country"]
                 sql_google = '''insert into {}(language,appsize,category,contentrating,current_version,description,developer,whatsnew,developer_url,instalations,isbusy,last_updatedate,minimum_os_version,name,pkgname,url) VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)'''.format(to_mysql)
-                print(sql_google)
                 params = (data["country"], data["size"], data["category"], data["content_rating"],
                           data["app_version"],
                           data["description"], data["provider"], data["what_news"],
