@@ -1,22 +1,16 @@
-import re
-
-emoji_pattern = re.compile(
-    u"(\ud83d[\ude00-\ude4f])|"  # emoticons
-    u"(\ud83c[\udf00-\uffff])|"  # symbols & pictographs (1 of 2)
-    u"(\ud83d[\u0000-\uddff])|"  # symbols & pictographs (2 of 2)
-    u"(\ud83d[\ude80-\udeff])|"  # transport & map symbols
-    u"(\ud83c[\udde0-\uddff])"  # flags (iOS)
-    "+", flags=re.UNICODE)
 
 
-def remove_emoji(text):
-    return emoji_pattern.sub(r'', text)
-def filter_emoji(text):
-    '''''
-    过滤表情
-    '''
-    try:
-        co = re.compile(u'[\U00010000-\U0010ffff]')
-    except re.error:
-        co = re.compile(u'[\uD800-\uDBFF][\uDC00-\uDFFF]')
-    return co.sub(r'', text)
+sql_google = '''
+                   insert into {} (category,appsize,contentrating,current_version,description,developer,whatsnew,
+                   instalations,last_updatedate,minimum_os_version,name,pkgname,price,reviewers,url) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)
+                   ON DUPLICATE KEY UPDATE appsize=VALUES(appsize),category=VALUES(category),contentrating=VALUES(contentrating),
+                   current_version=VALUES(current_version),description=VALUES(description),developer=VALUES(developer),whatsnew=VALUES(whatsnew),
+                   instalations=VALUES(instalations),last_updatedate=VALUES(last_updatedate),minimum_os_version=VALUES(minimum_os_version),name=VALUES(name),price=VALUES(price)
+                '''.format(cls.table_name_dict[lang])
+params = (dict_data['Category'], dict_data['AppSize'],
+          dict_data['ContentRating'], dict_data['CurrentVersion'],
+          dict_data['Description'], dict_data['Developer'], dict_data['WhatsNew'],
+          dict_data['Instalations'], dict_data['LastUpdateDate'],
+          dict_data['MinimumOSVersion'],
+          dict_data['Name'], dict_data['PkgName'], dict_data['Price'],
+          dict_data['Reviewers'], dict_data['url'])
