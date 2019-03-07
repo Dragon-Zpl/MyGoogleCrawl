@@ -265,8 +265,8 @@ class CheckUpdateApkname:
         while True:
             task = asyncio.ensure_future(self.get_redis_apk())
             tasks.append(task)
-
-            if len(tasks) > 1:
+            if len(tasks) > 5:
+                print('添加任务完毕')
                 get_db = self.loop.run_until_complete(self.get_mysql_db())
                 results = self.loop.run_until_complete(asyncio.gather(*tasks))
                 print('redis拿完数据')
@@ -315,6 +315,4 @@ class CheckUpdateApkname:
                     if len(save_mysql_tasks) >= 1:
                         self.loop.run_until_complete(asyncio.wait(save_mysql_tasks))
 
-if __name__ == '__main__':
-    t = CheckUpdateApkname()
-    t.run()
+
