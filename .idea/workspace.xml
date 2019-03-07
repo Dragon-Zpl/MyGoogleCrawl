@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6d700b11-5e9c-45a8-bbfc-f91dbeefd186" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/AllSetting/mysql_setting.py" beforeDir="false" afterPath="$PROJECT_DIR$/AllSetting/mysql_setting.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CheckOut_ApkName/check_update_apkname.py" beforeDir="false" afterPath="$PROJECT_DIR$/CheckOut_ApkName/check_update_apkname.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CrawlProxy/DomesticProxyCrawl/testIP.py" beforeDir="false" afterPath="$PROJECT_DIR$/CrawlProxy/DomesticProxyCrawl/testIP.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -39,8 +37,8 @@
       <file leaf-file-name="check_update_apkname.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/CheckOut_ApkName/check_update_apkname.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="879">
-              <caret line="258" lean-forward="true" selection-start-line="258" selection-end-line="258" />
+            <state relative-caret-position="1979">
+              <caret line="273" column="11" selection-start-line="273" selection-start-column="11" selection-end-line="273" selection-end-column="11" />
               <folding>
                 <element signature="e#0#14#0" expanded="true" />
               </folding>
@@ -51,8 +49,8 @@
       <file leaf-file-name="mysql_setting.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/AllSetting/mysql_setting.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="304">
-              <caret line="36" lean-forward="true" selection-start-line="36" selection-end-line="36" />
+            <state relative-caret-position="292">
+              <caret line="30" column="46" lean-forward="true" selection-start-line="9" selection-start-column="4" selection-end-line="30" selection-end-column="46" />
               <folding>
                 <element signature="e#0#15#0" expanded="true" />
               </folding>
@@ -403,11 +401,11 @@
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
       <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.35202864" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.35202864" />
       <window_info anchor="bottom" id="Version Control" order="7" weight="0.3293556" />
       <window_info anchor="bottom" id="Python Console" order="7" weight="0.3293556" />
       <window_info anchor="bottom" id="Terminal" order="7" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25820896" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25820896" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="3" />
       <window_info anchor="right" id="SciView" order="3" />
@@ -860,8 +858,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/AllSetting/mysql_setting.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="304">
-          <caret line="36" lean-forward="true" selection-start-line="36" selection-end-line="36" />
+        <state relative-caret-position="292">
+          <caret line="30" column="46" lean-forward="true" selection-start-line="9" selection-start-column="4" selection-end-line="30" selection-end-column="46" />
           <folding>
             <element signature="e#0#15#0" expanded="true" />
           </folding>
@@ -870,8 +868,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/CheckOut_ApkName/check_update_apkname.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="879">
-          <caret line="258" lean-forward="true" selection-start-line="258" selection-end-line="258" />
+        <state relative-caret-position="1979">
+          <caret line="273" column="11" selection-start-line="273" selection-start-column="11" selection-end-line="273" selection-end-column="11" />
           <folding>
             <element signature="e#0#14#0" expanded="true" />
           </folding>
