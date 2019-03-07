@@ -279,6 +279,7 @@ class CheckUpdateApkname:
                     redis_tasks = []
                     save_mysql_tasks = []
                     check_other_tasks = []
+                    print('检查更新')
                     for check_result in check_results:
                         try:
                             data_return, analysis_data = check_result
@@ -295,6 +296,8 @@ class CheckUpdateApkname:
                             print('错误信息：' + str(e))
                     if len(redis_tasks) >= 1:
                         self.loop.run_until_complete(asyncio.wait(redis_tasks))
+
+                    print('爬取其他国家信息')
 
                     if len(check_other_tasks) >= 1:
                         check_other_results = self.loop.run_until_complete(asyncio.gather(*check_other_tasks))
