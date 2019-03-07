@@ -180,9 +180,11 @@ class CheckUpdateApkname:
                 print("当前在爬取的国家是：" + str(country))
             try:
                 async with self.session.get(url=apk_url, headers=self.headers, proxy=proxy, timeout=10) as ct:
+                    print('国家'+str(country)+'进来')
                     if ct.status in [200, 201]:
                         datas = await ct.text()
                         check_app_data = self.analysis_web_data(datas)
+                        print('国家的数据:'+str(check_app_data))
                         check_app_data["pkgname"] = pkgname
                         check_app_data["country"] = country
                         check_app_data["url"] = apk_url
