@@ -86,6 +86,9 @@ class ParsingData:
 
 
     def _is_existence(self, data):
+        """
+        判断该数据是否存在
+        """
         if data:
             return data[0]
         else:
