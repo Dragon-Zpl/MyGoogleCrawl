@@ -28,11 +28,13 @@ class ParsingData:
         return co.sub(r'', text)
 
 
-    def analysis_country_data(self, data):
+    def analysis_country_data(self, data, pkgname=None):
         """
         解析传来的数据，解析方法:先抓父节点,在以父节点的文本信息,抓取子节点(防止标签位置改变)
 
         """
+        if pkgname:
+            print(pkgname)
         analysis_dic = {'update_time': '', 'size': '', 'installs': '', 'app_version': '', 'min_os_version': '', 'content_rating': '', 'provider': '', 'developer_email': '', 'is_busy': '', 'name': '', 'developer_url': '', 'category': '', 'app_current_num': '', 'cover_image_url': '', 'description': '', 'what_news': '', 'pkgname': '', 'country': '', 'url': ''}
         analysis_data = etree.HTML(data)
         xpath_list = analysis_data.xpath("//div[@class='hAyfc']")

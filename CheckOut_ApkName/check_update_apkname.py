@@ -57,7 +57,7 @@ class CheckUpdateApkname:
             async with self.session.get(url=apk_url, headers=self.headers, proxy=proxy, timeout=10) as ct:
                 if ct.status in [200, 201]:
                     datas = await ct.text()
-                    analysis_data = self.parsing.analysis_country_data(datas)
+                    analysis_data = self.parsing.analysis_country_data(datas,now_pkgname)
                     # 判断是否已经可下载
                     if analysis_data == None:
                         data_return = {}
