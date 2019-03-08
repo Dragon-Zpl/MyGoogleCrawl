@@ -29,6 +29,7 @@ class ParsingData:
 
 
     def analysis_country_data(self, data):
+        print('解析开始')
         analysis_dic = {}
         analysis_data = etree.HTML(data)
         xpath_list = analysis_data.xpath("//div[@class='hAyfc']")
@@ -72,7 +73,7 @@ class ParsingData:
         analysis_dic["what_news"] = ','.join(analysis_data.xpath("//div[@class='DWPxHb']/content/text()"))
         analysis_dic["what_news"] = self._remove_emoji(analysis_dic["what_news"])
         analysis_dic["what_news"] = self._filter_emoji(analysis_dic["what_news"])
-
+        print('analysi:'+str(analysis_dic))
         return analysis_dic
 
     def change_time(self, lang, LastUpdateDate):

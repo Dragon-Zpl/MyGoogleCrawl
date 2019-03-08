@@ -51,6 +51,7 @@ class CheckUpdateApkname:
         try:
             async with self.session.get(url=apk_url, headers=self.headers, proxy=proxy, timeout=10) as ct:
                 if ct.status in [200, 201]:
+                    print('进来解析了')
                     datas = await ct.text()
                     analysis_data = self.parsing.analysis_country_data(datas)
                     analysis_data["country"] = "us"
@@ -124,18 +125,15 @@ class CheckUpdateApkname:
                     return None
 
     def build_asyncio_tasks(self):
-        print('创建redis队列')
         tasks = []
         for i in range(50):
             task = asyncio.ensure_future(self.get_redis.get_redis_pkgname())
             tasks.append(task)
-        print(len(tasks))
         return tasks
 
     def build_check_tasks(self, results):
         check_tasks = []
         for result in results:
-            print('redis+'+str(result))
             task = asyncio.ensure_future(self.check_app_version(result))
             check_tasks.append(task)
         return check_tasks
@@ -166,6 +164,7 @@ class CheckUpdateApkname:
             results = self.loop.run_until_complete(asyncio.gather(*tasks))
             check_tasks = self.build_check_tasks(results)
             if len(check_tasks) >= 1:
+                print('check_tasks'+str(check_tasks))
                 check_results = self.loop.run_until_complete(asyncio.gather(*check_tasks))
                 redis_tasks, save_mysql_tasks, check_other_tasks = self.build_other_insert(check_results)
                 if len(redis_tasks) >= 1:
