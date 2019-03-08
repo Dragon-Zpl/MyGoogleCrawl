@@ -128,11 +128,11 @@ class CheckUpdateApkname:
         """
         sdasda asd asd
         """
-        tasks = []
+        pkg_datas = []
         for i in range(50):
-            task = asyncio.ensure_future(self.get_redis.get_redis_pkgname())
-            tasks.append(task)
-        return tasks
+            pkg_data = self.get_redis.get_redis_pkgname()
+            pkg_datas.append(pkg_data)
+        return pkg_datas
 
     def build_check_tasks(self, results):
         check_tasks = []
@@ -146,14 +146,14 @@ class CheckUpdateApkname:
         tasks.append(task)
 
     def build_other_insert(self, check_results):
-        redis_tasks = []
         save_mysql_tasks = []
         check_other_tasks = []
         for check_result in check_results:
             try:
                 data_return, analysis_data = check_result
                 if data_return != None:
-                    self.task_ensure_future(self.get_redis.update_pkgname_redis, data_return, redis_tasks)
+                    self.get_redis.update_pkgname_redis(data_return)
+                    # self.task_ensure_future(self.get_redis.update_pkgname_redis, data_return, redis_tasks)
                     # task = asyncio.ensure_future(self.get_redis.update_pkgname_redis(data_return))
                     # redis_tasks.append(task)
                 if analysis_data != None:
@@ -166,18 +166,18 @@ class CheckUpdateApkname:
                     # check_other_tasks.append(task)
             except Exception as e:
                 print('错误信息：' + str(e))
-        return redis_tasks, save_mysql_tasks, check_other_tasks
+        return save_mysql_tasks, check_other_tasks
 
     def run(self):
         while True:
-            tasks = self.build_asyncio_tasks()
-            results = self.loop.run_until_complete(asyncio.gather(*tasks))
-            check_tasks = self.build_check_tasks(results)
+            '''
+            
+            '''
+            pkg_datas = self.build_asyncio_tasks()
+            check_tasks = self.build_check_tasks(pkg_datas)
             if len(check_tasks) >= 1:
                 check_results = self.loop.run_until_complete(asyncio.gather(*check_tasks))
-                redis_tasks, save_mysql_tasks, check_other_tasks = self.build_other_insert(check_results)
-                if len(redis_tasks) >= 1:
-                    self.loop.run_until_complete(asyncio.wait(redis_tasks))
+                save_mysql_tasks, check_other_tasks = self.build_other_insert(check_results)
                 if len(check_other_tasks) >= 1:
                     self.loop.run_until_complete(asyncio.wait(check_other_tasks))
                     for result_list in self.all_data_list:
