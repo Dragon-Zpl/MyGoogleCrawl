@@ -1,6 +1,13 @@
-a = ['dasdas']
+def test():
+    try:
+        sadasd
 
-b = a[0] if (a) else 'asdsad'
+    except Exception as e:
+        print(e)
 
 
-print(b)
+try:
+    test()
+    dfsd
+except:
+    print('有错')

@@ -33,6 +33,7 @@ class ParsingData:
         解析传来的数据，解析方法:先抓父节点,在以父节点的文本信息,抓取子节点(防止标签位置改变)
 
         """
+        efdsfsd
         try:
             analysis_dic = {'update_time': '', 'size': '', 'installs': '', 'app_version': '', 'min_os_version': '',
                             'content_rating': '', 'provider': '', 'developer_email': '', 'is_busy': '', 'name': '',

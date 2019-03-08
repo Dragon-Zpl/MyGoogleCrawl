@@ -113,6 +113,8 @@ class CheckUpdateApkname:
                         if ct.status in [200, 201]:
                             datas = await ct.text()
                             check_app_data = self.parsing.analysis_country_data(datas)
+                            if check_app_data == None:
+                                break
                             check_app_data["pkgname"] = pkgname
                             check_app_data["country"] = country
                             check_app_data["url"] = apk_url
