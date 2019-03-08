@@ -52,7 +52,7 @@ class CheckUpdateApkname:
         apk_url = "https://play.google.com/store/apps/details?id=" + now_pkgname
         analysis_data = None
         for i in range(3):
-            if proxy == None:
+            if proxy is None:
                 proxy = await self._get_proxy()
             try:
                 async with self.session.get(url=apk_url, headers=self.headers, proxy=proxy, timeout=10) as ct:
@@ -60,7 +60,7 @@ class CheckUpdateApkname:
                         datas = await ct.text()
                         analysis_data = self.parsing.analysis_country_data(datas)
                         # 判断是否已经可下载
-                        if analysis_data == None:
+                        if analysis_data is None:
                             data_return = {}
                             data_return["app_version"] = now_app_version
                             data_return["pkgname"] = now_pkgname
@@ -71,9 +71,9 @@ class CheckUpdateApkname:
                         analysis_data["url"] = apk_url
                         check_app_version = analysis_data["app_version"]
                         change_time = self.parsing.change_time('us', analysis_data["update_time"])
-                        if change_time != None:
+                        if change_time is not None:
                             analysis_data["update_time"] = change_time
-                        if check_app_version == now_app_version or check_app_version == None:
+                        if check_app_version == now_app_version or check_app_version is None:
                             data_return = {}
                             data_return["app_version"] = now_app_version
                             data_return["pkgname"] = now_pkgname
@@ -113,13 +113,13 @@ class CheckUpdateApkname:
                         if ct.status in [200, 201]:
                             datas = await ct.text()
                             check_app_data = self.parsing.analysis_country_data(datas)
-                            if check_app_data == None:
+                            if check_app_data is None:
                                 break
                             check_app_data["pkgname"] = pkgname
                             check_app_data["country"] = country
                             check_app_data["url"] = apk_url
                             change_time = self.parsing.change_time(country, check_app_data["update_time"])
-                            if change_time != None:
+                            if change_time is not None:
                                 check_app_data["update_time"] = change_time
                             self.all_data_list.append(check_app_data)
                             break
@@ -169,11 +169,11 @@ class CheckUpdateApkname:
         for check_result in check_results:
             try:
                 data_return, analysis_data = check_result
-                if data_return != None:
+                if data_return is not None:
                     self.get_redis.update_pkgname_redis(data_return)
-                if analysis_data != None:
+                if analysis_data is not None:
                     self._task_ensure_future(self.get_pool.insert_mysql_, analysis_data, save_mysql_tasks)
-                if data_return != None and data_return["is_update"] == 1:
+                if data_return is not None and data_return["is_update"] == 1:
                     self._task_ensure_future(self.check_other_coutry, data_return, check_other_tasks)
             except Exception as e:
                 print('错误信息：' + str(e))
@@ -192,7 +192,7 @@ class CheckUpdateApkname:
                 if len(check_other_tasks) >= 1:
                     self.loop.run_until_complete(asyncio.wait(check_other_tasks))
                     for result_list in self.all_data_list:
-                        if result_list != None:
+                        if result_list is not None:
                             task = self.get_pool.insert_mysql_(result_list)
                             save_mysql_tasks.append(task)
                     self.all_data_list = []

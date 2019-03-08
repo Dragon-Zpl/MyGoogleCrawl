@@ -39,6 +39,7 @@ class ParsingData:
                         'description': '', 'what_news': '', 'country': ''}
         analysis_data = etree.HTML(data)
         xpath_list = analysis_data.xpath("//div[@class='hAyfc']")
+
         for xpath_one in xpath_list:
             needxpath = self._is_existence(xpath_one.xpath(".//div[contains(@class,'BgcNfc')]"))
             if needxpath.xpath("./text()")[0] in ["更新日期", "업데이트 날짜", "تم التحديث", "更新日", "Updated"]:
@@ -64,6 +65,7 @@ class ParsingData:
                                                     "Requires Android",
                                                     "Android 系统版本要求", "Android 最低版本需求"]:
                 analysis_dic["min_os_version"] = self._is_existence(xpath_one.xpath(".//span[@class='htlgb']/text()"))
+            print(analysis_dic)
         is_busy = analysis_data.xpath("//span[@class='oocvOe']/button/@aria-label")
         if is_busy:
             if analysis_data.xpath("//span[@class='oocvOe']/button/@aria-label")[0] in ["安装", "설치", "تثبيت",
@@ -91,6 +93,7 @@ class ParsingData:
             analysis_dic["what_news"] = ','.join(what_news)
             analysis_dic["what_news"] = self._remove_emoji(analysis_dic["what_news"])
             analysis_dic["what_news"] = self._filter_emoji(analysis_dic["what_news"])
+        print("没问题的："+str(analysis_dic))
         return analysis_dic
 
 
