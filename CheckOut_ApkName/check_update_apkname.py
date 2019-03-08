@@ -51,7 +51,6 @@ class CheckUpdateApkname:
         try:
             async with self.session.get(url=apk_url, headers=self.headers, proxy=proxy, timeout=10) as ct:
                 if ct.status in [200, 201]:
-                    print('进来解析了')
                     datas = await ct.text()
                     analysis_data = self.parsing.analysis_country_data(datas)
                     analysis_data["country"] = "us"
@@ -71,6 +70,7 @@ class CheckUpdateApkname:
                         data_return["app_version"] = check_app_version
                         data_return["pkgname"] = now_pkgname
                         data_return["is_update"] = 1
+                    print('data_return:'+str(data_return)+'analysis_data:'+str(analysis_data))
                     return data_return, analysis_data
                 elif ct.status in [403, 400, 500, 502, 503, 429]:
                     if time > 0:
@@ -166,6 +166,7 @@ class CheckUpdateApkname:
             if len(check_tasks) >= 1:
                 print('check_tasks'+str(check_tasks))
                 check_results = self.loop.run_until_complete(asyncio.gather(*check_tasks))
+                print('进入到下一步')
                 redis_tasks, save_mysql_tasks, check_other_tasks = self.build_other_insert(check_results)
                 if len(redis_tasks) >= 1:
                     self.loop.run_until_complete(asyncio.wait(redis_tasks))
