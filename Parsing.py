@@ -74,7 +74,11 @@ class ParsingData:
         analysis_dic["name"] = self._filter_emoji(analysis_dic["name"])
         analysis_dic["developer_url"] = analysis_data.xpath("//a[@class='hrTbp R8zArc']/@href")[0]
         analysis_dic["category"] = analysis_data.xpath("//a[@itemprop='genre']/text()")[0]
-        analysis_dic["app_current_num"] = analysis_data.xpath("//span[@class='AYi5wd TBRnV']/span/text()")[0]
+        analysis_dic["app_current_num"] = analysis_data.xpath("//span[@class='AYi5wd TBRnV']/span/text()")
+        if analysis_dic["app_current_num"]:
+            analysis_dic["app_current_num"] = analysis_dic["app_current_num"][0]
+        else:
+            analysis_dic["app_current_num"] = "0"
         analysis_dic["cover_image_url"] = analysis_data.xpath("//div[@class='dQrBL']/img/@src")[0]
         analysis_dic["description"] = analysis_data.xpath("//meta[@name='description']/@content")[0]
         analysis_dic["description"] = self._remove_emoji(analysis_dic["description"])
