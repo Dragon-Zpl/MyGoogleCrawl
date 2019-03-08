@@ -70,7 +70,7 @@ class CheckUpdateApkname:
                         data_return["app_version"] = check_app_version
                         data_return["pkgname"] = now_pkgname
                         data_return["is_update"] = 1
-                    print('data_return:'+str(data_return)+'analysis_data:'+str(analysis_data))
+                    # print('data_return:'+str(data_return)+'analysis_data:'+str(analysis_data))
                     return data_return, analysis_data
                 elif ct.status in [403, 400, 500, 502, 503, 429]:
                     if time > 0:
@@ -126,7 +126,7 @@ class CheckUpdateApkname:
 
     def build_asyncio_tasks(self):
         tasks = []
-        for i in range(50):
+        for i in range(2):
             task = asyncio.ensure_future(self.get_redis.get_redis_pkgname())
             tasks.append(task)
         return tasks
