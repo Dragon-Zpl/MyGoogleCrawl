@@ -13,13 +13,18 @@ class GetMysqlPool:
                                           db=self._db, charset='utf8', autocommit=True, loop=loop)
         async with pool.acquire() as conn:
             async with conn.cursor() as cur:
-                print(data)
+                print('存入数据库的:' + str(data))
                 if data["country"] == "us":
                     to_mysql = "crawl_google_play_app_info"
                 else:
                     to_mysql = "crawl_google_play_app_info_" + data["country"]
-                sql_google = '''insert into {}(language,appsize,category,contentrating,current_version,description,developer,whatsnew,developer_url,instalations,isbusy,last_updatedate,minimum_os_version,name,pkgname,url) VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)'''.format(
-                    to_mysql)
+                sql_google = """
+
+                                        insert into crawl_google_play_app_info_ar (language,appsize,category,contentrating,current_version,description,developer,whatsnew,developer_url,instalations,isbusy,last_updatedate,minimum_os_version,name,pkgname,url) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)
+                                        ON DUPLICATE KEY UPDATE appsize=VALUES(appsize),category=VALUES(category),contentrating=VALUES(contentrating),current_version=VALUES(current_version),
+                                        description=VALUES(description),developer=VALUES(developer),whatsnew=VALUES(whatsnew),
+                                        instalations=VALUES(instalations),last_updatedate=VALUES(last_updatedate),minimum_os_version=VALUES(minimum_os_version),name=VALUES(name)
+        """.format(to_mysql)
                 params = (data["country"], data["size"], data["category"], data["content_rating"],
                           data["app_version"],
                           data["description"], data["provider"], data["what_news"],
@@ -28,7 +33,7 @@ class GetMysqlPool:
                           data["name"], data["pkgname"], data["url"])
                 try:
                     result = await cur.execute(sql_google, params)
-                    print('当前插入的国家:' + str(data["country"]))
+                    print('当前插入的国家:' + str(data["country"]) + str(result))
                 except Exception as e:
                     print("数据库语句:" + sql_google)
                     print('数据库错误信息：' + str(e))
