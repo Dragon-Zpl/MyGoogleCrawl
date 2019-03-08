@@ -124,15 +124,18 @@ class CheckUpdateApkname:
                     return None
 
     def build_asyncio_tasks(self):
+        print('创建redis队列')
         tasks = []
         for i in range(50):
             task = asyncio.ensure_future(self.get_redis.get_redis_pkgname())
             tasks.append(task)
+        print(len(tasks))
         return tasks
 
     def build_check_tasks(self, results):
         check_tasks = []
         for result in results:
+            print('redis+'+str(result))
             task = asyncio.ensure_future(self.check_app_version(result))
             check_tasks.append(task)
         return check_tasks
