@@ -9,7 +9,7 @@ class GetMysqlPool:
         self._db = 'google_play'
 
         self.pool = await aiomysql.create_pool(host=self._host, port=self._port, user=self._user, password=self._password,
-                                      db=self._db, charset='utf8', autocommit=True, loop=loop)
+                                      db=self._db, charset='utf8', autocommit=True)
 
     async def insert_mysql(self, data):
         async with self.pool.acquire() as conn:
