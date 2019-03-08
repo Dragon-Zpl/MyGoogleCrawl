@@ -126,7 +126,7 @@ class CheckUpdateApkname:
 
     def build_asyncio_tasks(self):
         tasks = []
-        for i in range(2):
+        for i in range(50):
             task = asyncio.ensure_future(self.get_redis.get_redis_pkgname())
             tasks.append(task)
         return tasks

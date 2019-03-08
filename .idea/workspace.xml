@@ -138,7 +138,7 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>with self.session</find>
+      <find />
       <find>loop</find>
       <find>(.+):(.+)</find>
       <find>what</find>
@@ -149,7 +149,7 @@
       <find>check_app_data</find>
       <find>print</find>
       <find>get_redis_</find>
-      <find>Games System</find>
+      <find />
     </findStrings>
     <replaceStrings>
       <replace>&quot;$1&quot;:&quot;$2&quot;,</replace>
@@ -190,8 +190,7 @@
     <packageJsonPaths />
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="265" />
-    <option name="y" value="73" />
+    <option name="x" value="534" />
     <option name="width" value="1400" />
     <option name="height" value="1000" />
   </component>
