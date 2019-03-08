@@ -50,6 +50,7 @@ class CheckUpdateApkname:
         now_pkgname = data["pkgname"]
         now_app_version = data["app_version"]
         apk_url = "https://play.google.com/store/apps/details?id=" + now_pkgname
+        analysis_data = None
         for i in range(3):
             if proxy == None:
                 proxy = await self._get_proxy()
@@ -57,7 +58,7 @@ class CheckUpdateApkname:
                 async with self.session.get(url=apk_url, headers=self.headers, proxy=proxy, timeout=10) as ct:
                     if ct.status in [200, 201]:
                         datas = await ct.text()
-                        analysis_data = self.parsing.analysis_country_data(datas,now_pkgname)
+                        analysis_data = self.parsing.analysis_country_data(datas)
                         # 判断是否已经可下载
                         if analysis_data == None:
                             data_return = {}
@@ -86,6 +87,8 @@ class CheckUpdateApkname:
                     elif ct.status in [403, 400, 500, 502, 503, 429]:
                         pass
             except Exception as e:
+                if analysis_data:
+                    print('错误时的:'+str(analysis_data))
                 print("更新错误的数据"+str(data))
                 print("更新错误:"+str(e))
         else:
