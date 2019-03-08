@@ -50,51 +50,44 @@ class CheckUpdateApkname:
         now_pkgname = data["pkgname"]
         now_app_version = data["app_version"]
         apk_url = "https://play.google.com/store/apps/details?id=" + now_pkgname
-        if proxy == None:
-            proxy = self.get_proxy()
-        try:
-            async with self.session.get(url=apk_url, headers=self.headers, proxy=proxy, timeout=10) as ct:
-                if ct.status in [200, 201]:
-                    datas = await ct.text()
-                    analysis_data = self.parsing.analysis_country_data(datas)
-                    analysis_data["country"] = "us"
-                    analysis_data["pkgname"] = now_pkgname
-                    analysis_data["url"] = apk_url
-                    check_app_version = analysis_data["app_version"]
-                    change_time = self.parsing.change_time('us', analysis_data["update_time"])
-                    if change_time != None:
-                        analysis_data["update_time"] = change_time
-                    if check_app_version == now_app_version or check_app_version == None:
-                        data_return = {}
-                        data_return["app_version"] = now_app_version
-                        data_return["pkgname"] = now_pkgname
-                        data_return["is_update"] = 0
-                    else:
-                        data_return = {}
-                        data_return["app_version"] = check_app_version
-                        data_return["pkgname"] = now_pkgname
-                        data_return["is_update"] = 1
-                    return data_return, analysis_data
-                elif ct.status in [403, 400, 500, 502, 503, 429]:
-                    if time > 0:
-                        proxy = await self.get_proxy()
-                        return await self.check_app_version(data, proxy=proxy, time=time - 1)
-                    else:
-                        data_return = {}
-                        data_return["app_version"] = now_app_version
-                        data_return["pkgname"] = now_pkgname
-                        data_return["is_update"] = 0
-                        return data_return, None
-        except:
-            if time > 0:
-                proxy = await self.get_proxy()
-                return await self.check_app_version(data, proxy=proxy, time=time - 1)
-            else:
-                data_return = {}
-                data_return["app_version"] = now_app_version
-                data_return["pkgname"] = now_pkgname
-                data_return["is_update"] = 0
-                return data_return, None
+        for i in range(3):
+            if proxy == None:
+                proxy = self.get_proxy()
+            try:
+                async with self.session.get(url=apk_url, headers=self.headers, proxy=proxy, timeout=10) as ct:
+                    if ct.status in [200, 201]:
+                        datas = await ct.text()
+                        analysis_data = self.parsing.analysis_country_data(datas)
+                        analysis_data["country"] = "us"
+                        analysis_data["pkgname"] = now_pkgname
+                        analysis_data["url"] = apk_url
+                        check_app_version = analysis_data["app_version"]
+                        change_time = self.parsing.change_time('us', analysis_data["update_time"])
+                        if change_time != None:
+                            analysis_data["update_time"] = change_time
+                        if check_app_version == now_app_version or check_app_version == None:
+                            data_return = {}
+                            data_return["app_version"] = now_app_version
+                            data_return["pkgname"] = now_pkgname
+                            data_return["is_update"] = 0
+                        else:
+                            data_return = {}
+                            data_return["app_version"] = check_app_version
+                            data_return["pkgname"] = now_pkgname
+                            data_return["is_update"] = 1
+                        return data_return, analysis_data
+                    elif ct.status in [403, 400, 500, 502, 503, 429]:
+                        pass
+            except Exception as e:
+                print("更新错误:"+str(e))
+        else:
+            data_return = {}
+            data_return["app_version"] = now_app_version
+            data_return["pkgname"] = now_pkgname
+            data_return["is_update"] = 0
+            return data_return, None
+
+
 
     async def check_other_coutry(self, data, time=3, proxy=None):
         '''
