@@ -12,7 +12,7 @@ class GetMysqlPool:
         self.pool = await aiomysql.create_pool(host=self._host, port=self._port, user=self._user, password=self._password,
                                       db=self._db, charset='utf8', autocommit=True)
 
-    async def insert_mysql(self, data):
+    async def insert_mysql_(self, data):
         """
         将各位的数据存入或更新到数据库中
         """

@@ -88,9 +88,9 @@ class CheckUpdateApkname:
                         pass
             except Exception as e:
                 if analysis_data:
-                    print('错误时的:'+str(analysis_data))
-                print("更新错误的数据"+str(data))
-                print("更新错误:"+str(e))
+                    print('错误时的:' + str(analysis_data))
+                print("更新错误的数据" + str(data))
+                print("更新错误:" + str(e))
         else:
             data_return = {}
             data_return["app_version"] = now_app_version
@@ -124,8 +124,8 @@ class CheckUpdateApkname:
                         elif ct.status in [403, 400, 500, 502, 503, 429]:
                             pass
                 except Exception as e:
-                    print("错误信息的数据"+str(data))
-                    print('错误信息:'+str(e))
+                    print("错误信息的数据" + str(data))
+                    print('错误信息:' + str(e))
             else:
                 return None
 
@@ -170,7 +170,7 @@ class CheckUpdateApkname:
                 if data_return != None:
                     self.get_redis.update_pkgname_redis(data_return)
                 if analysis_data != None:
-                    self._task_ensure_future(self.get_pool.insert_mysql, analysis_data, save_mysql_tasks)
+                    self._task_ensure_future(self.get_pool.insert_mysql_, analysis_data, save_mysql_tasks)
                 if data_return != None and data_return["is_update"] == 1:
                     self._task_ensure_future(self.check_other_coutry, data_return, check_other_tasks)
             except Exception as e:
@@ -191,7 +191,7 @@ class CheckUpdateApkname:
                     self.loop.run_until_complete(asyncio.wait(check_other_tasks))
                     for result_list in self.all_data_list:
                         if result_list != None:
-                            task = self.get_pool.insert_mysql(result_list)
+                            task = self.get_pool.insert_mysql_(result_list)
                             save_mysql_tasks.append(task)
                     self.all_data_list = []
                 if len(save_mysql_tasks) >= 1:
