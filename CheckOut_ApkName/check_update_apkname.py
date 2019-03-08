@@ -137,9 +137,9 @@ class CheckUpdateApkname:
                 analysis_dic["update_time"] = xpath_one.xpath(".//span[@class='htlgb']/text()")[0]
             elif needxpath.xpath("./text()")[0] in ["大小", "크기", "الحجم", "サイズ", "Size"]:
                 analysis_dic["size"] = xpath_one.xpath(".//span[@class='htlgb']/text()")[0]
-            elif needxpath.xpath("./text()")[0] in ["当前版本", "현재 버전", "الإصدار الحالي", "現在のバージョン", "Current Version"]:
+            elif needxpath.xpath("./text()")[0] in ["当前版本", "目前版本", "현재 버전", "الإصدار الحالي", "現在のバージョン", "Current Version"]:
                 analysis_dic["app_version"] = xpath_one.xpath(".//span[@class='htlgb']/text()")[0]
-            elif needxpath.xpath("./text()")[0] in ["提供者", "제공", "تقديم", "提供元", "Offered By"]:
+            elif needxpath.xpath("./text()")[0] in ["提供者：", "제공", "تقديم", "提供元", "Offered By"]:
                 analysis_dic["provider"] = xpath_one.xpath(".//span[@class='htlgb']/text()")[0]
                 analysis_dic["provider"] = self.remove_emoji(analysis_dic["provider"])
                 analysis_dic["provider"] = self.filter_emoji(analysis_dic["provider"])
@@ -191,7 +191,7 @@ class CheckUpdateApkname:
                         change_time = self.change_time(country, check_app_data["update_time"])
                         if change_time != None:
                             check_app_data["update_time"] = change_time
-                        print('执行到最后一步'+check_app_data["country"])
+                        print('执行到最后一步'+check_app_data["country"]+str(check_app_data["update_time"]))
                         self.all_data_list.append(check_app_data)
                     elif ct.status in [403, 400, 500, 502, 503, 429]:
                         if time > 0:
