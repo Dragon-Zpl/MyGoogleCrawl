@@ -56,7 +56,7 @@ class CheckUpdateApkname:
             print(0)
             if proxy == None:
                 proxy = self.get_proxy()
-                print(proxy)
+                print('proxy'+str(proxy))
             print(10)
             try:
                 async with self.session.get(url=apk_url, headers=self.headers, proxy=proxy, timeout=10) as ct:

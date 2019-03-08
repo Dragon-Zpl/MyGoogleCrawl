@@ -95,6 +95,6 @@ class crawl_fn:
         for result in results:
             if result != None:
                 proxies.append(result)
-
+        print('proxies'+str(proxies))
         return proxies
 
