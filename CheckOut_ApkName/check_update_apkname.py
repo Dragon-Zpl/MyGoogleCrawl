@@ -79,6 +79,7 @@ class CheckUpdateApkname:
                     elif ct.status in [403, 400, 500, 502, 503, 429]:
                         pass
             except Exception as e:
+                print("更新错误的数据"+str(data))
                 print("更新错误:"+str(e))
         else:
             data_return = {}
@@ -115,6 +116,7 @@ class CheckUpdateApkname:
                         elif ct.status in [403, 400, 500, 502, 503, 429]:
                             pass
                 except Exception as e:
+                    print("错误信息的数据"+str(data))
                     print('错误信息:'+str(e))
             else:
                 return None
