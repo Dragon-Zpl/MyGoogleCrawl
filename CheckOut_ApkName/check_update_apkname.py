@@ -27,9 +27,9 @@ class CheckUpdateApkname:
             # 'us': '&hl=en&gl=us',
             'zh': '&hl=zh&gl=us',
             'zhtw': '&hl=zh_TW&gl=us',
-            'ko': '&hl=ko&gl=us',
-            'ar': '&hl=ar&gl=us',
-            'jp': '&hl=ja&gl=us',
+            # 'ko': '&hl=ko&gl=us',
+            # 'ar': '&hl=ar&gl=us',
+            # 'jp': '&hl=ja&gl=us',
         }
         self.emoji_pattern = re.compile(
             u"(\ud83d[\ude00-\ude4f])|"  # emoticons
@@ -55,6 +55,7 @@ class CheckUpdateApkname:
                 await self.get_proxy()
 
     def change_time(self, lang, LastUpdateDate):
+        print('LastUpdateDate'+str(LastUpdateDate))
         if LastUpdateDate:
             if lang == 'us':
                 try:
@@ -73,6 +74,7 @@ class CheckUpdateApkname:
                     LastUpdateDate = datetime.strptime(LastUpdateDate, '%Y年%m月%d日')
                 except:
                     LastUpdateDate = "2019-01-01 00:00:00"
+            print('改变后的:'+str(LastUpdateDate))
             return LastUpdateDate
 
     async def check_app_version(self, data, time=3, proxy=None):
@@ -177,14 +179,12 @@ class CheckUpdateApkname:
             apk_url = "https://play.google.com/store/apps/details?id=" + pkgname + self.country_dict[country]
             if proxy == None:
                 proxy = self.get_proxy()
-                print("当前在爬取的国家是：" + str(country))
             try:
                 async with self.session.get(url=apk_url, headers=self.headers, proxy=proxy, timeout=10) as ct:
                     print('国家'+str(country)+'进来')
                     if ct.status in [200, 201]:
                         datas = await ct.text()
                         check_app_data = self.analysis_web_data(datas)
-                        print('国家的数据:'+str(check_app_data))
                         check_app_data["pkgname"] = pkgname
                         check_app_data["country"] = country
                         check_app_data["url"] = apk_url
@@ -222,7 +222,7 @@ class CheckUpdateApkname:
     async def insert_mysql(self, data, pool):
         async with pool.acquire() as conn:
             async with conn.cursor() as cur:
-                print('data'+str(data))
+                print('存入数据库的:'+str(data))
                 if data["country"] == "us":
                     to_mysql = "crawl_google_play_app_info"
                 else:
@@ -237,7 +237,7 @@ class CheckUpdateApkname:
                           data["name"], data["pkgname"], data["url"])
                 try:
                     result = await cur.execute(sql_google, params)
-                    print('当前插入的国家:' + str(data["country"]))
+                    print('当前插入的国家:' + str(data["country"])+str(result))
                 except Exception as e:
                     print("数据库语句:" + sql_google)
                     print('数据库错误信息：' + str(e))
