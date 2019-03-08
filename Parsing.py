@@ -69,24 +69,27 @@ class ParsingData:
                 analysis_dic["is_busy"] = 1
         else:
             return None
-        analysis_dic["name"] = analysis_data.xpath("//h1[@class='AHFaub']/span/text()")[0]
+        analysis_dic["name"] = self._is_existence(analysis_data.xpath("//h1[@class='AHFaub']/span/text()"))
         analysis_dic["name"] = self._remove_emoji(analysis_dic["name"])
         analysis_dic["name"] = self._filter_emoji(analysis_dic["name"])
-        analysis_dic["developer_url"] = analysis_data.xpath("//a[@class='hrTbp R8zArc']/@href")[0]
-        analysis_dic["category"] = analysis_data.xpath("//a[@itemprop='genre']/text()")[0]
-        analysis_dic["app_current_num"] = analysis_data.xpath("//span[@class='AYi5wd TBRnV']/span/text()")
-        if analysis_dic["app_current_num"]:
-            analysis_dic["app_current_num"] = analysis_dic["app_current_num"][0]
-        else:
-            analysis_dic["app_current_num"] = "0"
-        analysis_dic["cover_image_url"] = analysis_data.xpath("//div[@class='dQrBL']/img/@src")[0]
-        analysis_dic["description"] = analysis_data.xpath("//meta[@name='description']/@content")[0]
+        analysis_dic["developer_url"] = self._is_existence(analysis_data.xpath("//a[@class='hrTbp R8zArc']/@href"))
+        analysis_dic["category"] = self._is_existence(analysis_data.xpath("//a[@itemprop='genre']/text()"))
+        analysis_dic["app_current_num"] = self._is_existence(analysis_data.xpath("//span[@class='AYi5wd TBRnV']/span/text()"))
+        analysis_dic["cover_image_url"] = self._is_existence(analysis_data.xpath("//div[@class='dQrBL']/img/@src"))
+        analysis_dic["description"] = self._is_existence(analysis_data.xpath("//meta[@name='description']/@content"))
         analysis_dic["description"] = self._remove_emoji(analysis_dic["description"])
         analysis_dic["description"] = self._filter_emoji(analysis_dic["description"])
         analysis_dic["what_news"] = ','.join(analysis_data.xpath("//div[@class='DWPxHb']/content/text()"))
         analysis_dic["what_news"] = self._remove_emoji(analysis_dic["what_news"])
         analysis_dic["what_news"] = self._filter_emoji(analysis_dic["what_news"])
         return analysis_dic
+
+
+    def _is_existence(self, data):
+        if data:
+            return data[0]
+        else:
+            return ""
 
     def change_time(self, lang, LastUpdateDate):
         '''

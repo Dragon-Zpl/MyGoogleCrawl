@@ -33,7 +33,7 @@ class CheckUpdateApkname:
             'jp': '&hl=ja&gl=us',
         }
 
-    async def get_proxy(self):
+    async def _get_proxy(self):
         async with self.lock:
             if len(self.proxies) < 3:
                 self.proxies = await self.crawl_proxy.run(self.session)
@@ -41,7 +41,7 @@ class CheckUpdateApkname:
                 proxy = choice(self.proxies)
                 return proxy
             except:
-                await self.get_proxy()
+                await self._get_proxy()
 
     async def check_app_version(self, data, time=3, proxy=None):
         """
@@ -52,7 +52,7 @@ class CheckUpdateApkname:
         apk_url = "https://play.google.com/store/apps/details?id=" + now_pkgname
         for i in range(3):
             if proxy == None:
-                proxy = await self.get_proxy()
+                proxy = await self._get_proxy()
             try:
                 async with self.session.get(url=apk_url, headers=self.headers, proxy=proxy, timeout=10) as ct:
                     if ct.status in [200, 201]:
@@ -95,8 +95,6 @@ class CheckUpdateApkname:
             data_return["is_update"] = 0
             return data_return, None
 
-
-
     async def check_other_coutry(self, data, time=3, proxy=None):
         '''
         获取其他国家的数据
@@ -105,7 +103,7 @@ class CheckUpdateApkname:
             pkgname = data["pkgname"]
             apk_url = "https://play.google.com/store/apps/details?id=" + pkgname + self.country_dict[country]
             if proxy == None:
-                proxy = await self.get_proxy()
+                proxy = await self._get_proxy()
             for i in range(3):
                 try:
                     async with self.session.get(url=apk_url, headers=self.headers, proxy=proxy, timeout=10) as ct:
@@ -128,7 +126,7 @@ class CheckUpdateApkname:
             else:
                 return None
 
-    def get_pkgdata_redis(self):
+    def _get_pkgdata_redis(self):
         """
         从redis中获取pkg的数据
         """
@@ -138,7 +136,7 @@ class CheckUpdateApkname:
             pkg_datas.append(pkg_data)
         return pkg_datas
 
-    def build_check_tasks(self, results):
+    def _build_check_tasks(self, results):
         '''
         创建检查美国信息的任务队列
         :param results:
@@ -150,11 +148,11 @@ class CheckUpdateApkname:
             check_tasks.append(task)
         return check_tasks
 
-    def task_ensure_future(self, func, data, tasks):
+    def _task_ensure_future(self, func, data, tasks):
         task = asyncio.ensure_future(func(data))
         tasks.append(task)
 
-    def build_other_insert(self, check_results):
+    def _build_other_insert(self, check_results):
         '''
         遍历以美国为基准的需要更新的数据，分别更新redis, 创建检查其他国家的任务队列和将美国数据插入mysql的任务队列
         :param check_results:
@@ -169,9 +167,9 @@ class CheckUpdateApkname:
                 if data_return != None:
                     self.get_redis.update_pkgname_redis(data_return)
                 if analysis_data != None:
-                    self.task_ensure_future(self.get_pool.insert_mysql, analysis_data, save_mysql_tasks)
+                    self._task_ensure_future(self.get_pool.insert_mysql, analysis_data, save_mysql_tasks)
                 if data_return != None and data_return["is_update"] == 1:
-                    self.task_ensure_future(self.check_other_coutry, data_return, check_other_tasks)
+                    self._task_ensure_future(self.check_other_coutry, data_return, check_other_tasks)
             except Exception as e:
                 print('错误信息：' + str(e))
         return save_mysql_tasks, check_other_tasks
@@ -181,11 +179,11 @@ class CheckUpdateApkname:
         从redis中获取pkg数据->检查美国的包是否有更新->更新redis->以美国为基准获取其他国家有版本更新的包的数据->存入数据库
         """
         while True:
-            pkg_datas = self.get_pkgdata_redis()
-            check_tasks = self.build_check_tasks(pkg_datas)
+            pkg_datas = self._get_pkgdata_redis()
+            check_tasks = self._build_check_tasks(pkg_datas)
             if len(check_tasks) >= 1:
                 check_results = self.loop.run_until_complete(asyncio.gather(*check_tasks))
-                save_mysql_tasks, check_other_tasks = self.build_other_insert(check_results)
+                save_mysql_tasks, check_other_tasks = self._build_other_insert(check_results)
                 if len(check_other_tasks) >= 1:
                     self.loop.run_until_complete(asyncio.wait(check_other_tasks))
                     for result_list in self.all_data_list:
