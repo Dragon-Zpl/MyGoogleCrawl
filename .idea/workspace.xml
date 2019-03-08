@@ -62,8 +62,8 @@
       <file leaf-file-name="check_update_apkname.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/CheckOut_ApkName/check_update_apkname.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="74">
-              <caret line="70" column="64" lean-forward="true" selection-start-line="70" selection-start-column="64" selection-end-line="70" selection-end-column="64" />
+            <state relative-caret-position="499">
+              <caret line="91" column="28" lean-forward="true" selection-start-line="91" selection-start-column="28" selection-end-line="91" selection-end-column="28" />
               <folding>
                 <element signature="e#0#14#0" expanded="true" />
               </folding>
@@ -164,8 +164,8 @@
         <option value="$PROJECT_DIR$/auto_crawl_pkgname.py" />
         <option value="$PROJECT_DIR$/CrawlApkName/get_apk_name.py" />
         <option value="$PROJECT_DIR$/CrawlProxy/DomesticProxyCrawl/testIP.py" />
-        <option value="$PROJECT_DIR$/CheckOut_ApkName/check_update_apkname.py" />
         <option value="$PROJECT_DIR$/build.sh" />
+        <option value="$PROJECT_DIR$/CheckOut_ApkName/check_update_apkname.py" />
       </list>
     </option>
   </component>
@@ -855,8 +855,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/CheckOut_ApkName/check_update_apkname.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="74">
-          <caret line="70" column="64" lean-forward="true" selection-start-line="70" selection-start-column="64" selection-end-line="70" selection-end-column="64" />
+        <state relative-caret-position="499">
+          <caret line="91" column="28" lean-forward="true" selection-start-line="91" selection-start-column="28" selection-end-line="91" selection-end-column="28" />
           <folding>
             <element signature="e#0#14#0" expanded="true" />
           </folding>

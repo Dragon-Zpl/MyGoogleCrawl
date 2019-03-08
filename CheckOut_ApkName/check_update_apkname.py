@@ -47,12 +47,15 @@ class CheckUpdateApkname:
         """
         检查美国的版本是否更新
         """
+        print('-1')
         now_pkgname = data["pkgname"]
         now_app_version = data["app_version"]
         apk_url = "https://play.google.com/store/apps/details?id=" + now_pkgname
         for i in range(3):
+            print(0)
             if proxy == None:
                 proxy = self.get_proxy()
+            print(10)
             try:
                 async with self.session.get(url=apk_url, headers=self.headers, proxy=proxy, timeout=10) as ct:
                     print(1)
