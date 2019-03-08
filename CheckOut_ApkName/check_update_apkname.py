@@ -36,7 +36,9 @@ class CheckUpdateApkname:
     async def get_proxy(self):
         async with self.lock:
             if len(self.proxies) < 3:
+                print('开始抓代理')
                 self.proxies = await self.crawl_proxy.run(self.session)
+                print('抓到的代理是'+str(self.proxies))
             try:
                 proxy = choice(self.proxies)
                 return proxy

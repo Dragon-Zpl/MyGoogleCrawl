@@ -89,6 +89,7 @@ class crawl_fn:
             proxies.append(ip_dic)
 
     async def run(self,session):
+        print('进来了')
         proxies = []
         results = await self.get_useful_proxy(session)
 
