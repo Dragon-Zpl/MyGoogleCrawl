@@ -38,9 +38,9 @@ class ParsingData:
                 analysis_dic["update_time"] = xpath_one.xpath(".//span[@class='htlgb']/text()")[0]
             elif needxpath.xpath("./text()")[0] in ["大小", "크기", "الحجم", "サイズ", "Size"]:
                 analysis_dic["size"] = xpath_one.xpath(".//span[@class='htlgb']/text()")[0]
-            elif needxpath.xpath("./text()")[0] in ["当前版本", "현재 버전", "الإصدار الحالي", "現在のバージョン", "Current Version"]:
+            elif needxpath.xpath("./text()")[0] in ["当前版本", "目前版本", "현재 버전", "الإصدار الحالي", "現在のバージョン", "Current Version"]:
                 analysis_dic["app_version"] = xpath_one.xpath(".//span[@class='htlgb']/text()")[0]
-            elif needxpath.xpath("./text()")[0] in ["提供者", "제공", "تقديم", "提供元", "Offered By"]:
+            elif needxpath.xpath("./text()")[0] in ["提供者：", "제공", "تقديم", "提供元", "Offered By"]:
                 analysis_dic["provider"] = xpath_one.xpath(".//span[@class='htlgb']/text()")[0]
                 analysis_dic["provider"] = self._remove_emoji(analysis_dic["provider"])
                 analysis_dic["provider"] = self._filter_emoji(analysis_dic["provider"])
