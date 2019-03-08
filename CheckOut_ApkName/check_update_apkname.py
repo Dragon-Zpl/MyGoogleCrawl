@@ -36,9 +36,7 @@ class CheckUpdateApkname:
     async def get_proxy(self):
         async with self.lock:
             if len(self.proxies) < 3:
-                print('开始抓代理')
                 self.proxies = await self.crawl_proxy.run(self.session)
-                print('抓到的代理是'+str(self.proxies))
             try:
                 proxy = choice(self.proxies)
                 return proxy
@@ -49,32 +47,22 @@ class CheckUpdateApkname:
         """
         检查美国的版本是否更新
         """
-        print('-1')
         now_pkgname = data["pkgname"]
         now_app_version = data["app_version"]
         apk_url = "https://play.google.com/store/apps/details?id=" + now_pkgname
-        print(apk_url)
         for i in range(3):
-            print(0)
             if proxy == None:
                 proxy = await self.get_proxy()
-                print('proxy'+str(proxy))
-            print(10)
             try:
                 async with self.session.get(url=apk_url, headers=self.headers, proxy=proxy, timeout=10) as ct:
-                    print(1)
                     if ct.status in [200, 201]:
                         datas = await ct.text()
-                        print(2)
                         analysis_data = self.parsing.analysis_country_data(datas)
-                        print(3)
                         analysis_data["country"] = "us"
                         analysis_data["pkgname"] = now_pkgname
                         analysis_data["url"] = apk_url
                         check_app_version = analysis_data["app_version"]
-                        print(4)
                         change_time = self.parsing.change_time('us', analysis_data["update_time"])
-                        print(5)
                         if change_time != None:
                             analysis_data["update_time"] = change_time
                         if check_app_version == now_app_version or check_app_version == None:
@@ -87,15 +75,12 @@ class CheckUpdateApkname:
                             data_return["app_version"] = check_app_version
                             data_return["pkgname"] = now_pkgname
                             data_return["is_update"] = 1
-                        print(6)
                         return data_return, analysis_data
                     elif ct.status in [403, 400, 500, 502, 503, 429]:
-                        print(7)
                         pass
             except Exception as e:
                 print("更新错误:"+str(e))
         else:
-            print('失败了三次')
             data_return = {}
             data_return["app_version"] = now_app_version
             data_return["pkgname"] = now_pkgname
@@ -112,31 +97,27 @@ class CheckUpdateApkname:
             pkgname = data["pkgname"]
             apk_url = "https://play.google.com/store/apps/details?id=" + pkgname + self.country_dict[country]
             if proxy == None:
-                proxy = self.get_proxy()
-            try:
-                async with self.session.get(url=apk_url, headers=self.headers, proxy=proxy, timeout=10) as ct:
-                    if ct.status in [200, 201]:
-                        datas = await ct.text()
-                        check_app_data = self.parsing.analysis_country_data(datas)
-                        check_app_data["pkgname"] = pkgname
-                        check_app_data["country"] = country
-                        check_app_data["url"] = apk_url
-                        change_time = self.parsing.change_time(country, check_app_data["update_time"])
-                        if change_time != None:
-                            check_app_data["update_time"] = change_time
-                        self.all_data_list.append(check_app_data)
-                    elif ct.status in [403, 400, 500, 502, 503, 429]:
-                        if time > 0:
-                            proxy = await self.get_proxy()
-                            return await self.check_other_coutry(data, proxy=proxy, time=time - 1)
-                        else:
-                            return None
-            except:
-                if time > 0:
-                    proxy = await self.get_proxy()
-                    return await self.check_other_coutry(data, proxy=proxy, time=time - 1)
-                else:
-                    return None
+                proxy = await self.get_proxy()
+            for i in range(3):
+                try:
+                    async with self.session.get(url=apk_url, headers=self.headers, proxy=proxy, timeout=10) as ct:
+                        if ct.status in [200, 201]:
+                            datas = await ct.text()
+                            check_app_data = self.parsing.analysis_country_data(datas)
+                            check_app_data["pkgname"] = pkgname
+                            check_app_data["country"] = country
+                            check_app_data["url"] = apk_url
+                            change_time = self.parsing.change_time(country, check_app_data["update_time"])
+                            if change_time != None:
+                                check_app_data["update_time"] = change_time
+                            self.all_data_list.append(check_app_data)
+                            break
+                        elif ct.status in [403, 400, 500, 502, 503, 429]:
+                            pass
+                except Exception as e:
+                    print('错误信息:'+str(e))
+            else:
+                return None
 
     def get_pkgdata_redis(self):
         """
