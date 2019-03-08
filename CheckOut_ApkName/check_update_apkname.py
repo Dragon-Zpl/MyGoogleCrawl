@@ -125,6 +125,9 @@ class CheckUpdateApkname:
                     return None
 
     def build_asyncio_tasks(self):
+        """
+        sdasda asd asd
+        """
         tasks = []
         for i in range(50):
             task = asyncio.ensure_future(self.get_redis.get_redis_pkgname())
@@ -138,6 +141,10 @@ class CheckUpdateApkname:
             check_tasks.append(task)
         return check_tasks
 
+    def task_ensure_future(self, func, data, tasks):
+        task = asyncio.ensure_future(func(data))
+        tasks.append(task)
+
     def build_other_insert(self, check_results):
         redis_tasks = []
         save_mysql_tasks = []
@@ -146,14 +153,17 @@ class CheckUpdateApkname:
             try:
                 data_return, analysis_data = check_result
                 if data_return != None:
-                    task = asyncio.ensure_future(self.get_redis.update_pkgname_redis(data_return))
-                    redis_tasks.append(task)
+                    self.task_ensure_future(self.get_redis.update_pkgname_redis, data_return, redis_tasks)
+                    # task = asyncio.ensure_future(self.get_redis.update_pkgname_redis(data_return))
+                    # redis_tasks.append(task)
                 if analysis_data != None:
-                    task = asyncio.ensure_future(self.get_pool.insert_mysql(analysis_data))
-                    save_mysql_tasks.append(task)
+                    self.task_ensure_future(self.get_pool.insert_mysql, analysis_data, save_mysql_tasks)
+                    # task = asyncio.ensure_future(self.get_pool.insert_mysql(analysis_data))
+                    # save_mysql_tasks.append(task)
                 if data_return != None and data_return["is_update"] == 1:
-                    task = asyncio.ensure_future(self.check_other_coutry(data_return))
-                    check_other_tasks.append(task)
+                    self.task_ensure_future(self.check_other_coutry, data_return, check_other_tasks)
+                    # task = asyncio.ensure_future(self.check_other_coutry(data_return))
+                    # check_other_tasks.append(task)
             except Exception as e:
                 print('错误信息：' + str(e))
         return redis_tasks, save_mysql_tasks, check_other_tasks

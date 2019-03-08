@@ -26,13 +26,13 @@ class GetMysqlPool:
                                         description=VALUES(description),developer=VALUES(developer),whatsnew=VALUES(whatsnew),
                                         instalations=VALUES(instalations),last_updatedate=VALUES(last_updatedate),minimum_os_version=VALUES(minimum_os_version),name=VALUES(name)
         """.format(to_mysql)
-                params = (data["country"], data["size"], data["category"], data["content_rating"],
-                          data["app_version"],
-                          data["description"], data["provider"], data["what_news"],
-                          data["developer_url"], data["installs"],
-                          data["is_busy"], data["update_time"], data["min_os_version"],
-                          data["name"], data["pkgname"], data["url"])
                 try:
+                    params = (data["country"], data["size"], data["category"], data["content_rating"],
+                              data["app_version"],
+                              data["description"], data["provider"], data["what_news"],
+                              data["developer_url"], data["installs"],
+                              data["is_busy"], data["update_time"], data["min_os_version"],
+                              data["name"], data["pkgname"], data["url"])
                     result = await cur.execute(sql_google, params)
                 except Exception as e:
                     print("数据库语句:" + sql_google)
