@@ -16,6 +16,7 @@ class CheckUpdateApkname:
         self.crawl_proxy = crawl_fn()
         self.parsing = ParsingData()
         self.get_pool = GetMysqlPool()
+        self.loop.run_until_complete(asyncio.ensure_future(self.get_pool.init_pool()))
         self.get_redis = RedisOption()
         self.apknames = set()
         self.proxies = []

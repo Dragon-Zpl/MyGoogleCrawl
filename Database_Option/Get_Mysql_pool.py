@@ -8,6 +8,7 @@ class GetMysqlPool:
         self._password = '123456'
         self._db = 'google_play'
 
+    async def init_pool(self):
         self.pool = await aiomysql.create_pool(host=self._host, port=self._port, user=self._user, password=self._password,
                                       db=self._db, charset='utf8', autocommit=True)
 
