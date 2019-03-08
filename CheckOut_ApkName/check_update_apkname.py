@@ -75,7 +75,7 @@ class CheckUpdateApkname:
                 except:
                     LastUpdateDate = "2019-01-01 00:00:00"
             print('改变后的:'+str(LastUpdateDate))
-            return LastUpdateDate
+            return str(LastUpdateDate)
 
     async def check_app_version(self, data, time=3, proxy=None):
         now_pkgname = data["pkgname"]
