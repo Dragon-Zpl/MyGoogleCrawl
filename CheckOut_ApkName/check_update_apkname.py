@@ -124,7 +124,7 @@ class CheckUpdateApkname:
         从redis中获取pkg的数据
         """
         pkg_datas = []
-        for i in range(2):
+        for i in range(50):
             pkg_data = self.get_redis.get_redis_pkgname()
             pkg_datas.append(pkg_data)
         return pkg_datas
