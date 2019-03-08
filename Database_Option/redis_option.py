@@ -28,6 +28,6 @@ class RedisOption:
         data["host"] = "host"
         self.rcon.lpush("download:queen", str(data).encode('utf-8'))
 
-    def get_redis_pkgname(self):
+    async def get_redis_pkgname(self):
         apk_detail = eval(self.rcon.brpop("download:queen", timeout=4)[1].decode('utf-8'))
         return apk_detail
