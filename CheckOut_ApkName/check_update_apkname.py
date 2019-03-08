@@ -58,6 +58,13 @@ class CheckUpdateApkname:
                 if ct.status in [200, 201]:
                     datas = await ct.text()
                     analysis_data = self.parsing.analysis_country_data(datas)
+                    # 判断是否已经可下载
+                    if analysis_data == None:
+                        data_return = {}
+                        data_return["app_version"] = now_app_version
+                        data_return["pkgname"] = now_pkgname
+                        data_return["is_update"] = 0
+                        return data_return, None
                     analysis_data["country"] = "us"
                     analysis_data["pkgname"] = now_pkgname
                     analysis_data["url"] = apk_url

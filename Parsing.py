@@ -58,11 +58,15 @@ class ParsingData:
             elif needxpath.xpath("./text()")[0] in ["필요한 Android 버전", "يتطلب Android", "Android 要件", "Requires Android",
                                                     "Android 系统版本要求", "Android 最低版本需求"]:
                 analysis_dic["min_os_version"] = xpath_one.xpath(".//span[@class='htlgb']/text()")[0]
-        if analysis_data.xpath("//span[@class='oocvOe']/button/@aria-label")[0] in ["安装", "설치", "تثبيت", "インストール",
-                                                                                    "Install"]:
-            analysis_dic["is_busy"] = 0
+        is_busy = analysis_data.xpath("//span[@class='oocvOe']/button/@aria-label")
+        if is_busy:
+            if analysis_data.xpath("//span[@class='oocvOe']/button/@aria-label")[0] in ["安装", "설치", "تثبيت", "インストール",
+                                                                                        "Install"]:
+                analysis_dic["is_busy"] = 0
+            else:
+                analysis_dic["is_busy"] = 1
         else:
-            analysis_dic["is_busy"] = 1
+            return None
         analysis_dic["name"] = analysis_data.xpath("//h1[@class='AHFaub']/span/text()")[0]
         analysis_dic["name"] = self._remove_emoji(analysis_dic["name"])
         analysis_dic["name"] = self._filter_emoji(analysis_dic["name"])
