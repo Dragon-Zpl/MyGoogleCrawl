@@ -51,6 +51,7 @@ class CheckUpdateApkname:
         now_pkgname = data["pkgname"]
         now_app_version = data["app_version"]
         apk_url = "https://play.google.com/store/apps/details?id=" + now_pkgname
+        print(apk_url)
         for i in range(3):
             print(0)
             if proxy == None:
