@@ -70,7 +70,6 @@ class CheckUpdateApkname:
                         data_return["app_version"] = check_app_version
                         data_return["pkgname"] = now_pkgname
                         data_return["is_update"] = 1
-                    # print('data_return:'+str(data_return)+'analysis_data:'+str(analysis_data))
                     return data_return, analysis_data
                 elif ct.status in [403, 400, 500, 502, 503, 429]:
                     if time > 0:
@@ -165,13 +164,10 @@ class CheckUpdateApkname:
             check_tasks = self.build_check_tasks(results)
             if len(check_tasks) >= 1:
                 check_results = self.loop.run_until_complete(asyncio.gather(*check_tasks))
-                print('进入到下一步')
                 redis_tasks, save_mysql_tasks, check_other_tasks = self.build_other_insert(check_results)
                 if len(redis_tasks) >= 1:
-                    print('进入第二部')
                     self.loop.run_until_complete(asyncio.wait(redis_tasks))
                 if len(check_other_tasks) >= 1:
-                    print('进入第三部')
                     self.loop.run_until_complete(asyncio.wait(check_other_tasks))
                     for result_list in self.all_data_list:
                         if result_list != None:

@@ -13,9 +13,6 @@ class GetMysqlPool:
                                           db=self._db, charset='utf8', autocommit=True, loop=loop)
         async with pool.acquire() as conn:
             async with conn.cursor() as cur:
-                print('存入数据库的:' + str(data))
-                print('提供者:'+str(data["provider"]))
-                print('版本：'+str(data["app_version"]))
                 if data["country"] == "us":
                     to_mysql = "crawl_google_play_app_info"
                 else:
