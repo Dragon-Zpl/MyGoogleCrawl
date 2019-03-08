@@ -77,7 +77,6 @@ class CrawlApkName:
                 apknames = analysis_data.xpath(
                     "//div[@class='card no-rationale square-cover apps small']//span[@class='preview-overlay-container']/@data-docid")
                 for apkname in apknames:
-                    print(apkname)
                     self.apk_names.add(apkname)
         except Exception as e:
             try:
@@ -94,7 +93,6 @@ class CrawlApkName:
                 apknames = analysis_data.xpath(
                     "//div[@class='card no-rationale square-cover apps small']//span[@class='preview-overlay-container']/@data-docid")
                 for apkname in apknames:
-                    print(apkname)
                     self.apk_names.add(apkname)
         except:
             try:
