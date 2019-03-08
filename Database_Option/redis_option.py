@@ -21,7 +21,7 @@ class RedisOption:
         data["host"] = "host"
         self.rcon.rpush("download:queen", str(data).encode('utf-8'))
 
-    def update_pkgname_redis(self, updatedata):
+    async def update_pkgname_redis(self, updatedata):
         data = {}
         data["pkgname"] = updatedata["pkgname"]
         data["app_version"] = updatedata["app_version"]

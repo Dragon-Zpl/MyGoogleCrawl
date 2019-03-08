@@ -164,13 +164,14 @@ class CheckUpdateApkname:
             results = self.loop.run_until_complete(asyncio.gather(*tasks))
             check_tasks = self.build_check_tasks(results)
             if len(check_tasks) >= 1:
-                print('check_tasks'+str(check_tasks))
                 check_results = self.loop.run_until_complete(asyncio.gather(*check_tasks))
                 print('进入到下一步')
                 redis_tasks, save_mysql_tasks, check_other_tasks = self.build_other_insert(check_results)
                 if len(redis_tasks) >= 1:
+                    print('进入第二部')
                     self.loop.run_until_complete(asyncio.wait(redis_tasks))
                 if len(check_other_tasks) >= 1:
+                    print('进入第三部')
                     self.loop.run_until_complete(asyncio.wait(check_other_tasks))
                     for result_list in self.all_data_list:
                         if result_list != None:
