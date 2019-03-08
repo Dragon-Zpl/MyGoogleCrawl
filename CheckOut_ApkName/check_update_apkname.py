@@ -44,6 +44,9 @@ class CheckUpdateApkname:
                 await self.get_proxy()
 
     async def check_app_version(self, data, time=3, proxy=None):
+        """
+        检查美国的版本是否更新
+        """
         now_pkgname = data["pkgname"]
         now_app_version = data["app_version"]
         apk_url = "https://play.google.com/store/apps/details?id=" + now_pkgname
@@ -94,6 +97,9 @@ class CheckUpdateApkname:
                 return data_return, None
 
     async def check_other_coutry(self, data, time=3, proxy=None):
+        '''
+        获取其他国家的数据
+        '''
         for country in self.country_dict:
             pkgname = data["pkgname"]
             apk_url = "https://play.google.com/store/apps/details?id=" + pkgname + self.country_dict[country]
@@ -124,9 +130,9 @@ class CheckUpdateApkname:
                 else:
                     return None
 
-    def build_asyncio_tasks(self):
+    def get_pkgdata_redis(self):
         """
-        sdasda asd asd
+        从redis中获取pkg的数据
         """
         pkg_datas = []
         for i in range(50):
@@ -135,6 +141,11 @@ class CheckUpdateApkname:
         return pkg_datas
 
     def build_check_tasks(self, results):
+        '''
+        创建检查美国信息的任务队列
+        :param results:
+        :return: 需要检查并要存入redis的pkg数据的字典,需要存入mysql美国的pkg数据的字典(两个字典)
+        '''
         check_tasks = []
         for result in results:
             task = asyncio.ensure_future(self.check_app_version(result))
@@ -146,6 +157,12 @@ class CheckUpdateApkname:
         tasks.append(task)
 
     def build_other_insert(self, check_results):
+        '''
+        遍历以美国为基准的需要更新的数据，分别更新redis, 创建检查其他国家的任务队列和将美国数据插入mysql的任务队列
+        :param check_results:
+        :return: 存入mysql的任务队列和检查其他国家的任务队列
+        '''
+
         save_mysql_tasks = []
         check_other_tasks = []
         for check_result in check_results:
@@ -153,27 +170,20 @@ class CheckUpdateApkname:
                 data_return, analysis_data = check_result
                 if data_return != None:
                     self.get_redis.update_pkgname_redis(data_return)
-                    # self.task_ensure_future(self.get_redis.update_pkgname_redis, data_return, redis_tasks)
-                    # task = asyncio.ensure_future(self.get_redis.update_pkgname_redis(data_return))
-                    # redis_tasks.append(task)
                 if analysis_data != None:
                     self.task_ensure_future(self.get_pool.insert_mysql, analysis_data, save_mysql_tasks)
-                    # task = asyncio.ensure_future(self.get_pool.insert_mysql(analysis_data))
-                    # save_mysql_tasks.append(task)
                 if data_return != None and data_return["is_update"] == 1:
                     self.task_ensure_future(self.check_other_coutry, data_return, check_other_tasks)
-                    # task = asyncio.ensure_future(self.check_other_coutry(data_return))
-                    # check_other_tasks.append(task)
             except Exception as e:
                 print('错误信息：' + str(e))
         return save_mysql_tasks, check_other_tasks
 
     def run(self):
+        """
+        从redis中获取pkg数据->检查美国的包是否有更新->更新redis->以美国为基准获取其他国家有版本更新的包的数据->存入数据库
+        """
         while True:
-            '''
-            
-            '''
-            pkg_datas = self.build_asyncio_tasks()
+            pkg_datas = self.get_pkgdata_redis()
             check_tasks = self.build_check_tasks(pkg_datas)
             if len(check_tasks) >= 1:
                 check_results = self.loop.run_until_complete(asyncio.gather(*check_tasks))

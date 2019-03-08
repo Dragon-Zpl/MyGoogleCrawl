@@ -15,6 +15,9 @@ class RedisOption:
         return rcon
 
     def save_pkgname_redis(self, apkname):
+        """
+        将pkg数据存入redis
+        """
         data = {}
         data["pkgname"] = apkname
         data["app_version"] = "none"
@@ -22,6 +25,9 @@ class RedisOption:
         self.rcon.rpush("download:queen", str(data).encode('utf-8'))
 
     def update_pkgname_redis(self, updatedata):
+        """
+        更新redis中的pkg数据
+        """
         data = {}
         data["pkgname"] = updatedata["pkgname"]
         data["app_version"] = updatedata["app_version"]
@@ -29,5 +35,8 @@ class RedisOption:
         self.rcon.lpush("download:queen", str(data).encode('utf-8'))
 
     def get_redis_pkgname(self):
+        """
+        从redis的末端获取一个pkg数据并返回
+        """
         apk_detail = eval(self.rcon.brpop("download:queen", timeout=4)[1].decode('utf-8'))
         return apk_detail

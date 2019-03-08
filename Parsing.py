@@ -29,7 +29,11 @@ class ParsingData:
 
 
     def analysis_country_data(self, data):
-        analysis_dic = {}
+        """
+        解析传来的数据，解析方法:先抓父节点,在以父节点的文本信息,抓取子节点(防止标签位置改变)
+
+        """
+        analysis_dic = {'update_time': '', 'size': '', 'installs': '', 'app_version': '', 'min_os_version': '', 'content_rating': '', 'provider': '', 'developer_email': '', 'is_busy': '', 'name': '', 'developer_url': '', 'category': '', 'app_current_num': '', 'cover_image_url': '', 'description': '', 'what_news': '', 'pkgname': '', 'country': '', 'url': ''}
         analysis_data = etree.HTML(data)
         xpath_list = analysis_data.xpath("//div[@class='hAyfc']")
         for xpath_one in xpath_list:
@@ -75,6 +79,9 @@ class ParsingData:
         return analysis_dic
 
     def change_time(self, lang, LastUpdateDate):
+        '''
+        将各个国家的时间更改为可存入数据库的时间(阿拉伯的有问题无法更改)
+        '''
         if LastUpdateDate:
             if lang == 'us':
                 try:

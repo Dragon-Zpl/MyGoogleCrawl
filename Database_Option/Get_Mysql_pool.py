@@ -13,6 +13,9 @@ class GetMysqlPool:
                                       db=self._db, charset='utf8', autocommit=True)
 
     async def insert_mysql(self, data):
+        """
+        将各位的数据存入或更新到数据库中
+        """
         async with self.pool.acquire() as conn:
             async with conn.cursor() as cur:
                 if data["country"] == "us":

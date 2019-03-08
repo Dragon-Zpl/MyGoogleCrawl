@@ -3,6 +3,7 @@ from lxml import etree
 import asyncio
 from random import choice
 from CrawlProxy.ForeignProxyCrawl.crawl_foreigh_auto import crawl_fn
+from Database_Option.redis_option import RedisOption
 
 
 class CrawlApkName:
@@ -19,7 +20,7 @@ class CrawlApkName:
         }
 
         self.proxies = []
-
+        self.get_redis = RedisOption()
         self.host = "https://play.google.com/"
 
         self.urls = {
@@ -147,53 +148,27 @@ class CrawlApkName:
             except:
                 pass
 
-    async def save_redis(self,apkname):
-        data = {}
-        data["pkgname"] = apkname
-        data["app_version"] = "none"
-        data["host"] = "host"
-        self.rcon.rpush("download:queen",str(data).encode('utf-8'))
-
     def run(self):
         self.apk_names.clear()
         # 获取最外层的apkname
         tasks = self.get_apknames_tasks()
-
         self.loop.run_until_complete(asyncio.wait(tasks))
-
         # 获取最外层类别的url，共八种
         urls = self.loop.run_until_complete(self.get_main_url())
-
         tasks = self.build_async_tasks(urls)
-
         results = self.loop.run_until_complete(asyncio.gather(*tasks))
-
-
         # 获取里层的分类的url
-
         task = asyncio.ensure_future(self.get_category_url(results[0]))
-
-
         allurls = self.loop.run_until_complete(task)
-
-
         for url in allurls:
             self.son_category_url.add(url)
-
         get_apkname_tasks = []
         for url in self.son_category_url:
             task = asyncio.ensure_future(self.fetch_get_apkname(url))
             get_apkname_tasks.append(task)
-
         self.loop.run_until_complete(asyncio.gather(*get_apkname_tasks))
-
-        save_redis_tasks = []
-
         for apkname in self.apk_names:
-            task = asyncio.ensure_future(self.save_redis(apkname))
-            save_redis_tasks.append(task)
-
-        self.loop.run_until_complete(asyncio.wait(save_redis_tasks))
+            self.get_redis.save_pkgname_redis(apkname)
 if __name__ == '__main__':
     t = CrawlApkName()
     t.run()
