@@ -57,7 +57,7 @@ class CheckUpdateApkname:
         for i in range(3):
             print(0)
             if proxy == None:
-                proxy = self.get_proxy()
+                proxy = await self.get_proxy()
                 print('proxy'+str(proxy))
             print(10)
             try:
@@ -143,7 +143,7 @@ class CheckUpdateApkname:
         从redis中获取pkg的数据
         """
         pkg_datas = []
-        for i in range(50):
+        for i in range(2):
             pkg_data = self.get_redis.get_redis_pkgname()
             pkg_datas.append(pkg_data)
         return pkg_datas
