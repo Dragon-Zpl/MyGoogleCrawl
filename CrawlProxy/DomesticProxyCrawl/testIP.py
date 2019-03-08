@@ -1,72 +1,25 @@
-def run(self):
-    while True:
-        tasks = self.build_asyncio_tasks()
-        results = self.loop.run_until_complete(asyncio.gather(*tasks))
-        check_tasks = self.build_check_tasks(results)
-        if len(check_tasks) >= 1:
-            check_results = self.loop.run_until_complete(asyncio.gather(*check_tasks))
-            redis_tasks, save_mysql_tasks, check_other_tasks = self.build_other_insert(check_results,get_db)
-            if len(redis_tasks) >= 1:
-                self.loop.run_until_complete(asyncio.wait(redis_tasks))
-            if len(check_other_tasks) >= 1:
-                self.loop.run_until_complete(asyncio.wait(check_other_tasks))
-                for result_list in self.all_data_list:
-                    if result_list != None:
-                        # print('时间：' + str(result["update_time"]) + '国家：' + result["country"])
-                        task = self.insert_mysql(result_list, get_db)
-                        save_mysql_tasks.append(task)
-            if len(save_mysql_tasks) >= 1:
-                self.loop.run_until_complete(asyncio.wait(save_mysql_tasks))
+
+data = {'update_time': '2019-01-12 00:00:00', 'size': '36M', 'installs': '100,000,000+', 'app_version': '1.3.3', 'min_os_version': '5.0 及更高版本', 'content_rating': '>适合所有人', 'provider': 'Serkan Özyılmaz', 'developer_email': 'magnificientgames2018@gmail.com', 'is_busy': 0, 'name': 'Rise Up', 'developer_url': 'https://play.google.com/store/apps/developer?id=Serkan+%C3%96zy%C4%B1lmaz', 'category': '街机', 'app_current_num': '1,122,124', 'cover_image_url': 'https://lh3.googleusercontent.com/n_3Q51HZ5v41am-EBPOjeU1hx5DS4KzG9KCJBbIenHKCYFhz6Rw6PTpxllkk-tkD4J4=s180-rw', 'description': "The most challenging and fun game of 2018! Protect your balloon with your shield while it's rising up! Beware of the obstacles.\n\nMove your shield with one finger to protect your balloon. Clear your way as you reach higher and higher!\n\nShield control is very easy but it's very hard to reach high scores!\n\nChallenge your friends for the highest score!\n\nGame Features:\n- Free to play\n- One finger control\n- Different obstacles and experience every time\n- Endless gameplay", 'what_news': '', 'pkgname': 'com.riseup.game', 'country': 'zh', 'url': 'https://play.google.com/store/apps/details?id=com.riseup.game&hl=zh&gl=us'}
+
+params = (data["country"], data["size"], data["category"], data["content_rating"],
+                          data["app_version"],
+                          data["description"], data["provider"], data["what_news"],
+                          data["developer_url"], data["installs"],
+                          data["is_busy"], data["update_time"], data["min_os_version"],
+                          data["name"], data["pkgname"], data["url"])
+
+sql = """
+
+                                insert into crawl_google_play_app_info_zh (language,appsize,category,contentrating,current_version,description,developer,whatsnew,developer_url,instalations,isbusy,last_updatedate,minimum_os_version,name,pkgname,url) VALUES ("{}","{}","{}","{}","{}","{}","{}","{}","{}","{}","{}","{}","{}","{}","{}","{}")
+                                ON DUPLICATE KEY UPDATE appsize=VALUES(appsize),category=VALUES(category),contentrating=VALUES(contentrating),current_version=VALUES(current_version),
+                                description=VALUES(description),developer=VALUES(developer),whatsnew=VALUES(whatsnew),
+                                instalations=VALUES(instalations),last_updatedate=VALUES(last_updatedate),minimum_os_version=VALUES(minimum_os_version),name=VALUES(name)
+"""
 
 
-
-
-
-
-
-    def run(self):
-        tasks = []
-        while True:
-            task = asyncio.ensure_future(self.get_redis_apk())
-            tasks.append(task)
-            if len(tasks) > 50:
-                results = self.loop.run_until_complete(asyncio.gather(*tasks))
-                tasks = []
-                check_tasks = []
-                for result in results:
-                    task = asyncio.ensure_future(self.check_app_version(result))
-                    check_tasks.append(task)
-                if len(check_tasks) >= 1:
-                    check_results = self.loop.run_until_complete(asyncio.gather(*check_tasks))
-                    redis_tasks = []
-                    save_mysql_tasks = []
-                    check_other_tasks = []
-                    get_db = self.loop.run_until_complete(self.get_mysql_db())
-                    for check_result in check_results:
-                        try:
-                            data_return, analysis_data = check_result
-                            if data_return != None:
-                                task = asyncio.ensure_future(self.save_redis(data_return))
-                                redis_tasks.append(task)
-                            if analysis_data != None:
-                                task = asyncio.ensure_future(self.insert_mysql(analysis_data, get_db))
-                                save_mysql_tasks.append(task)
-                            if data_return != None and data_return["is_update"] == 1:
-                                task = asyncio.ensure_future(self.check_other_coutry(data_return))
-                                check_other_tasks.append(task)
-                        except Exception as e:
-                            print('错误信息：' + str(e))
-                    if len(redis_tasks) >= 1:
-                        self.loop.run_until_complete(asyncio.wait(redis_tasks))
-
-
-                    if len(check_other_tasks) >= 1:
-                        self.loop.run_until_complete(asyncio.wait(check_other_tasks))
-                        for result_list in self.all_data_list:
-                            if result_list != None:
-                                # print('时间：' + str(result["update_time"]) + '国家：' + result["country"])
-                                task = self.insert_mysql(result_list, get_db)
-                                save_mysql_tasks.append(task)
-
-                    if len(save_mysql_tasks) >= 1:
-                        self.loop.run_until_complete(asyncio.wait(save_mysql_tasks))
+print(sql.format(data["country"], data["size"], data["category"], data["content_rating"],
+                          data["app_version"],
+                          data["description"], data["provider"], data["what_news"],
+                          data["developer_url"], data["installs"],
+                          data["is_busy"], data["update_time"], data["min_os_version"],
+                          data["name"], data["pkgname"], data["url"]))

@@ -8,10 +8,11 @@ class GetMysqlPool:
         self._password = '123456'
         self._db = 'google_play'
 
-    async def insert_mysql(self, data, loop=None):
-        pool = await aiomysql.create_pool(host=self._host, port=self._port, user=self._user, password=self._password,
-                                          db=self._db, charset='utf8', autocommit=True, loop=loop)
-        async with pool.acquire() as conn:
+        self.pool = await aiomysql.create_pool(host=self._host, port=self._port, user=self._user, password=self._password,
+                                      db=self._db, charset='utf8', autocommit=True, loop=loop)
+
+    async def insert_mysql(self, data):
+        async with self.pool.acquire() as conn:
             async with conn.cursor() as cur:
                 if data["country"] == "us":
                     to_mysql = "crawl_google_play_app_info"
