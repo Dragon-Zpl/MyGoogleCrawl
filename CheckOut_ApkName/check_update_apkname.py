@@ -27,9 +27,9 @@ class CheckUpdateApkname:
             # 'us': '&hl=en&gl=us',
             'zh': '&hl=zh&gl=us',
             'zhtw': '&hl=zh_TW&gl=us',
-            # 'ko': '&hl=ko&gl=us',
-            # 'ar': '&hl=ar&gl=us',
-            # 'jp': '&hl=ja&gl=us',
+            'ko': '&hl=ko&gl=us',
+            'ar': '&hl=ar&gl=us',
+            'jp': '&hl=ja&gl=us',
         }
         self.emoji_pattern = re.compile(
             u"(\ud83d[\ude00-\ude4f])|"  # emoticons
