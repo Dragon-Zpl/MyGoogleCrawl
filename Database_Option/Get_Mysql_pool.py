@@ -14,6 +14,8 @@ class GetMysqlPool:
         async with pool.acquire() as conn:
             async with conn.cursor() as cur:
                 print('存入数据库的:' + str(data))
+                print('提供者:'+str(data["provider"]))
+                print('版本：'+str(data["app_version"]))
                 if data["country"] == "us":
                     to_mysql = "crawl_google_play_app_info"
                 else:
@@ -33,7 +35,7 @@ class GetMysqlPool:
                           data["name"], data["pkgname"], data["url"])
                 try:
                     result = await cur.execute(sql_google, params)
-                    print('当前插入的国家:' + str(data["country"]) + str(result))
                 except Exception as e:
                     print("数据库语句:" + sql_google)
+                    print("错误时候的数据"+str(data))
                     print('数据库错误信息：' + str(e))

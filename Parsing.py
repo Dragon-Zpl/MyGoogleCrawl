@@ -93,4 +93,4 @@ class ParsingData:
                     LastUpdateDate = datetime.strptime(LastUpdateDate, '%Y年%m月%d日')
                 except:
                     LastUpdateDate = "2019-01-01 00:00:00"
-            return LastUpdateDate
+            return str(LastUpdateDate)
