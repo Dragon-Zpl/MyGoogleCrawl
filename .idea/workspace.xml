@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="6d700b11-5e9c-45a8-bbfc-f91dbeefd186" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/test_demo.py" beforeDir="false" afterPath="$PROJECT_DIR$/test_demo.py" afterDir="false" />
-    </list>
+    <list default="true" id="6d700b11-5e9c-45a8-bbfc-f91dbeefd186" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -20,6 +18,7 @@
     <SUITE FILE_PATH="coverage/MyGoogleCrawl$test_demo.coverage" NAME="test_demo Coverage Results" MODIFIED="1552294891659" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/MyGoogleCrawl$test.coverage" NAME="test Coverage Results" MODIFIED="1551683666329" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/CrawlProxy/DomesticProxyCrawl" />
     <SUITE FILE_PATH="coverage/MyGoogleCrawl$redis_option.coverage" NAME="redis_option Coverage Results" MODIFIED="1552282074245" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Database_Option" />
+    <SUITE FILE_PATH="coverage/MyGoogleCrawl$rmlog.coverage" NAME="rmlog Coverage Results" MODIFIED="1552296836200" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/MyGoogleCrawl$crawl_auto.coverage" NAME="crawl_auto Coverage Results" MODIFIED="1551664177459" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/CrawlProxy/DomesticProxyCrawl" />
     <SUITE FILE_PATH="coverage/MyGoogleCrawl$Get_Mysql_pool.coverage" NAME="Get_Mysql_pool Coverage Results" MODIFIED="1552283135496" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Database_Option" />
   </component>
@@ -46,37 +45,22 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="build.sh" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/build.sh">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="125">
+              <caret line="5" column="26" lean-forward="true" selection-start-line="5" selection-start-column="26" selection-end-line="5" selection-end-column="26" />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="get_apk_name.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/CrawlApkName/get_apk_name.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-92">
-              <caret line="91" column="44" selection-start-line="91" selection-start-column="44" selection-end-line="91" selection-end-column="44" />
+            <state relative-caret-position="-1126">
+              <caret line="112" column="27" lean-forward="true" selection-start-line="112" selection-start-column="27" selection-end-line="112" selection-end-column="27" />
               <folding>
                 <element signature="e#0#33#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="test_demo.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/test_demo.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="249">
-              <caret line="15" column="24" lean-forward="true" selection-start-line="15" selection-start-column="24" selection-end-line="15" selection-end-column="24" />
-              <folding>
-                <element signature="e#0#13#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Parsing.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Parsing.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2075">
-              <caret line="83" column="50" selection-start-line="83" selection-start-column="50" selection-end-line="83" selection-end-column="50" />
-              <folding>
-                <element signature="e#0#9#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -106,10 +90,22 @@
       <file leaf-file-name="crawl_foreigh_auto.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/CrawlProxy/ForeignProxyCrawl/crawl_foreigh_auto.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-450">
+            <state relative-caret-position="-1476">
               <caret line="12" column="70" lean-forward="true" selection-start-line="12" selection-start-column="70" selection-end-line="12" selection-end-column="70" />
               <folding>
                 <element signature="e#0#14#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="rmlog.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/rmlog.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="449">
+              <caret line="18" column="19" lean-forward="true" selection-start-line="18" selection-start-column="19" selection-end-line="18" selection-end-column="19" />
+              <folding>
+                <element signature="e#0#9#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -123,15 +119,6 @@
               <folding>
                 <element signature="e#0#14#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="__init__.py" pinned="false" current-in-tab="false">
-        <entry file="file://D:/python/Lib/logging/__init__.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="281">
-              <caret line="1929" column="4" selection-start-line="1929" selection-start-column="4" selection-end-line="1929" selection-end-column="4" />
             </state>
           </provider>
         </entry>
@@ -183,7 +170,6 @@
         <option value="$PROJECT_DIR$/AllSetting/mysql_setting.py" />
         <option value="$PROJECT_DIR$/auto_crawl_pkgname.py" />
         <option value="$PROJECT_DIR$/CrawlProxy/DomesticProxyCrawl/testIP.py" />
-        <option value="$PROJECT_DIR$/build.sh" />
         <option value="$PROJECT_DIR$/Request_Web/post_request.py" />
         <option value="$PROJECT_DIR$/Request_Web/get_request.py" />
         <option value="$PROJECT_DIR$/Parsing.py" />
@@ -194,9 +180,11 @@
         <option value="$PROJECT_DIR$/AllSetting/__init__.py" />
         <option value="$PROJECT_DIR$/CheckOut_ApkName/check_update_apkname.py" />
         <option value="$PROJECT_DIR$/Database_Option/Get_Mysql_pool.py" />
-        <option value="$PROJECT_DIR$/CrawlApkName/get_apk_name.py" />
         <option value="$PROJECT_DIR$/Request_Web/AllRequest.py" />
         <option value="$PROJECT_DIR$/test_demo.py" />
+        <option value="$PROJECT_DIR$/CrawlApkName/get_apk_name.py" />
+        <option value="$PROJECT_DIR$/build.sh" />
+        <option value="$PROJECT_DIR$/rmlog.py" />
       </list>
     </option>
   </component>
@@ -230,42 +218,6 @@
               <item name="MyGoogleCrawl" type="b2602c69:ProjectViewProjectNode" />
               <item name="MyGoogleCrawl" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="MyGoogleCrawl" type="b2602c69:ProjectViewProjectNode" />
-              <item name="MyGoogleCrawl" type="462c0819:PsiDirectoryNode" />
-              <item name="AllSetting" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="MyGoogleCrawl" type="b2602c69:ProjectViewProjectNode" />
-              <item name="MyGoogleCrawl" type="462c0819:PsiDirectoryNode" />
-              <item name="CheckOut_ApkName" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="MyGoogleCrawl" type="b2602c69:ProjectViewProjectNode" />
-              <item name="MyGoogleCrawl" type="462c0819:PsiDirectoryNode" />
-              <item name="CrawlApkName" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="MyGoogleCrawl" type="b2602c69:ProjectViewProjectNode" />
-              <item name="MyGoogleCrawl" type="462c0819:PsiDirectoryNode" />
-              <item name="CrawlProxy" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="MyGoogleCrawl" type="b2602c69:ProjectViewProjectNode" />
-              <item name="MyGoogleCrawl" type="462c0819:PsiDirectoryNode" />
-              <item name="CrawlProxy" type="462c0819:PsiDirectoryNode" />
-              <item name="ForeignProxyCrawl" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="MyGoogleCrawl" type="b2602c69:ProjectViewProjectNode" />
-              <item name="MyGoogleCrawl" type="462c0819:PsiDirectoryNode" />
-              <item name="Database_Option" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="MyGoogleCrawl" type="b2602c69:ProjectViewProjectNode" />
-              <item name="MyGoogleCrawl" type="462c0819:PsiDirectoryNode" />
-              <item name="Request_Web" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
@@ -297,7 +249,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.test_demo">
+  <component name="RunManager" selected="Python.rmlog">
     <configuration name="Get_Mysql_pool" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="MyGoogleCrawl" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -317,25 +269,6 @@
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
     </configuration>
-    <configuration name="mysql_setting" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="MyGoogleCrawl" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/AllSetting" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/AllSetting/mysql_setting.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-    </configuration>
     <configuration name="redis_option" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="MyGoogleCrawl" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -350,6 +283,25 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Database_Option/redis_option.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+    </configuration>
+    <configuration name="rmlog" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="MyGoogleCrawl" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/rmlog.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -395,18 +347,18 @@
     </configuration>
     <list>
       <item itemvalue="Python.testIP" />
-      <item itemvalue="Python.mysql_setting" />
       <item itemvalue="Python.test_demo" />
       <item itemvalue="Python.redis_option" />
       <item itemvalue="Python.Get_Mysql_pool" />
+      <item itemvalue="Python.rmlog" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.rmlog" />
         <item itemvalue="Python.test_demo" />
         <item itemvalue="Python.Get_Mysql_pool" />
         <item itemvalue="Python.redis_option" />
         <item itemvalue="Python.testIP" />
-        <item itemvalue="Python.mysql_setting" />
       </list>
     </recent_temporary>
   </component>
@@ -525,13 +477,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/CrawlProxy/DomesticProxyCrawl/testIP.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1650">
-          <caret line="66" column="18" lean-forward="true" selection-start-line="66" selection-start-column="18" selection-end-line="66" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/CrawlProxy/__init__.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -614,13 +559,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/testall.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="799">
-          <caret line="229" selection-start-line="229" selection-end-line="229" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/AllSetting/mysql_setting.py" />
     <entry file="file://D:/python/Lib/asyncio/transports.py">
       <provider selected="true" editor-type-id="text-editor">
@@ -669,13 +607,6 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Request_Web/post_request.py">
       <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/build.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="100">
-          <caret line="4" column="11" selection-start-line="4" selection-start-column="11" selection-end-line="4" selection-end-column="11" />
-        </state>
-      </provider>
     </entry>
     <entry file="file://$USER_HOME$/PycharmProjects/test/venv/Lib/site-packages/redis/client.py">
       <provider selected="true" editor-type-id="text-editor">
@@ -757,16 +688,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/CrawlProxy/ForeignProxyCrawl/crawl_foreigh_auto.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-450">
-          <caret line="12" column="70" lean-forward="true" selection-start-line="12" selection-start-column="70" selection-end-line="12" selection-end-column="70" />
-          <folding>
-            <element signature="e#0#14#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://D:/python/Lib/logging/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="281">
@@ -811,16 +732,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/CrawlApkName/get_apk_name.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-92">
-          <caret line="91" column="44" selection-start-line="91" selection-start-column="44" selection-end-line="91" selection-end-column="44" />
-          <folding>
-            <element signature="e#0#33#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Request_Web/AllRequest.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="149">
@@ -830,10 +741,54 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/test_demo.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="249">
-          <caret line="15" column="24" lean-forward="true" selection-start-line="15" selection-start-column="24" selection-end-line="15" selection-end-column="24" />
+        <state relative-caret-position="485">
+          <caret line="20" column="26" lean-forward="true" selection-start-line="20" selection-start-column="26" selection-end-line="20" selection-end-column="26" />
           <folding>
             <element signature="e#0#13#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CrawlApkName/get_apk_name.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1126">
+          <caret line="112" column="27" lean-forward="true" selection-start-line="112" selection-start-column="27" selection-end-line="112" selection-end-column="27" />
+          <folding>
+            <element signature="e#0#33#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/build.sh">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="125">
+          <caret line="5" column="26" lean-forward="true" selection-start-line="5" selection-start-column="26" selection-end-line="5" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/testall.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2699">
+          <caret line="229" selection-start-line="229" selection-end-line="229" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CrawlProxy/ForeignProxyCrawl/crawl_foreigh_auto.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1476">
+          <caret line="12" column="70" lean-forward="true" selection-start-line="12" selection-start-column="70" selection-end-line="12" selection-end-column="70" />
+          <folding>
+            <element signature="e#0#14#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/rmlog.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="449">
+          <caret line="18" column="19" lean-forward="true" selection-start-line="18" selection-start-column="19" selection-end-line="18" selection-end-column="19" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
           </folding>
         </state>
       </provider>
