@@ -71,8 +71,8 @@ class CrawlApkName:
         for i in range(3):
             proxy = await self.get_proxy()
             try:
-                data = await self._Request.post_request(self.session, url, proxy, data)
-                analysis_data = etree.HTML(data)
+                datas = await self._Request.post_request(self.session, url, proxy, data)
+                analysis_data = etree.HTML(datas)
                 apknames = analysis_data.xpath(
                     "//div[@class='card no-rationale square-cover apps small']//span[@class='preview-overlay-container']/@data-docid")
                 for apkname in apknames:
