@@ -17,7 +17,7 @@ class InitiateRequest:
                 pass
 
 
-    async def get_request(self,session,url,proxy):
+    async def get_request(self,session,url,proxy=None):
         print(url)
         async with session.get(url=url, headers=self.headers, proxy=proxy, timeout=10) as ct:
             print('出来的:'+str(url)+'状态码'+str(ct.status))

@@ -1,4 +1,5 @@
 import asyncio
+import time
 from random import choice
 from AllSetting import GetSetting
 from CrawlProxy.ForeignProxyCrawl.crawl_foreigh_auto import crawl_fn
@@ -23,9 +24,6 @@ class CheckUpdateApkname:
         self.apknames = set()
         self.proxies = []
         self.all_data_list = []
-        self.headers = {
-            "user-agent": "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.96 Safari/537.36",
-        }
         self.country_dict = {
             # 'us': '&hl=en&gl=us',
             'zh': '&hl=zh&gl=us',
@@ -137,12 +135,15 @@ class CheckUpdateApkname:
             else:
                 return None
 
-    def _get_pkgdata_redis(self):
+    def _get_pkgdata_redis(self,start):
         """
         从redis中获取pkg的数据
         """
         pkg_datas = []
-        for i in range(50):
+        for i in range(100):
+            end = time.time()
+            if (end -start) > 20:
+                return pkg_datas
             pkg_data = self.get_redis.get_redis_pkgname()
             pkg_datas.append(pkg_data)
         return pkg_datas
@@ -190,7 +191,8 @@ class CheckUpdateApkname:
         从redis中获取pkg数据->检查美国的包是否有更新->更新redis->以美国为基准获取其他国家有版本更新的包的数据->存入数据库
         """
         while True:
-            pkg_datas = self._get_pkgdata_redis()
+            start = time.time()
+            pkg_datas = self._get_pkgdata_redis(start)
             check_tasks = self._build_check_tasks(pkg_datas)
             if len(check_tasks) >= 1:
                 check_results = self.loop.run_until_complete(asyncio.gather(*check_tasks))
