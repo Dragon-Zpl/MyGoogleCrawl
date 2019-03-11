@@ -24,4 +24,4 @@ class InitiateRequest:
                 return data
             elif ct.status in [403, 400, 500, 502, 503, 429]:
                 print(ct.status)
-                pass
+                return None
