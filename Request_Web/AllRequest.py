@@ -18,6 +18,7 @@ class InitiateRequest:
 
 
     async def get_request(self,session,url,proxy):
+        print(url)
         async with session.get(url=url, headers=self.headers, proxy=proxy, timeout=10) as ct:
             if ct.status in [200,201]:
                 data = await ct.text()
