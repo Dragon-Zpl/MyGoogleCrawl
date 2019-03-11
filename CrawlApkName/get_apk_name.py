@@ -123,7 +123,6 @@ class CrawlApkName:
         proxy = await self.get_proxy()
         try:
             data = await self._Request.get_request(self.session, url, proxy)
-            print(data)
             return data
         except:
             try:
@@ -136,10 +135,8 @@ class CrawlApkName:
         url = "https://play.google.com/store/apps"
         try:
             data = await self._Request.get_request(self.session, url, proxy)
-            print(data)
             analysis_data = etree.HTML(data)
             urls = analysis_data.xpath("//div[@class='g4kCYe']/a/@href")
-            print(urls)
             return urls
         except:
             try:

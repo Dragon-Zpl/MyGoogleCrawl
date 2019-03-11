@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="6d700b11-5e9c-45a8-bbfc-f91dbeefd186" name="Default" comment="" />
+    <list default="true" id="6d700b11-5e9c-45a8-bbfc-f91dbeefd186" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/CrawlApkName/get_apk_name.py" beforeDir="false" afterPath="$PROJECT_DIR$/CrawlApkName/get_apk_name.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Database_Option/redis_option.py" beforeDir="false" afterPath="$PROJECT_DIR$/Database_Option/redis_option.py" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -17,15 +20,16 @@
     <SUITE FILE_PATH="coverage/MyGoogleCrawl$mysql_setting.coverage" NAME="mysql_setting Coverage Results" MODIFIED="1551944603563" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/AllSetting" />
     <SUITE FILE_PATH="coverage/MyGoogleCrawl$test_demo.coverage" NAME="test_demo Coverage Results" MODIFIED="1552268485659" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/MyGoogleCrawl$test.coverage" NAME="test Coverage Results" MODIFIED="1551683666329" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/CrawlProxy/DomesticProxyCrawl" />
+    <SUITE FILE_PATH="coverage/MyGoogleCrawl$redis_option.coverage" NAME="redis_option Coverage Results" MODIFIED="1552273308319" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Database_Option" />
     <SUITE FILE_PATH="coverage/MyGoogleCrawl$crawl_auto.coverage" NAME="crawl_auto Coverage Results" MODIFIED="1551664177459" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/CrawlProxy/DomesticProxyCrawl" />
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="get_apk_name.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="get_apk_name.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/CrawlApkName/get_apk_name.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="298">
-              <caret line="144" column="31" selection-start-line="144" selection-start-column="31" selection-end-line="144" selection-end-column="31" />
+            <state relative-caret-position="-755">
+              <caret line="124" column="76" selection-start-line="124" selection-start-column="76" selection-end-line="124" selection-end-column="76" />
               <folding>
                 <element signature="e#0#33#0" expanded="true" />
               </folding>
@@ -45,8 +49,8 @@
       <file leaf-file-name="AllRequest.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Request_Web/AllRequest.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="474">
-              <caret line="19" column="23" selection-start-line="19" selection-start-column="23" selection-end-line="19" selection-end-column="23" />
+            <state relative-caret-position="450">
+              <caret line="18" column="25" selection-start-line="18" selection-start-column="25" selection-end-line="18" selection-end-column="25" />
             </state>
           </provider>
         </entry>
@@ -105,11 +109,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="redis_option.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="redis_option.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Database_Option/redis_option.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1025">
-              <caret line="41" column="25" selection-start-line="41" selection-start-column="25" selection-end-line="41" selection-end-column="25" />
+            <state relative-caret-position="374">
+              <caret line="40" column="50" selection-start-line="40" selection-start-column="50" selection-end-line="40" selection-end-column="50" />
             </state>
           </provider>
         </entry>
@@ -160,7 +164,6 @@
         <option value="$PROJECT_DIR$/Mysql_Setting/Get_Mysql_pool.py" />
         <option value="$PROJECT_DIR$/AllSetting/__init__.py" />
         <option value="$PROJECT_DIR$/AllSetting/mysql_setting.py" />
-        <option value="$PROJECT_DIR$/Database_Option/redis_option.py" />
         <option value="$PROJECT_DIR$/auto_crawl_pkgname.py" />
         <option value="$PROJECT_DIR$/CrawlProxy/ForeignProxyCrawl/crawl_foreigh_auto.py" />
         <option value="$PROJECT_DIR$/Database_Option/Get_Mysql_pool.py" />
@@ -173,6 +176,7 @@
         <option value="$PROJECT_DIR$/CheckOut_ApkName/check_update_apkname.py" />
         <option value="$PROJECT_DIR$/Request_Web/AllRequest.py" />
         <option value="$PROJECT_DIR$/CrawlApkName/get_apk_name.py" />
+        <option value="$PROJECT_DIR$/Database_Option/redis_option.py" />
       </list>
     </option>
   </component>
@@ -214,6 +218,11 @@
             <path>
               <item name="MyGoogleCrawl" type="b2602c69:ProjectViewProjectNode" />
               <item name="MyGoogleCrawl" type="462c0819:PsiDirectoryNode" />
+              <item name="Database_Option" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="MyGoogleCrawl" type="b2602c69:ProjectViewProjectNode" />
+              <item name="MyGoogleCrawl" type="462c0819:PsiDirectoryNode" />
               <item name="Request_Web" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
@@ -247,7 +256,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.test_demo">
+  <component name="RunManager" selected="Python.redis_option">
     <configuration name="check_update_apkname" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="MyGoogleCrawl" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -281,6 +290,25 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/AllSetting/mysql_setting.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+    </configuration>
+    <configuration name="redis_option" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="MyGoogleCrawl" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Database_Option" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Database_Option/redis_option.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -324,39 +352,20 @@
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
     </configuration>
-    <configuration name="testall" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="MyGoogleCrawl" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/testall.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-    </configuration>
     <list>
       <item itemvalue="Python.testIP" />
-      <item itemvalue="Python.testall" />
       <item itemvalue="Python.check_update_apkname" />
       <item itemvalue="Python.mysql_setting" />
       <item itemvalue="Python.test_demo" />
+      <item itemvalue="Python.redis_option" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.redis_option" />
         <item itemvalue="Python.test_demo" />
         <item itemvalue="Python.testIP" />
         <item itemvalue="Python.mysql_setting" />
         <item itemvalue="Python.check_update_apkname" />
-        <item itemvalue="Python.testall" />
       </list>
     </recent_temporary>
   </component>
@@ -382,9 +391,9 @@
       <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="7" weight="0.3293556" />
       <window_info anchor="bottom" id="Python Console" order="7" weight="0.3293556" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.4989339" visible="true" weight="0.32997763" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.4989339" visible="true" weight="0.32997763" />
       <window_info anchor="bottom" id="Terminal" order="7" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.19083156" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.19083156" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="3" />
       <window_info anchor="right" id="SciView" order="3" />
@@ -737,13 +746,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Database_Option/redis_option.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1025">
-          <caret line="41" column="25" selection-start-line="41" selection-start-column="25" selection-end-line="41" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/CrawlProxy/DomesticProxyCrawl/testIP.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="25">
@@ -800,18 +802,25 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Request_Web/AllRequest.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="474">
-          <caret line="19" column="23" selection-start-line="19" selection-start-column="23" selection-end-line="19" selection-end-column="23" />
+        <state relative-caret-position="450">
+          <caret line="18" column="25" selection-start-line="18" selection-start-column="25" selection-end-line="18" selection-end-column="25" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/CrawlApkName/get_apk_name.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="298">
-          <caret line="144" column="31" selection-start-line="144" selection-start-column="31" selection-end-line="144" selection-end-column="31" />
+        <state relative-caret-position="-755">
+          <caret line="124" column="76" selection-start-line="124" selection-start-column="76" selection-end-line="124" selection-end-column="76" />
           <folding>
             <element signature="e#0#33#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Database_Option/redis_option.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="40" column="50" selection-start-line="40" selection-start-column="50" selection-end-line="40" selection-end-column="50" />
         </state>
       </provider>
     </entry>
