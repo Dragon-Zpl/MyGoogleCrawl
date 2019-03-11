@@ -69,6 +69,7 @@ class CrawlApkName:
 
     async def fetch_post_apkname(self,url,data):
         for i in range(3):
+            print('传进来的data:'+str(data))
             proxy = await self.get_proxy()
             try:
                 datas = await self._Request.post_request(self.session, url, proxy, data)
