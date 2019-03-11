@@ -21,11 +21,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="get_apk_name.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="get_apk_name.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/CrawlApkName/get_apk_name.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="324">
-              <caret line="67" column="12" lean-forward="true" selection-start-line="67" selection-start-column="12" selection-end-line="67" selection-end-column="12" />
+            <state relative-caret-position="-125">
+              <caret line="90" column="19" selection-start-line="90" selection-start-column="19" selection-end-line="90" selection-end-column="19" />
               <folding>
                 <element signature="e#0#33#0" expanded="true" />
               </folding>
@@ -42,11 +42,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AllRequest.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="AllRequest.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Request_Web/AllRequest.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="50">
-              <caret line="2" column="21" selection-start-line="2" selection-start-column="6" selection-end-line="2" selection-end-column="21" />
+            <state relative-caret-position="350">
+              <caret line="14" lean-forward="true" selection-start-line="14" selection-end-line="14" />
             </state>
           </provider>
         </entry>
@@ -125,7 +125,7 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>with self.session</find>
+      <find />
       <find>loop</find>
       <find>(.+):(.+)</find>
       <find>what</find>
@@ -134,7 +134,7 @@
       <find>CheckUpdateApkname</find>
       <find>check_app_data</find>
       <find>get_redis_</find>
-      <find>Games System</find>
+      <find />
       <find>print</find>
       <find>get_proxy</find>
       <find>insert_mysql</find>
@@ -169,8 +169,8 @@
         <option value="$PROJECT_DIR$/Request_Web/get_request.py" />
         <option value="$PROJECT_DIR$/Parsing.py" />
         <option value="$PROJECT_DIR$/CheckOut_ApkName/check_update_apkname.py" />
-        <option value="$PROJECT_DIR$/Request_Web/AllRequest.py" />
         <option value="$PROJECT_DIR$/CrawlApkName/get_apk_name.py" />
+        <option value="$PROJECT_DIR$/Request_Web/AllRequest.py" />
       </list>
     </option>
   </component>
@@ -796,20 +796,20 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Request_Web/AllRequest.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="50">
-          <caret line="2" column="21" selection-start-line="2" selection-start-column="6" selection-end-line="2" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/CrawlApkName/get_apk_name.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="324">
-          <caret line="67" column="12" lean-forward="true" selection-start-line="67" selection-start-column="12" selection-end-line="67" selection-end-column="12" />
+        <state relative-caret-position="-125">
+          <caret line="90" column="19" selection-start-line="90" selection-start-column="19" selection-end-line="90" selection-end-column="19" />
           <folding>
             <element signature="e#0#33#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Request_Web/AllRequest.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="350">
+          <caret line="14" lean-forward="true" selection-start-line="14" selection-end-line="14" />
         </state>
       </provider>
     </entry>
