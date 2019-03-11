@@ -16,5 +16,5 @@ class InitiateRequest:
 
     async def get_request(self,session,url,proxy):
         async with session.get(url=url, headers=self.headers, proxy=proxy, timeout=10) as ct:
-            data = ct.text()
+            data = await ct.text()
             return data
