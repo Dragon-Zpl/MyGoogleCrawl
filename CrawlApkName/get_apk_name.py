@@ -123,6 +123,7 @@ class CrawlApkName:
         proxy = await self.get_proxy()
         try:
             data = await self._Request.get_request(self.session, url, proxy)
+            print(data)
             return data
         except:
             try:

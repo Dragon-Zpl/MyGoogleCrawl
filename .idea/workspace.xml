@@ -125,7 +125,7 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find />
+      <find>with self.session</find>
       <find>loop</find>
       <find>(.+):(.+)</find>
       <find>what</find>
@@ -134,11 +134,13 @@
       <find>CheckUpdateApkname</find>
       <find>check_app_data</find>
       <find>get_redis_</find>
-      <find />
+      <find>Games System</find>
       <find>print</find>
       <find>get_proxy</find>
       <find>insert_mysql</find>
       <find>None</find>
+      <find>await</find>
+      <find>_Req</find>
     </findStrings>
     <replaceStrings>
       <replace>&quot;$1&quot;:&quot;$2&quot;,</replace>
