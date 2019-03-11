@@ -69,6 +69,7 @@ class CheckUpdateApkname:
                         data_return["app_version"] = now_app_version
                         data_return["pkgname"] = now_pkgname
                         data_return["is_update"] = 0
+                        # print('出去包名a：' + str(now_pkgname))
                         return data_return, None
                     print('3:' + now_pkgname)
                     analysis_data["country"] = "us"
