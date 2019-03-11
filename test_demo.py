@@ -1,28 +1,26 @@
-import logging.handlers
-def test(data):
-    logger = logging.getLogger('project')  # 不加名称设置root logger
-    logger.setLevel(logging.DEBUG)
-    formatter = logging.Formatter(
-        '%(asctime)s - %(filename)s - %(lineno)s %(levelname)s - %(message)s',
-        datefmt='%Y-%m-%d %H:%M:%S')
-    # 使用FileHandler输出到文件
-    fh = logging.handlers.TimedRotatingFileHandler('log.txt', when='D', interval=1)
-    fh.setLevel(logging.DEBUG)
-    fh.setFormatter(formatter)
-    # 使用StreamHandler输出到屏幕
-    ch = logging.StreamHandler()
-    ch.setLevel(logging.DEBUG)
-    ch.setFormatter(formatter)
-    # 添加两个Handler
-    logger.addHandler(ch)
-    logger.addHandler(fh)
-    return logger.info(data)
+import socket
+
+import aiohttp
+import asyncio
+
+from lxml import etree
+
+url  =  "https://play.google.com/store/apps/category/GAME/collection/topselling_new_free"
+conn = aiohttp.TCPConnector(family=socket.AF_INET,
+                            verify_ssl=False,
+                            use_dns_cache=True
+                            )
+session = aiohttp.ClientSession(connector=conn)
+async def test():
+    async with session.post(url=url,proxy="http://219.92.54.250:30646",data={'start': 120, 'num': '60', 'numChildren': '0', 'cctcss': 'square-cover', 'cllayout': 'NORMAL', 'ipf': '1', 'xhr': '1'}) as ct:
+        data = ct.text()
+        analysis_data = etree.HTML(data)
+        apknames = analysis_data.xpath(
+            "//div[@class='card no-rationale square-cover apps small']//span[@class='preview-overlay-container']/@data-docid")
+        for apkname in apknames:
+            print(apkname)
 
 
-printf = test
+loop = asyncio.get_event_loop()
 
-try:
-    sfasa
-
-except Exception as e:
-    printf(str(e))
+loop.run_until_complete(test())
