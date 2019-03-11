@@ -20,7 +20,6 @@ class RedisOption:
         """
         data = {}
         data["pkgname"] = apkname
-        data["app_version"] = "none"
         data["host"] = "host"
         self.rcon.sadd("pkgname", str(data).encode('utf-8'))
 
@@ -30,7 +29,6 @@ class RedisOption:
         """
         data = {}
         data["pkgname"] = updatedata["pkgname"]
-        data["app_version"] = updatedata["app_version"]
         data["host"] = "host"
         self.rcon.sadd("pkgname", str(data).encode('utf-8'))
 
@@ -40,4 +38,3 @@ class RedisOption:
         """
         apk_detail = eval(self.rcon.spop("pkgname").decode('utf-8'))
         return apk_detail
-

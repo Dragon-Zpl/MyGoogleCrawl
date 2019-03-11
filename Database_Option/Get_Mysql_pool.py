@@ -1,3 +1,5 @@
+import asyncio
+
 import aiomysql
 
 class GetMysqlPool:
@@ -41,3 +43,17 @@ class GetMysqlPool:
                     print("数据库语句:" + sql_google)
                     print("错误时候的数据"+str(data))
                     print('数据库错误信息：' + str(e))
+
+
+    async def find_pkgname(self,pkgname):
+        async with self.pool.acquire() as conn:
+            async with conn.cursor() as cur:
+                sql = """
+                    select current_version from crawl_google_play_app_info as f where  f.pkgname = "{}"
+                """.format(pkgname)
+                await cur.execute(sql,None)
+                result = await cur.fetchone()
+                if result:
+                    return result[0]
+                else:
+                    return None

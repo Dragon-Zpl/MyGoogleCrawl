@@ -50,9 +50,8 @@ class CheckUpdateApkname:
         检查美国的版本是否更新
         """
         now_pkgname = data["pkgname"]
-        now_app_version = data["app_version"]
+        now_app_version = await self.get_pool.find_pkgname(now_pkgname)
         apk_url = "https://play.google.com/store/apps/details?id=" + now_pkgname
-        analysis_data = None
         for i in range(3):
             if proxy is None:
                 proxy = await self._get_proxy()
@@ -66,10 +65,8 @@ class CheckUpdateApkname:
                     # 判断是否已经可下载
                     if analysis_data is None:
                         data_return = {}
-                        data_return["app_version"] = now_app_version
                         data_return["pkgname"] = now_pkgname
                         data_return["is_update"] = 0
-                        # print('出去包名a：' + str(now_pkgname))
                         return data_return, None
                     print('3:' + now_pkgname)
                     analysis_data["country"] = "us"
@@ -81,7 +78,8 @@ class CheckUpdateApkname:
                     print('5:' + now_pkgname)
                     if change_time is not None:
                         analysis_data["update_time"] = change_time
-                    if check_app_version == now_app_version or check_app_version is None:
+                    # 数据库中版本不为空，且检查版本与数据库相同或者检查版本为空时，不更新
+                    if now_app_version is not None and (check_app_version == now_app_version or check_app_version is None):
                         data_return = {}
                         data_return["app_version"] = now_app_version
                         data_return["pkgname"] = now_pkgname
@@ -96,17 +94,15 @@ class CheckUpdateApkname:
                 else:
                     print("data is none")
             except Exception as e:
-                if analysis_data:
-                    print('错误时的:' + str(analysis_data))
                 if str(e) == "":
                     print("错误数据"+str(data))
                 print('错误第'+str(i+1)+'次')
         else:
-            print('三次全失败')
+            # 失败三次重新放入redis中
+            print('失败三次重新放入redis')
             data_return = {}
-            data_return["app_version"] = now_app_version
             data_return["pkgname"] = now_pkgname
-            data_return["is_update"] = 0
+            data_return["is_update"] = 2
             return data_return, None
 
     async def check_other_coutry(self, data, time=3, proxy=None):
@@ -179,7 +175,7 @@ class CheckUpdateApkname:
         for check_result in check_results:
             try:
                 data_return, analysis_data = check_result
-                if data_return is not None:
+                if data_return is not None and data_return["is_update"] == 2:
                     self.get_redis.update_pkgname_redis(data_return)
                 if analysis_data is not None:
                     self._task_ensure_future(self.get_pool.insert_mysql_, analysis_data, save_mysql_tasks)
