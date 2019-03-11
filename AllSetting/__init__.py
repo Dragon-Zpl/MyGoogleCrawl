@@ -24,7 +24,7 @@ class GetSetting:
         rcon = redis.Redis(connection_pool=pool)
         return rcon
 
-    def get_logger(self,info):
+    def get_logger(self):
         logger = logging.getLogger('project')  # 不加名称设置root logger
         logger.setLevel(logging.DEBUG)
         formatter = logging.Formatter(
@@ -41,4 +41,4 @@ class GetSetting:
         # 添加两个Handler
         logger.addHandler(ch)
         logger.addHandler(fh)
-        return logger.info(info)
+        return logger

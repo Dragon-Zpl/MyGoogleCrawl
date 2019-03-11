@@ -12,7 +12,7 @@ class GetMysqlPool:
         self._user = 'root'
         self._password = '123456'
         self._db = 'google_play'
-        self.printf = GetSetting().get_logger
+        self.printf = GetSetting().get_logger()
     async def init_pool(self):
         self.pool = await aiomysql.create_pool(host=self._host, port=self._port, user=self._user, password=self._password,
                                       db=self._db, charset='utf8', autocommit=True)
@@ -43,9 +43,9 @@ class GetMysqlPool:
                               data["name"], data["pkgname"], data["url"])
                     result = await cur.execute(sql_google, params)
                 except Exception as e:
-                    self.printf("数据库语句:" + sql_google)
-                    self.printf("错误时候的数据"+str(data))
-                    self.printf('数据库错误信息：' + str(e))
+                    self.printf.info("数据库语句:" + sql_google)
+                    self.printf.info("错误时候的数据"+str(data))
+                    self.printf.info('数据库错误信息：' + str(e))
 
 
     async def find_pkgname(self,pkgname):
@@ -62,7 +62,7 @@ class GetMysqlPool:
                     else:
                         return None
                 except Exception as e:
-                    self.printf("数据库语句:" + sql)
-                    self.printf("错误时候的包名" + str(pkgname))
-                    self.printf('数据库错误信息：' + str(e))
+                    self.printf.info("数据库语句:" + sql)
+                    self.printf.info("错误时候的包名" + str(pkgname))
+                    self.printf.info('数据库错误信息：' + str(e))
                     return None

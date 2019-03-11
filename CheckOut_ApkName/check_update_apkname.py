@@ -24,7 +24,7 @@ class CheckUpdateApkname:
         self.apknames = set()
         self.proxies = []
         self.all_data_list = []
-        self.printf = self.setting.get_logger
+        self.printf = self.setting.get_logger()
         self.country_dict = {
             # 'us': '&hl=en&gl=us',
             'zh': '&hl=zh&gl=us',
@@ -84,14 +84,14 @@ class CheckUpdateApkname:
                         data_return["is_update"] = 1
                     return data_return, analysis_data
                 else:
-                    self.printf("data is none")
+                    self.printf.info("data is none")
             except Exception as e:
                 if str(e) == "":
-                    self.printf("错误数据"+str(data))
-                self.printf(str(e))
+                    self.printf.info("错误数据"+str(data))
+                self.printf.info(str(e))
         else:
             # 失败三次重新放入redis中
-            self.printf('失败三次重新放入redis')
+            self.printf.info('失败三次重新放入redis')
             data_return = {}
             data_return["pkgname"] = now_pkgname
             data_return["is_update"] = 2
@@ -123,8 +123,8 @@ class CheckUpdateApkname:
                         break
                 except Exception as e:
                     if str(e) == "":
-                        self.printf("错误数据" + str(data))
-                    self.printf(str(e))
+                        self.printf.info("错误数据" + str(data))
+                    self.printf.info(str(e))
             else:
                 return None
 
@@ -176,7 +176,7 @@ class CheckUpdateApkname:
                 if data_return is not None and data_return["is_update"] == 1:
                     self._task_ensure_future(self.check_other_coutry, data_return, check_other_tasks)
             except Exception as e:
-                self.printf('错误信息：' + str(e))
+                self.printf.info('错误信息：' + str(e))
         return save_mysql_tasks, check_other_tasks
 
     def run(self):
