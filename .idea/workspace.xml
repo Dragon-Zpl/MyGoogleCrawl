@@ -22,11 +22,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="get_apk_name.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="get_apk_name.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/CrawlApkName/get_apk_name.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-600">
-              <caret line="18" selection-start-line="18" selection-end-line="18" selection-end-column="41" />
+            <state relative-caret-position="346">
+              <caret line="156" column="66" selection-start-line="156" selection-start-column="59" selection-end-line="156" selection-end-column="66" />
               <folding>
                 <element signature="e#0#33#0" expanded="true" />
               </folding>
@@ -46,8 +46,8 @@
       <file leaf-file-name="AllRequest.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Request_Web/AllRequest.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="475">
-              <caret line="19" column="50" selection-start-line="19" selection-start-column="50" selection-end-line="19" selection-end-column="50" />
+            <state relative-caret-position="550">
+              <caret line="22" column="32" selection-start-line="22" selection-start-column="32" selection-end-line="22" selection-end-column="32" />
             </state>
           </provider>
         </entry>
@@ -73,11 +73,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="check_update_apkname.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="check_update_apkname.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/CheckOut_ApkName/check_update_apkname.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-610">
-              <caret line="60" column="51" selection-start-line="60" selection-start-column="51" selection-end-line="60" selection-end-column="51" />
+            <state relative-caret-position="140">
+              <caret line="60" column="52" lean-forward="true" selection-start-line="60" selection-start-column="52" selection-end-line="60" selection-end-column="52" />
               <folding>
                 <element signature="e#0#14#0" expanded="true" />
               </folding>
@@ -211,6 +211,11 @@
               <item name="MyGoogleCrawl" type="b2602c69:ProjectViewProjectNode" />
               <item name="MyGoogleCrawl" type="462c0819:PsiDirectoryNode" />
               <item name="CheckOut_ApkName" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="MyGoogleCrawl" type="b2602c69:ProjectViewProjectNode" />
+              <item name="MyGoogleCrawl" type="462c0819:PsiDirectoryNode" />
+              <item name="CrawlApkName" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="MyGoogleCrawl" type="b2602c69:ProjectViewProjectNode" />
@@ -794,29 +799,29 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/CheckOut_ApkName/check_update_apkname.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="140">
+          <caret line="60" column="52" lean-forward="true" selection-start-line="60" selection-start-column="52" selection-end-line="60" selection-end-column="52" />
+          <folding>
+            <element signature="e#0#14#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Request_Web/AllRequest.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="475">
-          <caret line="19" column="50" selection-start-line="19" selection-start-column="50" selection-end-line="19" selection-end-column="50" />
+        <state relative-caret-position="550">
+          <caret line="22" column="32" selection-start-line="22" selection-start-column="32" selection-end-line="22" selection-end-column="32" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/CrawlApkName/get_apk_name.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-600">
-          <caret line="18" selection-start-line="18" selection-end-line="18" selection-end-column="41" />
+        <state relative-caret-position="346">
+          <caret line="156" column="66" selection-start-line="156" selection-start-column="59" selection-end-line="156" selection-end-column="66" />
           <folding>
             <element signature="e#0#33#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CheckOut_ApkName/check_update_apkname.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-610">
-          <caret line="60" column="51" selection-start-line="60" selection-start-column="51" selection-end-line="60" selection-end-column="51" />
-          <folding>
-            <element signature="e#0#14#0" expanded="true" />
           </folding>
         </state>
       </provider>
