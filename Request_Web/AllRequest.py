@@ -8,13 +8,13 @@ class InitiateRequest:
 
 
 
-    async def post_request(self,session,url,proxy,data=None):
+    def post_request(self,session,url,proxy,data=None):
         async with session.post(url=url, data=data, headers=self.headers, proxy=proxy, timeout=10) as ct:
             data = await ct.text()
             return data
 
 
-    async def get_request(self,session,url,proxy):
+    def get_request(self,session,url,proxy):
         async with session.get(url=url, headers=self.headers, proxy=proxy, timeout=10) as ct:
             data = ct.text()
             return data
