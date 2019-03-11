@@ -61,7 +61,7 @@ class CheckUpdateApkname:
                 datas = await self._Request.get_request(self.session,apk_url,proxy)
                 if datas:
                     print('1:' + now_pkgname)
-                    analysis_data = self.parsing.analysis_country_data(datas,now_pkgname)
+                    analysis_data = self.parsing.analysis_country_data(datas)
                     print('2:' + now_pkgname)
                     # 判断是否已经可下载
                     if analysis_data is None:

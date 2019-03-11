@@ -28,12 +28,11 @@ class ParsingData:
         return co.sub(r'', text)
 
 
-    def analysis_country_data(self, data, now_pkgname):
+    def analysis_country_data(self, data):
         """
         解析传来的数据，解析方法:先抓父节点,在以父节点的文本信息,抓取子节点(防止标签位置改变)
 
         """
-        print('进来的包名'+now_pkgname)
         analysis_dic = {'update_time': '', 'size': '', 'installs': '', 'app_version': '', 'min_os_version': '',
                         'content_rating': '', 'provider': '', 'developer_email': '', 'is_busy': '', 'name': '',
                         'developer_url': '', 'category': '', 'app_current_num': '', 'cover_image_url': '',
@@ -74,7 +73,6 @@ class ParsingData:
             else:
                 analysis_dic["is_busy"] = 1
         else:
-            print('进来的包名a' + now_pkgname)
             return None
         analysis_dic["name"] = self._is_existence(analysis_data.xpath("//h1[@class='AHFaub']/span/text()"))
         analysis_dic["name"] = self._remove_emoji(analysis_dic["name"])
@@ -93,7 +91,6 @@ class ParsingData:
             analysis_dic["what_news"] = ','.join(what_news)
             analysis_dic["what_news"] = self._remove_emoji(analysis_dic["what_news"])
             analysis_dic["what_news"] = self._filter_emoji(analysis_dic["what_news"])
-        print('进来的包名b' + now_pkgname)
         return analysis_dic
 
 
