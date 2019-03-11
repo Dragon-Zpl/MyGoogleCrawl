@@ -69,19 +69,19 @@ class CrawlApkName:
 
     async def fetch_post_apkname(self,url,data):
         proxy = await self.get_proxy()
-        try:
-            data = await self._Request.post_request(self.session,url,proxy,data)
-            analysis_data = etree.HTML(data)
-            apknames = analysis_data.xpath(
-                "//div[@class='card no-rationale square-cover apps small']//span[@class='preview-overlay-container']/@data-docid")
-            for apkname in apknames:
-                self.apk_names.add(apkname)
-        except Exception as e:
-            self.printf.info(str(e))
-            try:
-                self.proxies.remove(proxy)
-            except:
-                pass
+        # try:
+        data = await self._Request.post_request(self.session,url,proxy,data)
+        analysis_data = etree.HTML(data)
+        apknames = analysis_data.xpath(
+            "//div[@class='card no-rationale square-cover apps small']//span[@class='preview-overlay-container']/@data-docid")
+        for apkname in apknames:
+            self.apk_names.add(apkname)
+        # except Exception as e:
+        #     self.printf.info(str(e))
+        #     try:
+        #         self.proxies.remove(proxy)
+        #     except:
+        #         pass
 
     async def fetch_get_apkname(self,url):
         proxy = await self.get_proxy()
