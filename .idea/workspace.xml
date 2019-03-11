@@ -1,13 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="6d700b11-5e9c-45a8-bbfc-f91dbeefd186" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/CheckOut_ApkName/check_update_apkname.py" beforeDir="false" afterPath="$PROJECT_DIR$/CheckOut_ApkName/check_update_apkname.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CrawlApkName/get_apk_name.py" beforeDir="false" afterPath="$PROJECT_DIR$/CrawlApkName/get_apk_name.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Parsing.py" beforeDir="false" afterPath="$PROJECT_DIR$/Parsing.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Request_Web/get_request.py" beforeDir="false" afterPath="$PROJECT_DIR$/Request_Web/AllRequest.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Request_Web/post_request.py" beforeDir="false" />
-    </list>
+    <list default="true" id="6d700b11-5e9c-45a8-bbfc-f91dbeefd186" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -30,8 +24,8 @@
       <file leaf-file-name="get_apk_name.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/CrawlApkName/get_apk_name.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="75">
-              <caret line="82" column="16" lean-forward="true" selection-start-line="82" selection-start-column="16" selection-end-line="82" selection-end-column="16" />
+            <state relative-caret-position="324">
+              <caret line="67" column="12" lean-forward="true" selection-start-line="67" selection-start-column="12" selection-end-line="67" selection-end-column="12" />
               <folding>
                 <element signature="e#0#33#0" expanded="true" />
               </folding>
@@ -811,8 +805,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/CrawlApkName/get_apk_name.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="82" column="16" lean-forward="true" selection-start-line="82" selection-start-column="16" selection-end-line="82" selection-end-column="16" />
+        <state relative-caret-position="324">
+          <caret line="67" column="12" lean-forward="true" selection-start-line="67" selection-start-column="12" selection-end-line="67" selection-end-column="12" />
           <folding>
             <element signature="e#0#33#0" expanded="true" />
           </folding>

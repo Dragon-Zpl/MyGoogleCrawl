@@ -73,7 +73,7 @@ class CrawlApkName:
     async def fetch_post_apkname(self,url,data):
         proxy = await self.get_proxy()
         try:
-            data = await self._Request.post_request(self.session,url,proxy,data)
+            data = self._Request.post_request(self.session,url,proxy,data)
             analysis_data = etree.HTML(data)
             apknames = analysis_data.xpath(
                 "//div[@class='card no-rationale square-cover apps small']//span[@class='preview-overlay-container']/@data-docid")
@@ -88,7 +88,7 @@ class CrawlApkName:
     async def fetch_get_apkname(self,url):
         proxy = await self.get_proxy()
         try:
-            data = await self._Request.get_request(self.session,url,proxy)
+            data = self._Request.get_request(self.session,url,proxy)
             analysis_data = etree.HTML(data)
             apknames = analysis_data.xpath(
                 "//div[@class='card no-rationale square-cover apps small']//span[@class='preview-overlay-container']/@data-docid")
@@ -122,7 +122,7 @@ class CrawlApkName:
     async def get_web_data(self, url):
         proxy = await self.get_proxy()
         try:
-            data = await self._Request.get_request(self.session, url, proxy)
+            data = self._Request.get_request(self.session, url, proxy)
             return data
         except:
             try:
@@ -134,7 +134,7 @@ class CrawlApkName:
         proxy = await self.get_proxy()
         url = "https://play.google.com/store/apps"
         try:
-            data = await self._Request.get_request(self.session, url, proxy)
+            data = self._Request.get_request(self.session, url, proxy)
             analysis_data = etree.HTML(data)
             urls = analysis_data.xpath("//div[@class='g4kCYe']/a/@href")
             return urls
