@@ -1,23 +1,28 @@
-# import requests
-#
-# from Parsing import ParsingData
-#
-# headers = {
-#             "user-agent": "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.96 Safari/537.36",
-#         }
-# response = requests.get('https://play.google.com/store/apps/details?id=com.amanotes.classicalpiano&hl=en&gl=us',headers=headers)
-#
-# t = ParsingData()
-#
-# print(t.analysis_country_data(response.text,'sda'))
+import logging.handlers
+def test(data):
+    logger = logging.getLogger('project')  # 不加名称设置root logger
+    logger.setLevel(logging.DEBUG)
+    formatter = logging.Formatter(
+        '%(asctime)s - %(filename)s - %(lineno)s %(levelname)s - %(message)s',
+        datefmt='%Y-%m-%d %H:%M:%S')
+    # 使用FileHandler输出到文件
+    fh = logging.handlers.TimedRotatingFileHandler('log.txt', when='D', interval=1)
+    fh.setLevel(logging.DEBUG)
+    fh.setFormatter(formatter)
+    # 使用StreamHandler输出到屏幕
+    ch = logging.StreamHandler()
+    ch.setLevel(logging.DEBUG)
+    ch.setFormatter(formatter)
+    # 添加两个Handler
+    logger.addHandler(ch)
+    logger.addHandler(fh)
+    return logger.info(data)
 
 
-import datetime
-import time
+printf = test
 
-start = time.time()
-time.sleep(1)
+try:
+    sfasa
 
-end = time.time()
-
-print(end-start)
+except Exception as e:
+    printf(str(e))

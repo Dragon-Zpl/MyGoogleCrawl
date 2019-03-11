@@ -24,6 +24,7 @@ class CheckUpdateApkname:
         self.apknames = set()
         self.proxies = []
         self.all_data_list = []
+        self.printf = self.setting.get_logger
         self.country_dict = {
             # 'us': '&hl=en&gl=us',
             'zh': '&hl=zh&gl=us',
@@ -54,26 +55,20 @@ class CheckUpdateApkname:
             if proxy is None:
                 proxy = await self._get_proxy()
             try:
-                print('0:'+now_pkgname)
                 datas = await self._Request.get_request(self.session,apk_url,proxy)
                 if datas:
-                    print('1:' + now_pkgname)
                     analysis_data = self.parsing.analysis_country_data(datas)
-                    print('2:' + now_pkgname)
                     # 判断是否已经可下载
                     if analysis_data is None:
                         data_return = {}
                         data_return["pkgname"] = now_pkgname
                         data_return["is_update"] = 0
                         return data_return, None
-                    print('3:' + now_pkgname)
                     analysis_data["country"] = "us"
                     analysis_data["pkgname"] = now_pkgname
                     analysis_data["url"] = apk_url
                     check_app_version = analysis_data["app_version"]
-                    print('4:' + now_pkgname)
                     change_time = self.parsing.change_time('us', analysis_data["update_time"])
-                    print('5:' + now_pkgname)
                     if change_time is not None:
                         analysis_data["update_time"] = change_time
                     # 数据库中版本不为空，且检查版本与数据库相同或者检查版本为空时，不更新
@@ -87,17 +82,16 @@ class CheckUpdateApkname:
                         data_return["app_version"] = check_app_version
                         data_return["pkgname"] = now_pkgname
                         data_return["is_update"] = 1
-                    print('6:' + now_pkgname)
                     return data_return, analysis_data
                 else:
-                    print("data is none")
+                    self.printf("data is none")
             except Exception as e:
                 if str(e) == "":
-                    print("错误数据"+str(data))
-                print('错误第'+str(i+1)+'次')
+                    self.printf("错误数据"+str(data))
+                self.printf(str(e))
         else:
             # 失败三次重新放入redis中
-            print('失败三次重新放入redis')
+            self.printf('失败三次重新放入redis')
             data_return = {}
             data_return["pkgname"] = now_pkgname
             data_return["is_update"] = 2
@@ -128,10 +122,9 @@ class CheckUpdateApkname:
                         self.all_data_list.append(check_app_data)
                         break
                 except Exception as e:
-
-                    print("错误信息的数据" + str(data))
-                    print('错误信息:' + str(e))
-                    print('错误第' + str(i + 1) + '次')
+                    if str(e) == "":
+                        self.printf("错误数据" + str(data))
+                    self.printf(str(e))
             else:
                 return None
 
@@ -183,7 +176,7 @@ class CheckUpdateApkname:
                 if data_return is not None and data_return["is_update"] == 1:
                     self._task_ensure_future(self.check_other_coutry, data_return, check_other_tasks)
             except Exception as e:
-                print('错误信息：' + str(e))
+                self.printf('错误信息：' + str(e))
         return save_mysql_tasks, check_other_tasks
 
     def run(self):

@@ -17,6 +17,7 @@ class CrawlApkName:
         self.lock = asyncio.Lock()
         self.rcon = GetSetting().get_redis()
         self._Request = InitiateRequest()
+        self.printf = GetSetting().get_logger
         self.proxies = []
         self.get_redis = RedisOption()
         self.host = "https://play.google.com/"
@@ -76,6 +77,7 @@ class CrawlApkName:
             for apkname in apknames:
                 self.apk_names.add(apkname)
         except Exception as e:
+            self.printf(str(e))
             try:
                 self.proxies.remove(proxy)
             except:
@@ -91,6 +93,7 @@ class CrawlApkName:
             for apkname in apknames:
                 self.apk_names.add(apkname)
         except:
+            self.printf(str(e))
             try:
                 self.proxies.remove(proxy)
             except:
@@ -113,6 +116,7 @@ class CrawlApkName:
                 proxy = choice(self.proxies)
                 return proxy
             except:
+                self.printf(str(e))
                 await self.get_proxy()
 
     async def get_web_data(self, url):

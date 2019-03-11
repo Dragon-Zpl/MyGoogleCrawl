@@ -89,13 +89,11 @@ class crawl_fn:
             proxies.append(ip_dic)
 
     async def run(self,session):
-        print('进来了')
         proxies = []
         results = await self.get_useful_proxy(session)
 
         for result in results:
             if result != None:
                 proxies.append(result)
-        print('proxies'+str(proxies))
         return proxies
 
