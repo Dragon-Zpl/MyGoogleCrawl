@@ -56,15 +56,11 @@ class CheckUpdateApkname:
                 proxy = await self._get_proxy()
             try:
                 async with self.session.get(url=apk_url, headers=self.headers, proxy=proxy, timeout=10) as ct:
-                    print(now_pkgname+'-1')
                     if ct.status in [200, 201]:
                         datas = await ct.text()
-                        print(now_pkgname+'0')
-                        analysis_data = self.parsing.analysis_country_data(datas,now_pkgname)
-                        print(now_pkgname+'1')
+                        analysis_data = self.parsing.analysis_country_data(datas)
                         # 判断是否已经可下载
                         if analysis_data is None:
-                            print(now_pkgname + '2')
                             data_return = {}
                             data_return["app_version"] = now_app_version
                             data_return["pkgname"] = now_pkgname
@@ -74,7 +70,6 @@ class CheckUpdateApkname:
                         analysis_data["pkgname"] = now_pkgname
                         analysis_data["url"] = apk_url
                         check_app_version = analysis_data["app_version"]
-                        print(now_pkgname + '3')
                         change_time = self.parsing.change_time('us', analysis_data["update_time"])
                         if change_time is not None:
                             analysis_data["update_time"] = change_time
@@ -88,16 +83,15 @@ class CheckUpdateApkname:
                             data_return["app_version"] = check_app_version
                             data_return["pkgname"] = now_pkgname
                             data_return["is_update"] = 1
-                            print(now_pkgname + '4')
                         return data_return, analysis_data
                     elif ct.status in [403, 400, 500, 502, 503, 429]:
-                        print(now_pkgname + '5')
                         pass
             except Exception as e:
                 if analysis_data:
                     print('错误时的:' + str(analysis_data))
                 print("更新错误的数据" + str(data))
                 print("更新错误:" + str(e))
+                print('错误第'+str(i+1)+'次')
         else:
             data_return = {}
             data_return["app_version"] = now_app_version
@@ -119,7 +113,7 @@ class CheckUpdateApkname:
                     async with self.session.get(url=apk_url, headers=self.headers, proxy=proxy, timeout=10) as ct:
                         if ct.status in [200, 201]:
                             datas = await ct.text()
-                            check_app_data = self.parsing.analysis_country_data(datas,pkgname)
+                            check_app_data = self.parsing.analysis_country_data(datas)
                             if check_app_data is None:
                                 break
                             check_app_data["pkgname"] = pkgname
@@ -135,6 +129,7 @@ class CheckUpdateApkname:
                 except Exception as e:
                     print("错误信息的数据" + str(data))
                     print('错误信息:' + str(e))
+                    print('错误第' + str(i + 1) + '次')
             else:
                 return None
 

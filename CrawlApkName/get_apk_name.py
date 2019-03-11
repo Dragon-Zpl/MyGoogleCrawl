@@ -4,6 +4,7 @@ import asyncio
 from random import choice
 from CrawlProxy.ForeignProxyCrawl.crawl_foreigh_auto import crawl_fn
 from Database_Option.redis_option import RedisOption
+from Request_Web.AllRequest import InitiateRequest
 
 
 class CrawlApkName:
@@ -15,6 +16,7 @@ class CrawlApkName:
         self.loop = GetSetting().get_loop()
         self.lock = asyncio.Lock()
         self.rcon = GetSetting().get_redis()
+        self._Request = InitiateRequest()
         self.headers = {
             "user-agent": "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.96 Safari/537.36",
         }
@@ -71,13 +73,12 @@ class CrawlApkName:
     async def fetch_post_apkname(self,url,data):
         proxy = await self.get_proxy()
         try:
-            async with self.session.post(url=url, data=data, headers=self.headers, proxy=proxy, timeout=10) as ct:
-                data = await ct.text()
-                analysis_data = etree.HTML(data)
-                apknames = analysis_data.xpath(
-                    "//div[@class='card no-rationale square-cover apps small']//span[@class='preview-overlay-container']/@data-docid")
-                for apkname in apknames:
-                    self.apk_names.add(apkname)
+            data = await self._Request.post_request(self.session,url,proxy,data)
+            analysis_data = etree.HTML(data)
+            apknames = analysis_data.xpath(
+                "//div[@class='card no-rationale square-cover apps small']//span[@class='preview-overlay-container']/@data-docid")
+            for apkname in apknames:
+                self.apk_names.add(apkname)
         except Exception as e:
             try:
                 self.proxies.remove(proxy)
@@ -87,13 +88,12 @@ class CrawlApkName:
     async def fetch_get_apkname(self,url):
         proxy = await self.get_proxy()
         try:
-            async with self.session.get(url=url, headers=self.headers, proxy=proxy, timeout=10) as ct:
-                data = await ct.text()
-                analysis_data = etree.HTML(data)
-                apknames = analysis_data.xpath(
-                    "//div[@class='card no-rationale square-cover apps small']//span[@class='preview-overlay-container']/@data-docid")
-                for apkname in apknames:
-                    self.apk_names.add(apkname)
+            data = await self._Request.get_request(self.session,url,proxy)
+            analysis_data = etree.HTML(data)
+            apknames = analysis_data.xpath(
+                "//div[@class='card no-rationale square-cover apps small']//span[@class='preview-overlay-container']/@data-docid")
+            for apkname in apknames:
+                self.apk_names.add(apkname)
         except:
             try:
                 self.proxies.remove(proxy)
@@ -122,9 +122,8 @@ class CrawlApkName:
     async def get_web_data(self, url):
         proxy = await self.get_proxy()
         try:
-            async with self.session.get(url=url, headers=self.headers, proxy=proxy, timeout=10) as ct:
-                data = await ct.text()
-                return data
+            data = await self._Request.get_request(self.session, url, proxy)
+            return data
         except:
             try:
                 self.proxies.remove(proxy)
@@ -135,11 +134,10 @@ class CrawlApkName:
         proxy = await self.get_proxy()
         url = "https://play.google.com/store/apps"
         try:
-            async with self.session.get(url=url, headers=self.headers, proxy=proxy, timeout=10) as tc:
-                data = await tc.text()
-                analysis_data = etree.HTML(data)
-                urls = analysis_data.xpath("//div[@class='g4kCYe']/a/@href")
-                return urls
+            data = await self._Request.get_request(self.session, url, proxy)
+            analysis_data = etree.HTML(data)
+            urls = analysis_data.xpath("//div[@class='g4kCYe']/a/@href")
+            return urls
         except:
             try:
                 self.proxies.remove(proxy)
