@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="6d700b11-5e9c-45a8-bbfc-f91dbeefd186" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/CrawlApkName/get_apk_name.py" beforeDir="false" afterPath="$PROJECT_DIR$/CrawlApkName/get_apk_name.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test_demo.py" beforeDir="false" afterPath="$PROJECT_DIR$/test_demo.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Request_Web/AllRequest.py" beforeDir="false" afterPath="$PROJECT_DIR$/Request_Web/AllRequest.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -47,11 +47,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="get_apk_name.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="get_apk_name.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/CrawlApkName/get_apk_name.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="433">
-              <caret line="82" column="20" lean-forward="true" selection-start-line="82" selection-start-column="20" selection-end-line="82" selection-end-column="20" />
+            <state relative-caret-position="208">
+              <caret line="91" column="44" selection-start-line="91" selection-start-column="44" selection-end-line="91" selection-end-column="44" />
               <folding>
                 <element signature="e#0#33#0" expanded="true" />
               </folding>
@@ -95,11 +95,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AllRequest.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="AllRequest.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Request_Web/AllRequest.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="250">
-              <caret line="10" column="19" lean-forward="true" selection-start-line="10" selection-start-column="19" selection-end-line="10" selection-end-column="19" />
+            <state relative-caret-position="274">
+              <caret line="21" column="32" selection-start-line="21" selection-start-column="32" selection-end-line="21" selection-end-column="32" />
             </state>
           </provider>
         </entry>
@@ -192,12 +192,12 @@
         <option value="$PROJECT_DIR$/AllSetting/config.conf" />
         <option value="$PROJECT_DIR$/log.txt" />
         <option value="$PROJECT_DIR$/CrawlProxy/ForeignProxyCrawl/crawl_foreigh_auto.py" />
-        <option value="$PROJECT_DIR$/Request_Web/AllRequest.py" />
         <option value="$PROJECT_DIR$/AllSetting/__init__.py" />
         <option value="$PROJECT_DIR$/CheckOut_ApkName/check_update_apkname.py" />
         <option value="$PROJECT_DIR$/Database_Option/Get_Mysql_pool.py" />
         <option value="$PROJECT_DIR$/test_demo.py" />
         <option value="$PROJECT_DIR$/CrawlApkName/get_apk_name.py" />
+        <option value="$PROJECT_DIR$/Request_Web/AllRequest.py" />
       </list>
     </option>
   </component>
@@ -758,23 +758,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Database_Option/Get_Mysql_pool.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1480">
-          <caret line="66" column="37" selection-start-line="66" selection-start-column="37" selection-end-line="66" selection-end-column="37" />
-          <folding>
-            <element signature="e#0#14#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Request_Web/AllRequest.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="250">
-          <caret line="10" column="19" lean-forward="true" selection-start-line="10" selection-start-column="19" selection-end-line="10" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/CrawlProxy/ForeignProxyCrawl/crawl_foreigh_auto.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-450">
@@ -831,11 +814,28 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/CrawlApkName/get_apk_name.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="433">
-          <caret line="82" column="20" lean-forward="true" selection-start-line="82" selection-start-column="20" selection-end-line="82" selection-end-column="20" />
+        <state relative-caret-position="208">
+          <caret line="91" column="44" selection-start-line="91" selection-start-column="44" selection-end-line="91" selection-end-column="44" />
           <folding>
             <element signature="e#0#33#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Database_Option/Get_Mysql_pool.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1480">
+          <caret line="66" column="37" selection-start-line="66" selection-start-column="37" selection-end-line="66" selection-end-column="37" />
+          <folding>
+            <element signature="e#0#14#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Request_Web/AllRequest.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="274">
+          <caret line="21" column="32" selection-start-line="21" selection-start-column="32" selection-end-line="21" selection-end-column="32" />
         </state>
       </provider>
     </entry>

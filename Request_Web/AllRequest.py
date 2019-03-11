@@ -9,8 +9,9 @@ class InitiateRequest:
 
 
     async def post_request(self,session,url,proxy,data=None):
+        print('post的url:' + str(url))
         async with session.post(url=url, data=data, headers=self.headers, proxy=proxy, timeout=10) as ct:
-            print('post的url:'+str(url)+str(ct.status))
+            print('post的通过url:'+str(url)+str(ct.status))
             if ct.status in [200, 201]:
                 data = await ct.text()
                 return data
@@ -19,7 +20,9 @@ class InitiateRequest:
 
 
     async def get_request(self,session,url,proxy=None):
+        print('get的url:'+str(url))
         async with session.get(url=url, headers=self.headers, proxy=proxy, timeout=10) as ct:
+            print('get的通过url:'+str(url)+str(ct.status))
             if ct.status in [200,201]:
                 data = await ct.text()
                 return data

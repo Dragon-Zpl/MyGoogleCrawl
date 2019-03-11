@@ -96,7 +96,7 @@ class CrawlApkName:
             for apkname in apknames:
                 self.apk_names.add(apkname)
         except Exception as e:
-            self.printf.info(str(e))
+            self.printf.info(str(e)+str(url))
             try:
                 self.proxies.remove(proxy)
             except:
