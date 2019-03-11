@@ -98,8 +98,8 @@ class CheckUpdateApkname:
             except Exception as e:
                 if analysis_data:
                     print('错误时的:' + str(analysis_data))
-                print("更新错误的数据" + str(data))
-                print("更新错误:" + str(e))
+                if str(e) == "":
+                    print("错误数据"+str(data))
                 print('错误第'+str(i+1)+'次')
         else:
             print('三次全失败')
@@ -134,6 +134,7 @@ class CheckUpdateApkname:
                         self.all_data_list.append(check_app_data)
                         break
                 except Exception as e:
+
                     print("错误信息的数据" + str(data))
                     print('错误信息:' + str(e))
                     print('错误第' + str(i + 1) + '次')
