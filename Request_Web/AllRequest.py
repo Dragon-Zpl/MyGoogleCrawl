@@ -10,11 +10,17 @@ class InitiateRequest:
 
     async def post_request(self,session,url,proxy,data=None):
         async with session.post(url=url, data=data, headers=self.headers, proxy=proxy, timeout=10) as ct:
-            data = await ct.text()
-            return data
+            if ct.status in [200, 201]:
+                data = await ct.text()
+                return data
+            elif ct.status in [403, 400, 500, 502, 503, 429]:
+                pass
 
 
     async def get_request(self,session,url,proxy):
         async with session.get(url=url, headers=self.headers, proxy=proxy, timeout=10) as ct:
-            data = await ct.text()
-            return data
+            if ct.status in [200,201]:
+                data = await ct.text()
+                return data
+            elif ct.status in [403, 400, 500, 502, 503, 429]:
+                pass

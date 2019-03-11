@@ -36,7 +36,7 @@ class RedisOption:
 
     def get_redis_pkgname(self):
         """
-        从redis的末端获取一个pkg数据并返回
+        从redis的获取一个pkg数据并返回
         """
         apk_detail = eval(self.rcon.spop("pkgname").decode('utf-8'))
         return apk_detail
