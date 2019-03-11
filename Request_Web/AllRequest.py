@@ -10,6 +10,7 @@ class InitiateRequest:
 
     async def post_request(self,session,url,proxy,data=None):
         async with session.post(url=url, data=data, headers=self.headers, proxy=proxy, timeout=10) as ct:
+            print('post的url:'+str(url)+str(ct.status))
             if ct.status in [200, 201]:
                 data = await ct.text()
                 return data
