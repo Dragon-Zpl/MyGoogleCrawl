@@ -15,6 +15,7 @@ class GetSetting:
     def get_session(self):
         conn = aiohttp.TCPConnector(family=socket.AF_INET,
                                     verify_ssl=False,
+                                    use_dns_cache=True
                                     )
         session = aiohttp.ClientSession(connector=conn)
         return session
