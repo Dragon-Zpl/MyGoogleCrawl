@@ -2,6 +2,9 @@ import asyncio
 
 import aiomysql
 
+from AllSetting import GetSetting
+
+
 class GetMysqlPool:
     def __init__(self):
         self._host = '192.168.9.227'
@@ -9,7 +12,7 @@ class GetMysqlPool:
         self._user = 'root'
         self._password = '123456'
         self._db = 'google_play'
-
+        self.printf = GetSetting().get_logger
     async def init_pool(self):
         self.pool = await aiomysql.create_pool(host=self._host, port=self._port, user=self._user, password=self._password,
                                       db=self._db, charset='utf8', autocommit=True)
@@ -40,20 +43,26 @@ class GetMysqlPool:
                               data["name"], data["pkgname"], data["url"])
                     result = await cur.execute(sql_google, params)
                 except Exception as e:
-                    print("数据库语句:" + sql_google)
-                    print("错误时候的数据"+str(data))
-                    print('数据库错误信息：' + str(e))
+                    self.printf("数据库语句:" + sql_google)
+                    self.printf("错误时候的数据"+str(data))
+                    self.printf('数据库错误信息：' + str(e))
 
 
     async def find_pkgname(self,pkgname):
         async with self.pool.acquire() as conn:
             async with conn.cursor() as cur:
-                sql = """
-                    select current_version from crawl_google_play_app_info as f where  f.pkgname = "{}"
-                """.format(pkgname)
-                await cur.execute(sql,None)
-                result = await cur.fetchone()
-                if result:
-                    return result[0]
-                else:
+                try:
+                    sql = """
+                        select current_version from crawl_google_play_app_info as f where  f.pkgname = "{}"
+                    """.format(pkgname)
+                    await cur.execute(sql, None)
+                    result = await cur.fetchone()
+                    if result:
+                        return result[0]
+                    else:
+                        return None
+                except Exception as e:
+                    self.printf("数据库语句:" + sql)
+                    self.printf("错误时候的包名" + str(pkgname))
+                    self.printf('数据库错误信息：' + str(e))
                     return None

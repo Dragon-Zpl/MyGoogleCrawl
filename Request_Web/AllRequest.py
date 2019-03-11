@@ -18,13 +18,9 @@ class InitiateRequest:
 
 
     async def get_request(self,session,url,proxy=None):
-        print(url)
         async with session.get(url=url, headers=self.headers, proxy=proxy, timeout=10) as ct:
-            print('出来的:'+str(url)+'状态码'+str(ct.status))
             if ct.status in [200,201]:
                 data = await ct.text()
-                print(str(url)+"全部完成")
                 return data
             elif ct.status in [403, 400, 500, 502, 503, 429]:
-                print(ct.status)
                 return None
