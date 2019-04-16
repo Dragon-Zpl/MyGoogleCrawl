@@ -3,8 +3,8 @@ import redis
 
 class RedisOption:
     def __init__(self):
-        self._host = '192.168.9.227'
-        self._password = 'a123456'
+        self._host = ''
+        self._password = ''
         self._port = 6379
         self._db = 1
         self.rcon = self._get_redis()
