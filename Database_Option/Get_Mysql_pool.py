@@ -7,10 +7,10 @@ from AllSetting import GetSetting
 
 class GetMysqlPool:
     def __init__(self):
-        self._host = '192.168.9.227'
+        self._host = ''
         self._port = 3306
         self._user = 'root'
-        self._password = '123456'
+        self._password = ''
         self._db = 'google_play'
         self.printf = GetSetting().get_logger()
     async def init_pool(self):
